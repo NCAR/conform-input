@@ -1,0 +1,64 @@
+{
+    "latitude_bnds": {
+        "attributes": {
+            "units": "degrees_north"
+        },
+        "datatype": "float",
+        "definition": "latitude_bnds",
+        "dimensions": [
+            "latitude",
+            "d2"
+        ]
+    },
+    "olevel_bnds": {
+        "attributes": {
+            "units": "m"
+        },  
+        "datatype": "float",
+        "definition": "xxlevbndxx",
+        "dimensions": [
+            "olevel",
+            "d2"
+        ]
+    },
+    "longitude_bnds": {
+        "attributes": {
+            "units": "degrees_east"
+        },
+        "datatype": "float",
+        "definition": "longitude_bnds",
+        "dimensions": [
+            "longitude",
+            "d2"
+        ]
+    },
+    "time_bnds": {
+        "attributes": {},
+        "datatype": "double",
+        "definition": "time_bnds",
+        "dimensions": [
+            "time",
+            "d2"
+        ]
+    },
+    "time2_bnds": {
+        "attributes": {},
+        "datatype": "double",
+        "definition": "time_bnds",
+        "dimensions": [
+            "time",
+            "d2"
+        ]
+    },
+    "rho_bnds": {
+        "attributes": {
+            "units": "kg m-3"
+        },
+        "datatype": "float",
+        "definition": "rho_bnds",
+        "dimensions": [
+            "rho",
+            "d2"
+        ]
+    }
+}

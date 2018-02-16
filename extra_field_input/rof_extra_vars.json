@@ -1,0 +1,53 @@
+{
+    "latitude_bnds": {
+        "attributes": {
+            "units": "degrees_north"
+        },
+        "datatype": "float",
+        "definition": "latitude_bnds",
+        "dimensions": [
+            "latitude",
+            "hist_interval"
+        ]
+    },
+    "sdepth_bnds": {
+        "attributes": {
+            "units": "m"
+        },
+        "datatype": "float",
+        "definition": "sdepth_bnds",
+        "dimensions": [
+            "sdepth",
+            "hist_interval"
+        ]
+    },
+    "longitude_bnds": {
+        "attributes": {
+            "units": "degrees_east"
+        },
+        "datatype": "float",
+        "definition": "longitude_bnds",
+        "dimensions": [
+            "longitude",
+            "hist_interval"
+        ]
+    },
+    "time_bnds": {
+        "attributes": {},
+        "datatype": "double",
+        "definition": "time_bnds",
+        "dimensions": [
+            "time",
+            "hist_interval"
+        ]
+    },
+    "time2_bnds": {
+        "attributes": {},
+        "datatype": "double",
+        "definition": "time_bnds",
+        "dimensions": [
+            "time",
+            "hist_interval"
+        ]
+    }
+}
