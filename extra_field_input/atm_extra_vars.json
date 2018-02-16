@@ -96,9 +96,9 @@
             "units": "hPa"
         },
         "datatype": "float",
-        "definition": "alevel_bnds",
+        "definition": "lev_bnds",
         "dimensions": [
-            "lev",
+            "alevel",
             "nbnd"
         ]
     },
