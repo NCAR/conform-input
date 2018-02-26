@@ -80,10 +80,10 @@ clt=CLDTOT
 hfls=LHFLX
 hfss=SENH_F  #SHFLX
 huss=QREFHT
-mrro=QRUNOFF
+mrro=chunits(QRUNOFF, units="kg m-2 s-1")
 mrsos=SOILWATER_10CM
 pr=PRECT  #Isn't this PRECT from CAM?
-prc=PRECC
+prc=chunits( 1000 * PRECC, units="kg m-2 s-1")
 prsn=SNOW_F  #Isn't this PRECSL+PRECSC
 ps=PS
 rlds=FLDS  #FLDS
@@ -133,7 +133,7 @@ mrsos=SOILWATER_10CM
 psl=PSL
 sfcWind=U10
 snowmxrat27=QSNOW
-snw=H2OSNO  #mm
+snw=chunits(H2OSNO, units="kg m-2")  #mm
 tas=TREFHT
 ts=TS
 tsl=TSOI
@@ -160,7 +160,7 @@ c2h2=vinth2p(C2H2, hyam, hybm, alevel, PS, P0)
 c2h6=vinth2p(C2H6, hyam, hybm, alevel, PS, P0)
 c3h6=vinth2p(C3H6, hyam, hybm, alevel, PS, P0)
 c3h8=vinth2p(C3H8, hyam, hybm, alevel, PS, P0)
-cdnc=NUMLIQ  #Cannot map dimensions (u'time', u'lat', u'lon') to dimensions [u'time', u'alevel', u'latitude', u'longitude']
+cdnc=chunits(NUMLIQ, units="m-3")  
 ch3coch3=vinth2p(CH3COCH3, hyam, hybm, alevel, PS, P0)
 ch4=vinth2p(CH4, hyam, hybm, alevel, PS, P0)
 cheaqpso4=(so4_c1AQH2SO4+so4_c2AQH2SO4+so4_c3AQH2SO4+so4_c1AQSO4+so4_c2AQSO4+so4_c3AQSO4)*96.06/115.11
@@ -181,7 +181,7 @@ dryoa=pom_a1DDF+pom_a4DDF+soa_a1DDF+soa_a2DDF+pom_c1DDF+pom_c4DDF+soa_c1DDF+soa_
 dryso2=DF_SO2
 dryso4=so4_a1DDF+so4_a2DDF+so4_a3DDF+so4_c1DDF+so4_c2DDF+so4_c3DDF
 dryss=ncl_a1DDF+ncl_a2DDF+ncl_a3DDF+ncl_c1DDF+ncl_c2DDF+ncl_c3DDF
-emibc=SFbc_a4+(bc_a4_CLXF/6.02e+23*12.e+1)  #Cannot convert units Unit('1.66053878316273e-20 meter^-2-second^-1-mole') to Unit('kg/m2/s')
+emibc=SFbc_a4 + chunits( bc_a4_CLXF/6.02e23*12, units="g/cm2/s" )  #Cannot convert units Unit('1.66053878316273e-20 meter^-2-second^-1-mole') to Unit('kg/m2/s')
 emibvoc=MEG_ISOP/68 + MEG_MTERP/136 + MEG_CH3OH/32 + MEG_CH3COCH3/58 + MEG_CH3CHO/44 + MEG_CH2O/30 + MEG_CO/28 + MEG_C2H6/30 + MEG_C3H8/44 + MEG_C2H4/28 + MEG_C3H6/42 + MEG_C2H5OH/46 + MEG_BIGALK/72 + MEG_BIGENE/56 + MEG_TOLUENE/92 + MEG_HCN/27 + MEG_HCOOH/46 + MEG_CH3COOH/60
 emico=SFCO
 emidms=SFDMS
@@ -191,8 +191,8 @@ emilnox=LNO_PROD* 14. *1.e+3/6.022e23 *delp/9.81/rho
 eminh3=SFNH3
 eminox=SFNO+SFNO2
 emioa=SFpom_a4+(pom_a4_CLXF/6.02e+23*12.e+1) + soa1_a1_sfgaex1 + soa1_a2_sfgaex1
-emiso2=SFSO2+(SO2_CLXF/6.02e+23*64.e+1)  #Cannot convert units Unit('1.66053878316273e-20 meter^-2-second^-1-mole') to Unit('kg/m2/s')
-emiso4=SFso4_a1+SFso4_a2+(so4_a1_CLXF+so4_a2_CLXF)*/6.02e+23*96.e+1)  #Cannot convert units Unit('molec/cm2/s') to Unit('kg/m2/s')
+emiso2=SFSO2 + chunits( SO2_CLXF/6.02e23*64.066, units="g/cm2/s" )  #Cannot convert units Unit('1.66053878316273e-20 meter^-2-second^-1-mole') to Unit('kg/m2/s')
+emiso4=SFso4_a1 + SFso4_a2 + chunits( (so4_a1_CLXF+so4_a2_CLXF)/6.02e+23*96.06, units="g/cm2/s" )  #Cannot convert units Unit('molec/cm2/s') to Unit('kg/m2/s')
 emiss=SFncl_a1+SFncl_a2+SFncl_a3
 emivoc=SFBENZENE/78 + SFBIGALK/72 + SFBIGENE/56 + SFC2H2/26 + SFC2H4/28 + SFC2H5OH/46 + SFC2H6/30 + SFC3H6/42 + SFC3H8/44 + SFCH2O/30 + SFCH3CHO/44 + SFCH3CN/41 + SFCH3COCH3/58 + SFCH3COCHO/72 + SFCH3COOH/60 + SFCH3OH/32 + SFHCN/27 + SFHCOOH/46 + SFISOP/68 + SFMEK/72 + SFMTERP/136 + SFTOLUENE/92 + SFXYLENES/106
 h2o=Q+CLDICE+CLDLIQ
@@ -268,7 +268,7 @@ clt=CLDTOT
 clw=CLDLIQ
 clwvi=TGCLDLWP
 co2=vinth2p(CO2,hyam, hybm, plev19, PS, P0)
-co2mass=co2vmr  #Cannot convert units Unit('1') to Unit('kg')
+co2mass=chunits((28.966/44.) * co2vmr, units="kg")  #Cannot convert units Unit('1') to Unit('kg')
 evspsbl=QFLX
 hfls=LHFLX
 hfss=SENH_F
@@ -280,7 +280,7 @@ mc=CMFMC + CMFMCDZM
 n2o=vinth2p(N2O,hyam, hybm, plev19, PS, P0)
 n2oglobal=n2ovmr
 pr=PRECT
-prc=PRECC  #Cannot convert units Unit('m/s') to Unit('kg m-2 s-1')
+prc=chunits( 1000 * PRECC, units="kg m-2 s-1")  #Cannot convert units Unit('m/s') to Unit('kg m-2 s-1')
 prsn=SNOW_F
 prw=TMQ
 ps=PS
@@ -298,7 +298,7 @@ rsuscs=FSDSC - FSNSC
 rsut=SOLIN - FSNTOA
 rsutcs=SOLIN - FSNTOAC
 rtmt=FSNT - FLNT
-sbl=QFLX_SUB_SNOW  #clm grid cell
+sbl=chunits(QFLX_SUB_SNOW, units="kg m-2 s-1")*landfrac  #clm grid cell
 sci=FREQSH
 sfcWind=U10
 ta=vinth2p(T,hyam, hybm, plev19, PS, P0)
@@ -329,7 +329,7 @@ dtaus=TOT_ICLD_VISTAU
 h2o=Q+CLDICE+CLDLIQ
 hurs=RHREFHT
 pr=PRECT
-prc=PRECC
+prc=chunits( 1000 * PRECC, units="kg m-2 s-1")
 prcprof=ZMFLXPRC-ZMFLXSNW + RKFLXPRC-RKFLXSNW
 prlsns=LS_FLXSNW
 prlsprof=LS_FLXPRC-LS_FLXSNW
@@ -437,7 +437,7 @@ cl=CLOUD
 hur=vinth2p(RELHUM,hyam,hybm,alevel,PS,P0)
 hus=vinth2p(Q,hyam,hybm,alevel,PS,P0)
 pr=PRECT
-prc=PRECC
+prc=chunits( 1000 * PRECC, units="kg m-2 s-1")
 ps=PS
 psl=PSL
 rld=FDL
@@ -472,7 +472,7 @@ parasolRefl=RFL_PARASOL
 #  TABLE : E1hr
 ############################
 pr=PREC_F
-prc=PRECC
+prc=chunits( 1000 * PRECC, units="kg m-2 s-1")
 psl=PSL
 rlut=FUL
 ta=vinth2p(T,hyam, hybm, plev3, PS, P0)
@@ -562,7 +562,7 @@ mrsll=SOILLIQ
 mrsol=SOILLIQ+SOILICE
 prCrop=RAIN+SNOW  #All land tiles get same precipitation
 prsnc=ZMFLXSNW+HKFLXSNW
-prveg=QINTR
+prveg=chunits(QINTR, units="kg m-2 s-1")
 prw=TMQ
 reffsclwtop=ACTREL/FCTL
 rivo=RIVER_DISCHARGE_OVER_LAND_LIQ
@@ -570,7 +570,7 @@ rls=FLNS
 rsdscsdiff=SOLLD+SOLSD
 rsdsdiff=SOLLD+SOLSD
 rss=FSA
-sbl=QFLX_SUB_SNOW
+sbl=chunits(QFLX_SUB_SNOW, units="kg m-2 s-1")
 scldncl=ACTNL/FCTL
 snd=SNOWDP  #Note that this is the land grid cell mean snow depth.  Since snow and snow-free areas are tracked separately, the snow depth for the snow covered portion of grid cell would be different.
 snmsl=QFLX_SNOW_DRAIN
@@ -588,7 +588,7 @@ tauvpbl=-1(TAUY)
 tcs=TV
 tgs=TG
 tr=TS  #Not output by CLM
-tran=QVEGT
+tran=chunits(QVEGT, units="kg m-2 s-1")
 ts=TS
 tsl=TSOI  #This is a lot of data because we have 25 lyevels
 tws=TWS
@@ -658,8 +658,8 @@ cfadLidarsr532=CFAD_SR532_CAL
 cldicemxrat27=CLDICE
 cldnvi=CDNUMC
 cldwatmxrat27=CLDLIQ
-conccmcn=num_a3
-conccn=num_a1+num_a2+num_a3+num_a4
+conccmcn=chunits(num_a3, units="m-3")
+conccn=chunits((num_a1+num_a2+num_a3+num_a4), units="m-3")
 fBNF=chunits(FFIX_TO_SMINN, units="g/m^2/s")+chunits(NFIX, units="g/m^2/s")
 fCLandToOcean=chunits(SOM_C_LEACHED, units="g/m^2/s")
 fDeforestToAtmos=chunits(DWT_CONV_CFLUX, units="g/m^2/s")
@@ -668,7 +668,7 @@ fFireAll=chunits(COL_FIRE_CLOSS, units="g/m^2/s")
 fHarvestToProduct=chunits(WOOD_HARVESTC, units="g/m^2/s")
 fLuc=DWT_CLOSS+PRODUCT_CLOSS
 fLulccAtmLut=CLM_landunit_to_CMIP6_Lut(DWT_CONV_CFLUX_PATCH,time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell)*100/PCT_LANDUNIT  #h2
-fLulccProductLut=CLM_landunit_to_CMIP6_Lut(WOOD_HARVESTC+(DWT_PROD100C_GAIN_PATCH+DWT_PROD10C_GAIN_PATCH),time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell)*100/PCT_LANDUNIT+GRAINC_TO_FOOD)  #h2
+fLulccProductLut=CLM_landunit_to_CMIP6_Lut(WOOD_HARVESTC+(DWT_PROD100C_GAIN_PATCH+DWT_PROD10C_GAIN_PATCH),time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell)*100/PCT_LANDUNIT+GRAINC_TO_FOOD  #h2
 fLulccResidueLut=CLM_landunit_to_CMIP6_Lut(chunits(SLASH_HARVESTC, units="g/m^2/s")+chunits(DWT_SLASH_CFLUX, units="g/m^2/s"),time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell)  #h2
 fNProduct=chunits(TOT_WOODPRODN_LOSS, units="g/m^2/s")
 fNVegLitter=chunits(LEAFN_TO_LITTER, units="g/m^2/s")
@@ -709,7 +709,7 @@ mrsll=SOILLIQ  #Not averaged in the vertical.  Native vertical grid
 mrsoLut=CLM_landunit_to_CMIP6_Lut(TOTSOILICE+TOTSOILLIQ,time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell)  #h2
 mrsol=SOILLIQ+SOILICE  #Not averaged in the vertical.  Native vertical grid
 mrsosLut=CLM_landunit_to_CMIP6_Lut(SOILWATER_10CM,time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell)  #h2
-mrtws=TWS
+mrtws=chunits(TWS, units="kg m-2")
 nLand=chunits(TOTECOSYSN, units="g/m^2")
 nLeaf=chunits(LEAFN, units="g/m^2")
 nLitter=chunits(LITTERN, units="g/m^2")
@@ -812,7 +812,7 @@ hus=vinth2p(Q,hyam, hybm, alevel, PS, P0)
 huss=QREFHT
 mc=CMFMC + CMFMCDZM
 pr=PREC_F
-prc=PRECC
+prc=chunits( 1000 * PRECC, units="kg m-2 s-1")
 prw=TMQ
 ps=PS
 reffclis=AREI/FREQI
@@ -876,7 +876,7 @@ ts=TSFC  #Not sure whether this is the land surface temperature or the temperatu
 ############################
 acabf=SFC_MBAL_FLUX  #cism (annual only). This is the SMB applied in CISM.  A related variable called QSMB, available in coupler history, is computed in clm and downscaled to cism.  But this value is not necessarily equal to the SMB applied in CISM (e.g., CISM ignores a negative SMB where ice thickness = 0).
 hfls=QSOIL _ICE converted into energy flux or EFLX_LH_TOT_ICE  #clm-glc
-icem=QICE_MELT  #clm-glc
+icem=chunits(QICE_MELT, units="kg m-2 s-1")  #clm-glc
 libmassbffl=BASAL_MBAL_FLUX (multiply by FLOATING_MASK to mask out grounded ice)  #cism (annual only)
 libmassbfgr=BASAL_MBAL_FLUX (multiply by GROUNDED_MASK to mask out floating ice)  #cism (annual only)
 licalvf=CALVING_FLUX  #cism (annual only)
@@ -958,7 +958,7 @@ acabfIs=QSMB  #coupler histories
 hfdsn=FGR; FGR_ICE is NOT default  #This variable is not tracked separately; clm grid cell?
 hflsIs=QSOIL _ICE converted into energy flux or EFLX_LH_TOT_ICE  #clm-glc; EFLZ_LH_TOT_ICE NOT DEFAULT
 hfssIs=FSH_ICE   #clm-glc; NOT DEFAULT 
-icemIs=QICE_MELT  #clm-glc
+icemIs=chunits(QICE_MELT, units="kg m-2 s-1")  #clm-glc
 litemptopIs=TSFC  #coupler histories
 lwsnl=SNOWLIQ  #clm grid cell
 mrroIs=To be calculated from runoff components: [list variables here]  #surface runoff per grid cell (clm-glc quantity?)
@@ -969,19 +969,18 @@ rldsIs=FIRA_ICE  #clm-glc; NOT DEFAULT
 rlusIs=FIRE_ICE  #clm-glc; NOT DEFAULT 
 rsdsIs=FSA  # IN CESM IT IS THE SAME FOR GLC AND NON-GLC 
 rsusIs=FSR_ICE  #clm-glc; NOT DEFAULT 
-sbl=QFLX_SUB_SNOW
-sblIs=QSOIL_ICE  #clm-glc; NOT DEFAULT
+sblIs=chunits(QSOIL_ICE, units="kg m-2 s-1")  #clm-glc; NOT DEFAULT
 sftflf=FLOATING_MASK  #cism (annual only)
 sftgif=PCT_LANDUNIT[:,3,:,:]  #glacier is 3; glacier with elevation classes is 4?; clm grid cell
 sftgrf=GROUNDED_MASK  #cism (annual only)
 snc=FSNO  #clm grid cell
 sncIs=FSNO_ICE  #clm-glc; NOT AVAILABLE
 snd=SNOWDP  #clm grid cell
-snicefreezIs=QSNOFRZ_ICE  #clm-glc; NOT DEFAULT
-snicemIs=QICE_MELT+QSNOMELT_ICE  #clm-glc; NOT DEFAULT
-snm=QSNOMELT  #rules in column B should be checked; clm grid cell
-snmIs=QSNOMELT_ICE  #clm-glc; NOT DEFAULT
-snw=H2OSNO  #clm grid cell
+snicefreezIs=chunits(QSNOFRZ_ICE, units="kg m-2 s-1")  #clm-glc; NOT DEFAULT
+snicemIs=chunits((QICE_MELT+QSNOMELT_ICE), units="kg m-2 s-1")  #clm-glc; NOT DEFAULT
+snm=chunits(QSNOMELT, units="kg m-2 s-1")  #rules in column B should be checked; clm grid cell
+snmIs=chunits(QSNOMELT_ICE, units="kg m-2 s-1")  #clm-glc; NOT DEFAULT
+snw=chunits(H2OSNO, units="kg m-2")  #clm grid cell
 sootsn=SNOBCMSL  #Do not include organic carbon or dust; clm grid cell
 tasIs=TSA_ICE  #clm-glc; NOT DEFAULT
 tsIs=TG_ICE  #clm-glc; NOT DEFAULT
@@ -1001,8 +1000,8 @@ cSoilMedium=chunits(SOIL2C, units="g/m^2")
 cSoilSlow=chunits(SOIL3C, units="g/m^2")
 cVeg=chunits(TOTVEGC, units="g/m^2")
 cropFrac=PCT_LANDUNIT[:,1,:,:]
-evspsblsoi=QSOIL
-evspsblveg=QVEGE
+evspsblsoi=chunits(QSOIL, units="kg m-2 s-1")
+evspsblveg=chunits(QVEGE, units="kg m-2 s-1")
 fFire=chunits(COL_FIRE_CLOSS, units="g/m^2/s")
 fHarvest=chunits(CROPPROD1C_LOSS, units="g/m^2/s")
 fLitterSoil=LITR1C_TO_SOIL1C+LITR2C_TO_SOIL1C+LITR3C_TO_SOIL2C
@@ -1013,7 +1012,7 @@ lai=TLAI
 landCoverFrac=PCT_NAT_PFT*PCT_LANDUNIT  #Hard to know how to report this.  PCT_CFT will only be reported annually.  We could provide full description annually.
 mrfso=SOILICE
 mrlsl=SOILLIQ + SOILICE
-mrro=QRUNOFF
+mrro=chunits(QRUNOFF, units="kg m-2 s-1")
 mrros=QOVER
 mrso=SOILLIQ + SOILICE  #Sum over all layers
 mrsos=SOILWATER_10CM
@@ -1022,14 +1021,14 @@ npp=chunits(NPP, units="g/m^2/s")
 nppLeaf=chunits(LEAFC_ALLOC, units="g/m^2/s")
 nppRoot=chunits(FROOTC_ALLOC, units="g/m^2/s")
 nppWood=chunits(WOODC_ALLOC, units="g/m^2/s")
-prveg=QINTR
+prveg=chunits(QINTR, units="kg m-2 s-1")
 rGrowth=chunits(GR, units="g/m^2/s")
 rMaint=chunits(MR, units="g/m^2/s")
 ra=chunits(AR, units="g/m^2/s")
 residualFrac=100-PCT_LANDUNIT[:,0,:,:]-PCT_LANDUNIT[:,1,:,:]
 rh=chunits(HR, units="g/m^2/s")
 shrubFrac=(PCT_NAT_PFT[:,9,:,:]+PCT_NAT_PFT[:,10,:,:]+PCT_NAT_PFT[:,11,:,:])*PCT_LANDUNIT[:,0,:,:]
-tran=QVEGT
+tran=chunits(QVEGT, units="kg m-2 s-1")
 treeFrac=((PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]+PCT_NAT_PFT[:,3,:,:]+(PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+(PCT_NAT_PFT[:,7,:,:]+PCT_NAT_PFT[:,8,:,:])*PCT_LANDUNIT[:,0,:,:]
 tsl=TSOI
 ############################
@@ -1086,10 +1085,10 @@ co3satcalc=co3_sat_calc
 dfe=Fe
 dissic=DIC
 dissoc=DOC
-dpco2=DpCO2  #Cannot convert units Unit('ppmv') to Unit('Pa')
+dpco2=chunits( 0.101325 * DpCO2, units="Pa")  #Cannot convert units Unit('ppmv') to Unit('Pa')
 evs=EVAP_F
 expc=POC_FLUX_IN
-fbddtalk=Jint_100m_ALK  #Cannot convert units Unit('1') to Unit('mol m-2 s-1')
+fbddtalk=chunits( 1.0e-5 * Jint_100m_ALK, units="mol m-2 s-1")  #Cannot convert units Unit('1') to Unit('mol m-2 s-1')
 fbddtdic=Jint_100m_DIC
 fbddtdife=Jint_100m_Fe
 fbddtdin=Jint_100m_NO3+Jint_100m_NH4
@@ -1103,7 +1102,7 @@ fddtdip=tend_zint_100m_PO4
 fddtdisi=tend_zint_100m_SiO3
 fgcfc11=STF_CFC11
 fgcfc12=STF_CFC12
-fgco2=FG_CO2  #Cannot convert units Unit('mmol/m^3 cm/s') to Unit('kg m-2 s-1')
+fgco2=chunits(FG_CO2 * 12.0e-8, units="kg m-2 s-1")
 fgo2=STF_O2
 frn=Integrate -DENITRIF over z_t (if (kmt(i,j).ge.k) then cm dat2d(i,j)
 fsn=NOx_FLUX+NHy_FLUX+(integrate diaz_Nfix over z_t) (if (kmt(i,j).ge.k) then cm dat2d(i,j)  #Cannot convert units Unit('mmol/m^3/s') to Unit('nmol/cm^2/s')
@@ -1146,8 +1145,8 @@ so=SALT
 sob=SALT(t, KMT(I,j), I,j)
 sos=SALT[:,0,:,:]
 sossq=SSS2
-spco2=pCO2SURF  #Cannot convert units Unit('ppmv') to Unit('Pa')
-talk=ALK  #Cannot convert units Unit('1') to Unit('mol m-3')
+spco2=chunits( 0.101325 * pCO2SURF, units="Pa")  #Cannot convert units Unit('ppmv') to Unit('Pa')
+talk=chunits(ALK * 1e-3, units="mol m-3")  #Cannot convert units Unit('1') to Unit('mol m-3')
 tauuo=TAUX
 tauvo=TAUY
 thetao=TEMP
@@ -1301,7 +1300,7 @@ hus=vinth2p(Q,hyam, hybm, plev8, PS, P0)
 huss=QREFHT
 mrsos=SOILWATER_10CM
 pr=PREC_F
-prc=PRECC
+prc=chunits( 1000 * PRECC, units="kg m-2 s-1")
 prsn=SNOW_F
 psl=PSL
 rlds=FLDS
