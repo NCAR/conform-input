@@ -677,9 +677,9 @@ cSoilLevels=chunits(SOIL1C_vr+SOIL2C_vr+SOIL3C_vr, units="g/m^2")  #Available on
 cSoilPools=chunits(TOTSOMC, units="g/m^2")
 cStem=chunits(LIVESTEMC + DEADSTEMC, units="g/m^2")
 cTotFireLut=chunits(COL_FIRE_CLOSS, units="g/m^2/s")  #h2
-cVegGrass=CLM_to_pft_to_CMIP6_vegGrass(chunits(TOTVEGC, units="g/m^2"))  #Can be derived from vector h1 output
-cVegShrub=CLM_to_pft_to_CMIP6_vegShrub(chunits(TOTVEGC, units="g/m^2"))  #Can be derived from vector h1 output
-cVegTree=CLM_to_pft_to_CMIP6_vegTree(chunits(TOTVEGC, units="g/m^2"))  #Can be derived from vector h1 output
+cVegGrass=CLM_pft_to_CMIP6_vegtype(chunits(TOTVEGC, units="g/m^2"),"grass",ntim, nlat, nlon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit)  #Can be derived from vector h1 output
+cVegShrub=CLM_pft_to_CMIP6_vegtype(chunits(TOTVEGC, units="g/m^2"),"shrub",ntim, nlat, nlon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit)  #Can be derived from vector h1 output
+cVegTree=CLM_pft_to_CMIP6_vegtype(chunits(TOTVEGC, units="g/m^2"),"tree",ntim, nlat, nlon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit)  #Can be derived from vector h1 output
 cWood=chunits(WOODC, units="g/m^2")
 cfadDbze94=CFAD_DBZE94_CS
 cfadLidarsr532=CFAD_SR532_CAL

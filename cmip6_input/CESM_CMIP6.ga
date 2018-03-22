@@ -4,7 +4,7 @@ branch_time_in_child =
 branch_time_in_parent = 
 # comment 
 contact = cesm_cmip6@ucar.edu
-Conventions = CF-1.7 CMIP-6.0
+Conventions = CF-1.7 CMIP-6.2
 creation_date = 
 data_specs_version = 
 experiment = 
