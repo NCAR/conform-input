@@ -1,4 +1,22 @@
 {
+    "latitude": {
+        "attributes": {
+            "axis": "Y", 
+            "bounds": "latitude_bnds", 
+            "direction": "increasing", 
+            "standard_name": "latitude", 
+            "title": "latitude", 
+            "type": "double", 
+            "units": "degrees_north", 
+            "valid_max": 90.0, 
+            "valid_min": -90.0
+        }, 
+        "datatype": "double", 
+        "definition": "lat", 
+        "dimensions": [
+            "latitude"
+        ]
+    }, 
     "latitude_bnds": {
         "attributes": {
             "units": "degrees_north"
@@ -21,6 +39,24 @@
             "hist_interval"
         ]
     },
+    "longitude": {
+        "attributes": {
+            "axis": "X", 
+            "bounds": "longitude_bnds", 
+            "direction": "increasing", 
+            "standard_name": "longitude", 
+            "title": "longitude", 
+            "type": "double", 
+            "units": "degrees_east", 
+            "valid_max": 360.0, 
+            "valid_min": 0.0
+        }, 
+        "datatype": "double", 
+        "definition": "lon", 
+        "dimensions": [
+            "longitude"
+        ]
+    }, 
     "longitude_bnds": {
         "attributes": {
             "units": "degrees_east"

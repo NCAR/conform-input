@@ -19,12 +19,13 @@ alevel=xxlevxx
 sdepth=xxlevxx
 time1=xxtimexx
 longitude=xxlonxx
-xant=
+xgre=xxlonxx
+ygre=xxlatxx
 ############################
 #  Coords: landIce
 ############################
-latitude=xxlatxx
-longitude=xxlonxx
+xgre=xxlonxx
+ygre=xxlatxx
 level=xxlevxx
 ############################
 #  Coords: ocean
@@ -39,8 +40,8 @@ latitude=xxlatxx
 ############################
 #  Coords: atmos
 ############################
-yant=
-xant=
+xgre=xxlonxx
+ygre=xxlatxx
 time2=xxtimexx
 site=
 time=xxtimexx
@@ -52,8 +53,8 @@ alevhalf=ilev
 ############################
 #  Coords: aerosol
 ############################
-yant=
-xant=
+xgre=xxlonxx
+ygre=xxlatxx
 time2=xxtimexx
 site=
 time=xxtimexx
@@ -302,7 +303,6 @@ huss=QREFHT
 mc=CMFMC + CMFMCDZM
 n2o=vinth2p(N2O,hyam, hybm, plev19, PS, P0)
 n2oglobal=n2ovmr
-n2oglobalClim=AskChemseeabove.
 o3=vinth2p(O3,hyam,hybm,plev19,PS,P0)
 pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
@@ -622,7 +622,7 @@ mrsll=SOILLIQ
 mrsol=SOILLIQ+SOILICE
 mrtws=TWS
 parasolRefl=RFL_PARASOL
-prCrop=RAIN+SNOW
+prCrop=RAIN+SNOW  #clm2.h4
 prra=RAIN+SNOW
 prsnc=ZMFLXSNW
 prveg=chunits(QINTR, units="kg m-2 s-1")
@@ -661,16 +661,16 @@ zmla=PBLH
 ############################
 epfy=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 epfz=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-hus=vinth2p(Q,hyam, hybm, plev19, PS, P0)
+hus=zonalmean(vinth2p(Q,hyam, hybm, plev19, PS, P0))
 psitem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-ta=vinth2p(T,hyam, hybm, plev19, PS, P0)
-ua=vinth2p(U,hyam, hybm, plev39, PS, P0)
+ta=zonalmean(vinth2p(T,hyam, hybm, plev19, PS, P0))
+ua=zonalmean(vinth2p(U,hyam, hybm, plev39, PS, P0))
 utendepfd=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 utendnogw=vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev39,PS,P0)
 utendogw=vinth2p(UTGWORO,hyam,hybm,plev39,PS,P0)
 utendvtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 utendwtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-va=vinth2p(V,hyam, hybm, plev19, PS, P0)
+va=zonalmean(vinth2p(V,hyam, hybm, plev19, PS, P0))
 vtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 wtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 zg=vinth2p(Z3,hyam, hybm, plev19, PS, P0)
@@ -684,7 +684,7 @@ rsd=FDS
 sandfrac=PCT_SAND
 sftflf=floating_mask
 sftgrf=grounded_mask
-siltfrac=100-PCT_SAND-PCT_CLAY
+siltfrac=100-PCT_SAND-PCT_CLAY  #clm2.h0
 slthick=DZSOI
 ############################
 #  TABLE : Emon
@@ -772,7 +772,7 @@ fddtdisi=tend_zint_100m_SiO3
 fg14co2abio=FG_ABIO_DIC14
 fgco2abio=chunits(FG_ABIO_DIC * 12.0e-8, units="kg m-2 s-1")
 fgco2nat=chunits(FG_ALT_CO2 * 12.0e-8, units="kg m-2 s-1")
-flashrate=FLASHFRQ/60./area
+flashrate=FLASHFRQ/60./AREA
 fracLut=PCT_LANDUNIT
 gppGrass=chunits(CLM_pft_to_CMIP6_vegtype(GPP,"grass",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g/m^2/s")  #clm2.h1
 gppLut=chunits(CLM_landunit_to_CMIP6_Lut(GPP,time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell), units="g/m^2/s")  #clm2.h2
@@ -902,13 +902,13 @@ tntogw=zonalmean(vinth2p(TTGWORO,hyam,hybm,plev39,PS,P0))
 tntrl=zonalmean(vinth2p(QRL,hyam,hybm,plev39,PS,P0))
 tntrlcs=QRLC
 tntrs=zonalmean(vinth2p(QRS,hyam,hybm,plev39,PS,P0))
-tntrscs=QRSC
+tntrscs=zonalmean(vinth2p(QRSC,hyam,hybm,plev39,PS,P0))
 utendepfd=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-utendnogw=vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev39,PS,P0)
+utendnogw=zonalmean(vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev39,PS,P0))
 vmrox=O3+O+O1D
 vtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 wtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-zmtnt=PTTEND PS
+zmtnt=zonalmean(vinth2p(PTTEND,hyam,hybm,plev39,PS,P0))
 ############################
 #  TABLE : Esubhr
 ############################
@@ -1549,7 +1549,7 @@ zg=vinth2p(Z3,hyam,hybm,plev8,PS,P0)
 ############################
 #  TABLE : fx
 ############################
-areacella=AREA
+areacella=AREA[0,:,:]
 mrsofc=WATSAT
 orog=PHIS/g
 sftgif=PCT_LANDUNT[:,3,:,:]

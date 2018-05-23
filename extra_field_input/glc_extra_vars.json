@@ -1,12 +1,31 @@
 {
-    "latitude_bnds": {
+    "xgre": {
+        "definition": "xxxgrexx",
+        "attributes": {
+            "units": "1",
+            "long_name": ""
+        },
+        "datatype": "int",
+        "dimensions": ["xgre"]
+    },
+    "ygre": {
+        "definition": "xxygrexx",
+        "attributes": {
+            "units": "1",
+            "long_name": ""
+        },
+        "datatype": "int",
+        "dimensions": ["ygre"]
+    },
+
+    "xgre_bnds": {
         "attributes": {
             "units": "degrees_north"
         },
         "datatype": "float",
         "definition": "latitude_bnds",
         "dimensions": [
-            "latitude",
+            "xgre",
             "hist_interval"
         ]
     },
@@ -21,14 +40,14 @@
             "hist_interval"
         ]
     },
-    "longitude_bnds": {
+    "ygre_bnds": {
         "attributes": {
             "units": "degrees_east"
         },
         "datatype": "float",
         "definition": "longitude_bnds",
         "dimensions": [
-            "longitude",
+            "ygre",
             "hist_interval"
         ]
     },
