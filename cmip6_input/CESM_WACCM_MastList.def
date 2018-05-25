@@ -10,22 +10,21 @@ latitude=xxlatxx
 ############################
 #  Coords: land
 ############################
-yant=
+ygre=xxlatxx
 time2=xxtimexx
-site=
 time=xxtimexx
 latitude=xxlatxx
+xgre=xxlonxx
 alevel=xxlevxx
 sdepth=xxlevxx
 time1=xxtimexx
 longitude=xxlonxx
-xgre=xxlonxx
-ygre=xxlatxx
+site=
 ############################
 #  Coords: landIce
 ############################
-xgre=xxlonxx
 ygre=xxlatxx
+xgre=xxlonxx
 level=xxlevxx
 ############################
 #  Coords: ocean
@@ -40,26 +39,26 @@ latitude=xxlatxx
 ############################
 #  Coords: atmos
 ############################
-xgre=xxlonxx
+site=
 ygre=xxlatxx
 time2=xxtimexx
-site=
 time=xxtimexx
 latitude=xxlatxx
 alevel=lev
+xgre=xxlonxx
 time1=xxtimexx
 longitude=xxlonxx
 alevhalf=ilev
 ############################
 #  Coords: aerosol
 ############################
-xgre=xxlonxx
+site=
 ygre=xxlatxx
 time2=xxtimexx
-site=
 time=xxtimexx
 latitude=xxlatxx
 alevel=lev
+xgre=xxlonxx
 time1=xxtimexx
 longitude=xxlonxx
 alevhalf=ilev
@@ -277,8 +276,8 @@ ua=zonalmean(vinth2p(U,hyam,hybm,plev39,PS,P0))
 ############################
 #  TABLE : Amon
 ############################
-ccb=PCLDBOT
-cct=PCLDTOP
+ccb=chunits(PCLDBOT, units="Pa")
+cct=chunits(PCLDTOP,units="Pa")
 cfc11global=f11vmr
 cfc12global=f12vmr
 ch4=vinth2p(CH4, hyam, hybm, plev19, PS, P0)
@@ -323,7 +322,7 @@ rsuscs=FSDSC - FSNSC
 rsut=FSUTOA
 rsutcs=SOLIN - FSNTOAC
 rtmt=FSNT - FLNT
-sbl=chunits(QFLX_SUB_SNOW,units="kg/m2/s")*landfrac
+sbl=chunits(QFLX_SUB_SNOW,units="kg/m2/s")*landfrac  #clm2.h0
 sfcWind=U10
 ta=vinth2p(T,hyam, hybm, plev19, PS, P0)
 tas=TREFHT
@@ -385,8 +384,8 @@ ts=TS
 #  TABLE : CFday
 ############################
 albisccp=MEANCLDALB_ISCCP
-ccb=PCLDBOT
-cct=PCLDTOP
+ccb=chunits(PCLDBOT,units="Pa")
+cct=chunits(PCLDTOP,units="Pa")
 cl=CLOUD
 clcalipso=CLD_CAL
 clhcalipso=CLDHGH_CAL
@@ -666,14 +665,14 @@ psitem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 ta=zonalmean(vinth2p(T,hyam, hybm, plev19, PS, P0))
 ua=zonalmean(vinth2p(U,hyam, hybm, plev39, PS, P0))
 utendepfd=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-utendnogw=vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev39,PS,P0)
-utendogw=vinth2p(UTGWORO,hyam,hybm,plev39,PS,P0)
+utendnogw=zonalmean(vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev39,PS,P0))
+utendogw=zonalmean(vinth2p(UTGWORO,hyam,hybm,plev39,PS,P0))
 utendvtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 utendwtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 va=zonalmean(vinth2p(V,hyam, hybm, plev19, PS, P0))
 vtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 wtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-zg=vinth2p(Z3,hyam, hybm, plev19, PS, P0)
+zg=zonalmean(vinth2p(Z3,hyam, hybm, plev19, PS, P0))
 ############################
 #  TABLE : Efx
 ############################
@@ -892,20 +891,20 @@ wetlandFrac=FINUNDATED
 ############################
 epfy=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 epfz=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-jo2=jo2_a+jo2_b
-jo3=jo3_a+jo3_b
-oxloss=O3_Loss*1.e6/6.022E23
-oxprod=O3_Prod*1.e6/6.022E23
+jo2=zonalmean(vinth2p((jo2_a+jo2_b),hyam,hybm,plev39,PS,P0))
+jo3=zonalmean(vinth2p((jo3_a+jo3_b),hyam,hybm,plev39,PS,P0))
+oxloss=zonalmean(vinth2p((O3_Loss*1.e6/6.022E23),hyam,hybm,plev39,PS,P0))
+oxprod=zonalmean(vinth2p((O3_Prod*1.e6/6.022E23),hyam,hybm,plev39,PS,P0))
 tntmp=zonalmean(vinth2p(PTTEND,hyam,hybm,plev39,PS,P0))
 tntnogw=zonalmean(vinth2p(TTGWSPEC,hyam,hybm,plev39,PS,P0))
 tntogw=zonalmean(vinth2p(TTGWORO,hyam,hybm,plev39,PS,P0))
 tntrl=zonalmean(vinth2p(QRL,hyam,hybm,plev39,PS,P0))
-tntrlcs=QRLC
+tntrlcs=zonalmean(vinth2p(QRLC,hyam,hybm,plev39,PS,P0))
 tntrs=zonalmean(vinth2p(QRS,hyam,hybm,plev39,PS,P0))
 tntrscs=zonalmean(vinth2p(QRSC,hyam,hybm,plev39,PS,P0))
 utendepfd=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 utendnogw=zonalmean(vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev39,PS,P0))
-vmrox=O3+O+O1D
+vmrox=zonalmean(vinth2p((O3+O+O1D),hyam,hybm,plev39,PS,P0))
 vtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 wtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 zmtnt=zonalmean(vinth2p(PTTEND,hyam,hybm,plev39,PS,P0))
@@ -960,16 +959,13 @@ zfullo=z_t(k)
 #  TABLE : IfxAnt
 ############################
 areacellg=area  #clm2.h0
-hfgeoubed=bheatflx  #cism.h
-lithk=thk  #cism.h
-topg=topg  #cism.h
 ############################
 #  TABLE : IfxGre
 ############################
 areacellg=area  #clm2.h0
-hfgeoubed=bheatflx  #cism.h
-lithk=thk  #cism.h
-topg=topg  #cism.h
+hfgeoubed=bheatflx[0,:,:]  #cism.h
+lithk=thk[0,:,:]  #cism.h
+topg=topg[0,:,:]  #cism.h
 ############################
 #  TABLE : ImonAnt
 ############################
@@ -977,14 +973,8 @@ acabf=chunits(QICE, units="kg m-2 s-1")  #clm2.h0
 hfls=EFLX_LH_TOT_ICE  #clm2.h0
 hfss=FSH_ICE  #clm2.h0
 icem=chunits(QICE_MELT, units="kg m-2 s-1")  #clm2.h0
-libmassbffl=basal_mbal_flux * floating_mask  #cism.h
-libmassbfgr=basal_mbal_flux * grounded_mask  #cism.h
-licalvf=calving_flux  #cism.h
-litempbotfl=btemp * floating_mask   #cism.h
-litempbotgr=btemp * grounded_mask  #cism.h
 litemptop=TSOI_ICE[:,0,:,:]  #clm2.h0
 mrroLi=chunits(QRUNOFF_ICE, units="kg m-2 s-1")  #clm2.h0
-orog=usurf  #cism.h
 prra=RAIN_ICE  #clm2.h0
 prsn=SNOW_ICE  #clm2.h0
 rlds=FLDS_ICE  #clm2.h0
@@ -1031,38 +1021,7 @@ tsn=numpy.ma.masked_invalid(SNOTXMASS_ICE/(SNOWICE_ICE+SNOWLIQ_ICE))  #clm2.h0
 ############################
 #  TABLE : IyrAnt
 ############################
-acabf=sfc_mbal_flux  #cism.h
-modelCellAreai=cell_area  #cism.h
-hfgeoubed=bheatflx  #cism.h
-iareafl=iareaf  #cism.h
-iareagr=iareag  #cism.h
-libmassbffl=basal_mbal_flux * floating_mask   #cism.h
-libmassbfgr=basal_mbal_flux * grounded_mask   #cism.h
-licalvf=calving_flux  #cism.h
-lim=imass  #cism.h
-limnsw=imass_above_flotation  #cism.h
-litempbotfl=btemp * floating_mask  #cism.h
-litempbotgr=btemp * grounded_mask  #cism.h
-litemptop=tempstag[:,0,:,:]  #cism.h
-lithk=thk  #cism.h
-orog=usurf  #cism.h
-sftflf=floating_mask  #cism.h
-sftgif=ice_mask  #cism.h
-sftgrf=grounded_mask  #cism.h
 snc=FSNO_ICE  #clm2.h3
-strbasemag=btract  #cism.h
-tendacabf=total_smb_flux  #cism.h
-tendlibmassbf=total_bmb_flux  #cism.h
-tendlicalvf=total_calving_flux  #cism.h
-topg=topg  #cism.h
-xvelbase=ubas  #cism.h
-xvelmean=uvel_mean  #cism.h
-xvelsurf=usfc  #cism.h
-yvelbase=vbas  #cism.h
-yvelmean=vvel_mean  #cism.h
-yvelsurf=vsfc  #cism.h
-zvelbase=wbas  #cism.h
-zvelsurf=wsfc  #cism.h
 ############################
 #  TABLE : IyrGre
 ############################
