@@ -2,19 +2,19 @@
     "xgre": {
         "definition": "xxxgrexx",
         "attributes": {
-            "units": "1",
+            "units": "meters",
             "long_name": ""
         },
-        "datatype": "int",
+        "datatype": "float",
         "dimensions": ["xgre"]
     },
     "ygre": {
         "definition": "xxygrexx",
         "attributes": {
-            "units": "1",
+            "units": "meters",
             "long_name": ""
         },
-        "datatype": "int",
+        "datatype": "float",
         "dimensions": ["ygre"]
     },
 
