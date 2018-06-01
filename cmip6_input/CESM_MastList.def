@@ -118,11 +118,9 @@ zg1000=Z1000
 ############################
 #  TABLE : 6hrPlevPt
 ############################
-cldicemxrat27=CLDICE
-cldwatmxrat27=CLDLIQ
+cldicemxrat27=vinth2p(CLDICE,hyam,hybm,plev27,PS,P0)
+cldwatmxrat27=vinth2p(CLDLIQ,hyam,hybm,plev27,PS,P0)
 dtaus=TOT_ICLD_VISTAU:allcloud
-hus27=vinth2p(Q,hyam,hybm,plev27,PS,P0)
-hus7h=vinth2p(Q,hyam,hybm,plev7h,PS,P0)
 huss=QREFHT
 mrsol=H2OSOI
 mrsos=SOILWATER_10CM
@@ -201,10 +199,10 @@ hcho=vinth2p(CH2O,hyam, hybm, alevel, PS, P0)
 hcl=vinth2p(HCL,hyam, hybm, alevel, PS, P0)
 hno3=vinth2p(HNO3,hyam, hybm, alevel, PS, P0)
 isop=vinth2p(ISOP,hyam, hybm, alevel, PS, P0)
-jno2=vinth2p(jno2,hyam, hybm, alevel, PS, P0)
-lossch4=vinth2p(CH4_CHML,hyam,hybm,alevel,PS,P0)*1.e6/6.022E23
-lossco=vinth2p(CO_CHML,hyam,hybm,alevel,PS,P0)*1.e6/6.022E23
-lossn2o=vinth2p(N2O_CHML,hyam,hybm,alevel,PS,P0)*1.e6/6.022E23
+jno2=chunits(vinth2p(jno2,hyam, hybm, alevel, PS, P0),units="s-1")
+lossch4=chunits((vinth2p(CH4_CHML,hyam,hybm,alevel,PS,P0)*1.e6/6.022E23),units="mol m-3 s-1")
+lossco=chunits((vinth2p(CO_CHML,hyam,hybm,alevel,PS,P0)*1.e6/6.022E23),units="mol m-3 s-1")
+lossn2o=chunits((vinth2p(N2O_CHML,hyam,hybm,alevel,PS,P0)*1.e6/6.022E23),units="mol m-3 s-1")
 lwp=TGCLDLWP
 mmrbc=vinth2p(BC,hyam,hybm,alevel,PS,P0)
 mmrdust=vinth2p((dst_a1+dst_a2+dst_a3),hyam,hybm,alevel,PS,P0)
@@ -262,7 +260,7 @@ h2o=zonalmean(vinth2p((Q+CLDICE+CLDLIQ),hyam,hybm,plev39,PS,P0))
 hcl=zonalmean(vinth2p(HCL,hyam,hybm,plev39,PS,P0))
 hno3=zonalmean(vinth2p(HNO3,hyam,hybm,plev39,PS,P0))
 ho2=zonalmean(vinth2p(HO2,hyam,hybm,plev39,PS,P0))
-meanage=chunits(ageofair(zonalmean(vinth2p(AOA1,hyam,hybm,plev39,PS,P0)),date,time,lat,plev39),units=\"yr\")
+meanage=chunits(ageofair(zonalmean(vinth2p(AOA1,hyam,hybm,plev39,PS,P0)),date,time,lat,plev39),units="yr")
 n2o=zonalmean(vinth2p(N2O,hyam,hybm,plev39,PS,P0))
 noy=zonalmean(vinth2p(NOY,hyam,hybm,plev39,PS,P0))
 o3=zonalmean(vinth2p(O3, hyam, hybm, plev39, PS, P0))
@@ -272,8 +270,6 @@ ua=zonalmean(vinth2p(U,hyam,hybm,plev39,PS,P0))
 ############################
 #  TABLE : Amon
 ############################
-ccb=chunits(PCLDBOT, units="Pa")
-cct=chunits(PCLDTOP,units="Pa")
 cfc11global=f11vmr
 cfc12global=f12vmr
 ch4=vinth2p(CH4, hyam, hybm, plev19, PS, P0)
@@ -380,8 +376,6 @@ ts=TS
 #  TABLE : CFday
 ############################
 albisccp=MEANCLDALB_ISCCP
-ccb=chunits(PCLDBOT,units="Pa")
-cct=chunits(PCLDTOP,units="Pa")
 cl=CLOUD
 clcalipso=CLD_CAL
 clhcalipso=CLDHGH_CAL
@@ -442,11 +436,7 @@ rldcs=FDLC
 rlu=FUL
 rlucs=FULC
 rsd=FDS
-rsdcs=FSDS
-rsdcs4co2=FSDS
 rsu=FUS
-rsucs=FSDSC-FSNSC
-rsucs4co2=FSDSC-FSNSC
 ta=vinth2p(T,hyam, hybm, alevel, PS, P0)
 tnhus=QAP(n)-QAP(n-1)/dt
 tnhusa=TAQ
@@ -457,7 +447,7 @@ tnhusscpbl=EVAPPREC+DQSED-CME
 tnt=TTEND_TOT
 tnta=DTCORE
 tntc=ZMDT+EVAPTZM+ZMMTT+CMFDT
-tntmp=zonalmean(vinth2p(PTTEND,hyam,hybm,alevel,PS,P0))
+tntmp=vinth2p(PTTEND,hyam,hybm,alevel,PS,P0)
 tntr=QRS+QRL
 ############################
 #  TABLE : CFsubhr
@@ -577,8 +567,6 @@ n2o=vinth2p(N2O, hyam, hybm, alevel, PS, P0)
 o3=vinth2p(O3,hyam,hybm,alevel,PS,P0)
 parasolRefl=RFL_PARASOL
 ps=PS
-rsdcs=FSDS
-rsucs=FSDSC-FSNSC
 ############################
 #  TABLE : E6hrZ
 ############################
@@ -677,8 +665,8 @@ ksat=HKSAT
 ps=PS
 rsd=FDS
 sandfrac=PCT_SAND
-sftflf=floating_mask
-sftgrf=grounded_mask
+sftflf=floating_mask  #cism.h
+sftgrf=grounded_mask  #cism.h
 siltfrac=100-PCT_SAND-PCT_CLAY  #clm2.h0
 slthick=DZSOI
 ############################
@@ -887,8 +875,8 @@ wetlandFrac=FINUNDATED
 ############################
 epfy=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
 epfz=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-jo2=zonalmean(vinth2p((jo2_a+jo2_b),hyam,hybm,plev39,PS,P0))
-jo3=zonalmean(vinth2p((jo3_a+jo3_b),hyam,hybm,plev39,PS,P0))
+jo2=chunits(zonalmean(vinth2p((jo2_a+jo2_b),hyam,hybm,plev39,PS,P0)),units="s-1")
+jo3=chunits(zonalmean(vinth2p((jo3_a+jo3_b),hyam,hybm,plev39,PS,P0)),units="s-1")
 oxloss=zonalmean(vinth2p((O3_Loss*1.e6/6.022E23),hyam,hybm,plev39,PS,P0))
 oxprod=zonalmean(vinth2p((O3_Prod*1.e6/6.022E23),hyam,hybm,plev39,PS,P0))
 tntmp=zonalmean(vinth2p(PTTEND,hyam,hybm,plev39,PS,P0))
@@ -992,14 +980,14 @@ acabf=chunits(QICE, units="kg m-2 s-1")  #clm2.h0
 hfls=EFLX_LH_TOT_ICE  #clm2.h0
 hfss=FSH_ICE  #clm2.h0
 icem=chunits(QICE_MELT, units="kg m-2 s-1")  #clm2.h0
-libmassbffl=basal_mbal_flux * floating_mask  #cism.h
-libmassbfgr=basal_mbal_flux * grounded_mask  #cism.h
-licalvf=calving_flux  #cism.h
-litempbotfl=btemp * floating_mask   #cism.h
-litempbotgr=btemp * grounded_mask  #cism.h
+libmassbffl=yeartomonth_data(basal_mbal_flux * floating_mask, time, y1, x1)  #cism.h
+libmassbfgr=yeartomonth_data(basal_mbal_flux * grounded_mask, time, y1, x1)  #cism.h
+licalvf=yeartomonth_data(calving_flux, time, y1, x1)  #cism.h
+litempbotfl=yeartomonth_data(btemp * floating_mask, time, y1, x1)   #cism.h
+litempbotgr=yeartomonth_data(btemp * grounded_mask, time, y1, x1)  #cism.h
 litemptop=TSOI_ICE[:,0,:,:]  #clm2.h0
 mrroLi=chunits(QRUNOFF_ICE, units="kg m-2 s-1")  #clm2.h0
-orog=usurf  #cism.h
+orog=yeartomonth_data(usurf, time, y1, x1)  #cism.h
 prra=RAIN_ICE  #clm2.h0
 prsn=SNOW_ICE  #clm2.h0
 rlds=FLDS_ICE  #clm2.h0
@@ -1061,7 +1049,7 @@ hflsIs=EFLX_LH_TOT_ICE  #clm2.h0
 hfssIs=FSH_ICE   #clm2.h0
 icemIs=chunits(QICE_MELT, units="kg m-2 s-1")   #clm2.h0
 litemptopIs=TSOI_ICE[:,0,:,:]  #clm2.h0
-lwsnl=SNOWLIQ
+lwsnl=SNOWLIQ  #clm2.h0
 mrroIs=chunits(QRUNOFF_ICE, units="kg m-2 s-1")  #clm2.h0
 orogIs=TOPO_COL_ICE  #clm2.h0
 prraIs=chunits(RAIN_ICE,units="kg m-2 s-1")  #clm2.h0
@@ -1071,9 +1059,9 @@ rlusIs=FIRE_ICE  #clm2.h0
 rsdsIs=FSDS  #clm2.h0
 rsusIs=FSR_ICE  #clm2.h0
 sblIs=chunits(QFLUX_SUB_SNOW, units="kg m-2 s-1")  #clm2.h0
-sftflf=floating_mask  #cism.h
+sftflf=yeartomonth_data(floating_mask, time, y1, x1)  #cism.h
 sftgif=PCT_LANDUNIT[:,3,:,:]  #clm2.h0
-sftgrf=grounded_mask  #cism.h
+sftgrf=yeartomonth_data(grounded_mask, time, y1, x1)  #cism.h
 snc=FSNO  #clm2.h0
 sncIs=FSNO_ICE  #clm2.h0
 snd=SNOWDP  #clm2.h0
@@ -1162,6 +1150,8 @@ thkcello=dz
 tos=TEMP[:,0,:,:]
 uo=UVEL
 vo=VVEL
+volcello=TAREA(I,j) * dz(k)
+wo=WVEL(t,k,I,j)
 ############################
 #  TABLE : Ofx
 ############################
