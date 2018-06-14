@@ -51,5 +51,14 @@
             "time",
             "d2"
         ]
+    },
+    "iceband_bnds": {
+        "attributes": {},
+        "datatype": "double",
+        "definition": "bounds(iceband,bdim=\"d2\")",
+        "dimensions": [
+            "iceband",
+            "d2"
+        ]
     }
 }

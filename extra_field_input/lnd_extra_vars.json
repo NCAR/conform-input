@@ -85,5 +85,16 @@
             "time",
             "hist_interval"
         ]
+    },
+    "landUse": {
+        "attributes": {
+            "requested": "primary_and_secondary_land pastures crops urban",
+            "title": "Land use type" 
+        },
+        "datatype": "int",
+        "definition": [0,1,2,3],
+        "dimensions": [
+            "landUse"
+        ]
     }
 }
