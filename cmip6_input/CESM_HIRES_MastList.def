@@ -689,7 +689,7 @@ cOther=chunits(STORVEGC, units="g/m^2")
 cSoil=chunits(TOTSOMC, units="g/m^2")  #clm2.h0
 cSoilAbove1m=chunits(TOTSOMC_1m, units="g/m^2")  #clm2.h0
 cSoilLevels=chunits(SOIL1C_vr+SOIL2C_vr+SOIL3C_vr, units="g/m^2")  #clm2.h3
-cSoilPools=chunits(soilpools(SOIL1C,SOIL2C,SOIL3C,soilpools), units=\"g/m^2\")  #clm2.h0
+cSoilPools=chunits(soilpools(SOIL1C,SOIL2C,SOIL3C,soilpools), units="g/m^2")  #clm2.h0
 cStem=chunits(LIVESTEMC + DEADSTEMC, units="g/m^2")
 cTotFireLut=chunits(CLM_landunit_to_CMIP6_Lut(COL_FIRE_CLOSS,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2/s")  #clm2.h2
 cVegGrass=chunits(CLM_pft_to_CMIP6_vegtype(TOTVEGC,"grass",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g/m^2")  #clm2.h1
@@ -745,7 +745,6 @@ fVegFire=chunits(PFT_FIRE_CLOSS, units="g/m^2/s")
 fVegLitterMortality=LITFALL - (LEAFC_TO_LITTER + FROOTC_TO_LITTER)
 fVegLitterSenescence=LEAFC_TO_LITTER + FROOTC_TO_LITTER
 fahLut=CLM_landunit_to_CMIP6_Lut((URBAN_HEAT+WASTEHEAT),"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
-fbddtdic=Jint_100m_DIC
 fbddtdin=Jint_100m_NO3+Jint_100m_NH4
 fbddtdip=Jint_100m_PO4
 fbddtdisi=Jint_100m_SiO3
@@ -1141,8 +1140,8 @@ tossq=SST2
 agessc=IAGE
 hfds=SHF+QFLUX
 masscello=RHO0*dz(k)
-masso=1.35957458896e+21
-sfriver=0.0
+masso=masso   
+sfriver=sfriver   
 so=SALT
 sos=SALT[:,0,:,:]
 tauuo=TAUX
@@ -1153,14 +1152,14 @@ tos=TEMP[:,0,:,:]
 uo=UVEL
 vo=VVEL
 volcello=TAREA(I,j) * dz(k)
-volo=1.32512143173e+18
+volo=volo   
 wo=WVEL(t,k,I,j)
 ############################
 #  TABLE : Ofx
 ############################
 areacello=TAREA
 deptho=HT
-hfgeou=0
+hfgeou=hfgeou[0,:,:]   
 masscello=RHO0*dz
 sftof=sftof(KMT)
 thkcello=expand_latlon(dz,nlat,nlon)
@@ -1179,20 +1178,20 @@ chldiazos=diazChl[:,0,:,:]
 chlos=diatChl[:,0,:,:]+spChl[:,0,:,:]+diazChl[:,0,:,:]
 chlpico=spChl[:,0,:,:]
 chlpicoos=spChl[:,0,:,:]
-co3=CO3[:,0,:,:]
-co3nat=CO3_ALT_CO2[:,0,:,:]
-co3satarag=co3_sat_arag[:,0,:,:]
-co3satcalc=co3_sat_calc[:,0,:,:]
+co3=CO3
+co3nat=CO3_ALT_CO2
+co3satarag=co3_sat_arag
+co3satcalc=co3_sat_calc
 dfe=Fe[:,0,:,:]
 dfeos=Fe[:,0,:,:]
 dissi14cabio=ABIO_DIC14[:,0,:,:]
 dissi14cabioos=ABIO_DIC14[:,0,:,:]
-dissic=DIC[:,0,:,:]
+dissic=DIC
 dissicabio=ABIO_DIC[:,0,:,:]
 dissicabioos=ABIO_DIC[:,0,:,:]
 dissicnat=DIC_ALT_CO2[:,0,:,:]
 dissicnatos=DIC_ALT_CO2[:,0,:,:]
-dissoc=DOC[:,0,:,:]+DOCr[:,0,:,:]
+dissoc=DOC+DOCr
 dpco2=chunits( 0.101325 * DpCO2, units="Pa")
 dpco2abio=chunits( 0.101325 * ABIO_DpCO2, units="Pa")
 dpco2nat=chunits( 0.101325 * DpCO2_ALT_CO2, units="Pa")
@@ -1231,9 +1230,9 @@ froc=chunits( 1.0e-5 * pocToSed, units="mol m-2 s-1")
 fsn=NOx_FLUX+NHy_FLUX
 graz=graze_auto_TOT
 hfds=SHF+QFLUX
-hfevapds="EVAP_F*latent_heat_vapor"
-hfgeou=0
-hflso="EVAP_F*latent_heat_vapor + MELTH_F + QFLUX -(IOFF+SNOW_F)*latent_heat_fusion"
+hfevapds=EVAP_F*latent_heat_vapor
+hfgeou=hfgeou   
+hflso=EVAP_F*latent_heat_vapor + MELTH_F + QFLUX -(IOFF+SNOW_F)*latent_heat_fusion
 hfsifrazil2d=QFLUX
 hfsnthermds2d=chunits(-SNOW_F/(1e-4 * latent_heat_fusion), units="kg s-3")
 hfsso=SENH_F
@@ -1258,13 +1257,16 @@ limndiat=diat_N_lim_Cweight_avg_100m
 limndiaz=diaz_N_lim_Cweight_avg_100m
 limnpico=sp_N_lim_Cweight_avg_100m
 masscello=RHO0*dz
-masso=1.35957458896e+21
+masso=masso   
 mlotst=HMXL_DR
 mlotstmax=XMXL_DR
 mlotstmin=TMXL_DR
 mlotstsq=HMXL_DR2
 msftbarot=BSF*rho_sw
-nh4=NH4[:,0,:,:]
+msftmz=chunits(ocean_basin((1e9 * rho_sw *MOC),0,basin),units="kg/s")
+msftmzmpa=chunits(ocean_basin((1e9 * rho_sw *MOC),1,basin),units="kg/s")
+msftmzsmpa=chunits(ocean_basin((1e9 * rho_sw *MOC),2,basin),units="kg/s")
+nh4=NH4
 no3=NO3[:,0,:,:]
 no3os=NO3[:,0,:,:]
 o2=O2[:,0,:,:]
@@ -1273,28 +1275,28 @@ o2os=O2[:,0,:,:]
 o2sat=O2[:,0,:,:]+AOU[:,0,:,:]
 o2satos=O2[:,0,:,:]+AOU[:,0,:,:]
 ocfriver=DOC_RIV_FLUX+DOCr_RIV_FLUX
-ph=PH
+ph=pH_3D
 phabio=ABIO_PH_SURF
 phabioos=ABIO_PH_SURF
 phnat=PH_ALT_CO2
 phnatos=PH_ALT_CO2
 phyc=spC[:,0,:,:]+diatC[:,0,:,:]+diazC[:,0,:,:]
 phycos=spC[:,0,:,:]+diatC[:,0,:,:]+diazC[:,0,:,:]
-phydiat=diatC[:,0,:,:]
-phydiaz=diazC[:,0,:,:]
+phydiat=diatC
+phydiaz=diazC
 phyfe=spFe[:,0,:,:]+diatFe[:,0,:,:]+diazFe[:,0,:,:]
 phyfeos=spFe[:,0,:,:]+diatFe[:,0,:,:]+diazFe[:,0,:,:]
-phypico=spC[:,0,:,:]
+phypico=spC
 physi=diatSi[:,0,:,:]
 physios=diatSi[:,0,:,:]
-po4=PO4[:,0,:,:]
+po4=PO4
 pp=photoC_TOT[:,0,:,:]
 prsn=SNOW_F
 rlntds=LWDN_F
 rsdo=QSW_3D
 rsntds=SHF_QSW
 sf6=SF6
-sfriver=0.0
+sfriver=sfriver   
 si=SiO3[:,0,:,:]
 sios=SiO3[:,0,:,:]
 so=SALT
@@ -1302,7 +1304,7 @@ sob=POP_bottom_layer(KMT,SALT)
 sos=SALT[:,0,:,:]
 sossq=SSS2
 spco2=chunits( 0.101325 * pCO2SURF, units="Pa")
-talk=chunits(ALK[:,0,:,:] * 1e-3, units="mol m-3")
+talk=chunits(ALK * 1e-3, units="mol m-3")
 talknat=chunits(ALK_ALT_CO2[:,0,:,:] * 1e-3, units="mol m-3")
 talknatos=chunits(ALK_ALT_CO2[:,0,:,:] * 1e-3, units="mol m-3")
 tauuo=TAUX
@@ -1316,6 +1318,7 @@ uo=UVEL
 vmo=0.5 * (VVEL(i,j) + VVEL(i-1,j)) * HTN(i,j) * dz(k) * rho_0
 vo=VVEL
 volcello=TAREA(I,j) * dz(k)
+volo=volo   
 vsfevap=EVAP_F
 vsfpr=PREC_F
 vsfriver=ROFF_F
@@ -1323,7 +1326,7 @@ vsfsit=MELF_F
 wmo=0.5 * (WVEL(i,j,k) + WVEL(i,j,k+1)) * TAREA(i,j) * rho_0
 wo=WVEL
 zo2min=O2_ZMIN_DEPTH
-zooc=zooC[:,0,:,:]
+zooc=zooC
 zos=SSH
 zossq=SSH2
 zostoga=ave_slc_t from Aixue's SLC code; derived from SSH PD TEMP SALT
