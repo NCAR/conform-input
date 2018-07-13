@@ -7,6 +7,7 @@ iceband=nc
 longitude=xxlonxx
 time=xxtimexx
 latitude=xxlatxx
+olevel=xxlevxx
 ############################
 #  Coords: land
 ############################
@@ -21,6 +22,10 @@ time=xxtimexx
 latitude=xxlatxx
 landuse=landuse
 xgre=xxlonxx
+yant=xxlatxx
+xant=xxlonxx
+soilpools=soilpools
+vegtype=natpft
 ############################
 #  Coords: landIce
 ############################
@@ -37,6 +42,7 @@ longitude=xxlonxx
 rho=rho_sw
 time=xxtimexx
 latitude=xxlatxx
+gridlatitude=xxlatxx
 ############################
 #  Coords: atmos
 ############################
@@ -50,6 +56,9 @@ xgre=xxlonxx
 time1=xxtimexx
 longitude=xxlonxx
 alevhalf=ilev
+yant=xxlatxx
+xant=xxlonxx
+spectband=spectband
 ############################
 #  Coords: aerosol
 ############################
@@ -533,12 +542,12 @@ rsutcs=SOLIN - FSNTOAC
 ############################
 clivi=TGCLDIWP
 clwvi=TGCLDTWP
-gpp=GPP
+gpp=chunits(GPP, units="g/m^2")
 prrc=chunits( 1000 * PRECC, units="kg m-2 s-1")
 prw=TMQ
 psl=PSL
-ra=AR
-rh=HR
+ra=chunits(AR, units="g/m^2")
+rh=chunits(HR, units="g/m^2")
 rlut=FUL[:,-1,:,:]
 rlutcs=FULC[:,-1,:,:]
 rsdt=SOLIN
@@ -577,10 +586,10 @@ albsn=(SNOFSRVD+SNOFSRVI+SNOFSRND+SNOFSRNI)/(FSDSVD+FSDSVI+FSDSND+FSDSNI)
 cldnvi=CDNUMC
 clt=CLDTOT
 cw=H20CAN
-ec=QVEGE
-es=QSOIL
-esn=QSNOEVAP
-et=QVEGE+QSOIL+QVEGT
+ec=chunits(QVEGE, units="kg m-2 s-1") 
+es=chunits(QSOIL, units="kg m-2 s-1")
+esn=chunits(QSNOEVAP, units="kg m-2 s-1")
+et=chunits((QVEGE+QSOIL+QVEGT), units="kg m-2 s-1")
 hfdsl=FGR12
 hfls=EFLX_LH_TOT
 hfmlt=FSM
@@ -598,12 +607,12 @@ lwsnl=SNOWLIQ
 mlotst=HMXL_DR_2
 mrfsofr=SOILICE/(SOILICE+SOILLIQ)
 mrlqso=SOILLIQ/(SOILICE+SOILLIQ)
-mrrob=QDRAI+QDRAI_PERCH
+mrrob=chunits((QDRAI+QDRAI_PERCH), units="kg m-2 s-1")
 mrros=chunits(QOVER, units="kg m-2 s-1")
 mrsfl=SOILICE
 mrsll=SOILLIQ
 mrsol=SOILLIQ+SOILICE
-mrtws=TWS
+mrtws=chunits(TWS, units="kg m-2")
 parasolRefl=RFL_PARASOL
 prCrop=RAIN+SNOW  #clm2.h4
 prra=RAIN+SNOW
@@ -623,7 +632,7 @@ snmsl=QFLX_SNOW_DRAIN
 snrefr=QSNOFRZ
 snwc=SNOCAN
 sootsn=SNOBCMSL
-sw=H2OSFC
+sw=chunits(H2OSFC, units="kg m-2")
 ta500=T500
 ta850=T850
 tasmaxCrop=CLM_landunit_to_CMIP6_Lut(TREFMXAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h5
@@ -689,7 +698,7 @@ cOther=chunits(STORVEGC, units="g/m^2")
 cSoil=chunits(TOTSOMC, units="g/m^2")  #clm2.h0
 cSoilAbove1m=chunits(TOTSOMC_1m, units="g/m^2")  #clm2.h0
 cSoilLevels=chunits(SOIL1C_vr+SOIL2C_vr+SOIL3C_vr, units="g/m^2")  #clm2.h3
-cSoilPools=chunits(soilpools(SOIL1C,SOIL2C,SOIL3C,soilpools), units="g/m^2")  #clm2.h0
+cSoilPools=chunits(get_soilpools(SOIL1C,SOIL2C,SOIL3C,soilpools), units="g/m^2")  #clm2.h0
 cStem=chunits(LIVESTEMC + DEADSTEMC, units="g/m^2")
 cTotFireLut=chunits(CLM_landunit_to_CMIP6_Lut(COL_FIRE_CLOSS,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2/s")  #clm2.h2
 cVegGrass=chunits(CLM_pft_to_CMIP6_vegtype(TOTVEGC,"grass",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g/m^2")  #clm2.h1
@@ -717,33 +726,33 @@ expfe=P_iron_FLUX_IN
 expn=(16.0/117.0)*POC_FLUX_IN
 expp=POP_FLUX_IN
 expsi=SiO2_FLUX_IN
-fAnthDisturb=LAND_USE_FLUX-CROPPROD1C_LOSS
-fBNF=chunits(FFIX_TO_SMINN, units="g/m^2/s")+chunits(NFIX, units="g/m^2/s")
-fCLandToOcean=chunits(SOM_C_LEACHED, units="g/m^2/s")
-fDeforestToAtmos=chunits(DWT_CONV_CFLUX, units="g/m^2/s")
-fDeforestToProduct=chunits(DWT_WOOD_PRODUCTC_GAIN_PATCH, units="g/m^2/s")  #clm2.h0
-fFireAll=chunits(COL_FIRE_CLOSS, units="g/m^2/s")  #clm2.h0
-fHarvestToProduct=chunits(WOOD_HARVESTC, units="g/m^2/s")  #clm2.h0
-fLuc=DWT_CONV_CFLUX+TOT_WOODPROD_LOSS
-fLulccAtmLut=chunits(CLM_landunit_to_CMIP6_Lut(DWT_CONV_CFLUX_PATCH,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2/s")  #clm2.h2
-fLulccProductLut=chunits(CLM_landunit_to_CMIP6_Lut((WOOD_HARVESTC+(DWT_PROD100C_GAIN_PATCH+DWT_PROD10C_GAIN_PATCH)*100/PCT_LANDUNIT+GRAINC_TO_FOOD),"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2/s")  #clm2.h2
-fLulccResidueLut=chunits(CLM_landunit_to_CMIP6_Lut(SLASH_HARVESTC+DWT_SLASH_CFLUX,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2/s")  #clm2.h2
-fNLitterSoil=chunits((LITR1N_TO_SOIL1N+LITR2N_TO_SOIL1N+LITR3N_TO_SOIL2N), units="g/m^2/s")
-fNProduct=chunits(TOT_WOODPRODN_LOSS, units="g/m^2/s")
-fNVegLitter=chunits(LITFALL_N, units="g/m^2/s")
-fNdep=chunits(NDEP_TO_SMINN, units="g/m^2/s")
-fNfert=chunits(NFERTILIZATION, units="g/m^2/s")
-fNgas=chunits(PFT_FIRE_NLOSS,units="g/m^2/s") + chunits(F_N2O_NIT,units="g/m^2/s") + chunits(F_DENIT,units="g/m^2/s")
-fNgasFire=chunits(PFT_FIRE_NLOSS,units="g/m^2/s")
-fNgasNonFire=chunits(F_N2O_NIT,units="g/m^2/s") + chunits(F_DENIT,units="g/m^2/s")
-fNleach=chunits(SMIN_NO3_LEACHED,units="g/m^2/s") + chunits(SMIN_NO3_RUNOFF,units="g/m^2/s")
-fNloss=chunits((PFT_FIRE_NLOSS + F_N2O_NIT + F_DENIT + SMIN_NO3_LEACHED + SMIN_NO3_RUNOFF), units="g/m^2/s")
-fNnetmin=chunits(ACTUAL_IMMOB, units="g/m^2/s")+chunits(NET_NMIN, units="g/m^2/s")
-fNup=chunits(NUPTAKE, units="g/m^2/s")
-fProductDecomp=chunits(TOT_WOODPRODC_LOSS, units="g/m^2/s")+chunits(CROPPROD1C_LOSS, units="g/m^2/s")
-fVegFire=chunits(PFT_FIRE_CLOSS, units="g/m^2/s")
-fVegLitterMortality=LITFALL - (LEAFC_TO_LITTER + FROOTC_TO_LITTER)
-fVegLitterSenescence=LEAFC_TO_LITTER + FROOTC_TO_LITTER
+fAnthDisturb=chunits(LAND_USE_FLUX-CROPPROD1C_LOSS, units="g m-2 s-1")
+fBNF=chunits(FFIX_TO_SMINN, units="g m-2 s-1")+chunits(NFIX, units="g m-2 s-1")
+fCLandToOcean=chunits(SOM_C_LEACHED, units="g m-2 s-1")
+fDeforestToAtmos=chunits(DWT_CONV_CFLUX, units="g m-2 s-1")
+fDeforestToProduct=chunits(DWT_WOOD_PRODUCTC_GAIN_PATCH, units="g m-2 s-1")  #clm2.h0
+fFireAll=chunits(COL_FIRE_CLOSS, units="g m-2 s-1")  #clm2.h0
+fHarvestToProduct=chunits(WOOD_HARVESTC, units="g m-2 s-1")  #clm2.h0
+fLuc=chunits((DWT_CONV_CFLUX+TOT_WOODPRODC_LOSS), units="g m-2 s-1")
+fLulccAtmLut=chunits(CLM_landunit_to_CMIP6_Lut(DWT_CONV_CFLUX_PATCH,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g m-2 s-1")  #clm2.h2
+fLulccProductLut=chunits(CLM_landunit_to_CMIP6_Lut((WOOD_HARVESTC+(DWT_PROD100C_GAIN_PATCH+DWT_PROD10C_GAIN_PATCH)*100/PCT_LANDUNIT+GRAINC_TO_FOOD),"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g m-2 s-1")  #clm2.h2
+fLulccResidueLut=chunits(CLM_landunit_to_CMIP6_Lut(SLASH_HARVESTC+DWT_SLASH_CFLUX,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g m-2 s-1")  #clm2.h2
+fNLitterSoil=chunits((LITR1N_TO_SOIL1N+LITR2N_TO_SOIL1N+LITR3N_TO_SOIL2N), units="g m-2 s-1")
+fNProduct=chunits(TOT_WOODPRODN_LOSS, units="g m-2 s-1")
+fNVegLitter=chunits(LITFALL_N, units="g m-2 s-1")
+fNdep=chunits(NDEP_TO_SMINN, units="g m-2 s-1")
+fNfert=chunits(NFERTILIZATION, units="g m-2 s-1")
+fNgas=chunits(PFT_FIRE_NLOSS,units="g m-2 s-1") + chunits(F_N2O_NIT,units="g m-2 s-1") + chunits(F_DENIT,units="g m-2 s-1")
+fNgasFire=chunits(PFT_FIRE_NLOSS,units="g m-2 s-1")
+fNgasNonFire=chunits(F_N2O_NIT,units="g m-2 s-1") + chunits(F_DENIT,units="g m-2 s-1")
+fNleach=chunits(SMIN_NO3_LEACHED,units="g m-2 s-1") + chunits(SMIN_NO3_RUNOFF,units="g m-2 s-1")
+fNloss=chunits((PFT_FIRE_NLOSS + F_N2O_NIT + F_DENIT + SMIN_NO3_LEACHED + SMIN_NO3_RUNOFF), units="g m-2 s-1")
+fNnetmin=chunits(ACTUAL_IMMOB, units="g m-2 s-1")+chunits(NET_NMIN, units="g m-2 s-1")
+fNup=chunits(NUPTAKE, units="g m-2 s-1")
+fProductDecomp=chunits(TOT_WOODPRODC_LOSS, units="g m-2 s-1")+chunits(CROPPROD1C_LOSS, units="g m-2 s-1")
+fVegFire=chunits(PFT_FIRE_CLOSS, units="g m-2 s-1")
+fVegLitterMortality=chunits(LITFALL - (LEAFC_TO_LITTER + FROOTC_TO_LITTER), units="g m-2 s-1")
+fVegLitterSenescence=chunits(LEAFC_TO_LITTER + FROOTC_TO_LITTER, units="g m-2 s-1")
 fahLut=CLM_landunit_to_CMIP6_Lut((URBAN_HEAT+WASTEHEAT),"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 fbddtdin=Jint_100m_NO3+Jint_100m_NH4
 fbddtdip=Jint_100m_PO4
@@ -759,12 +768,12 @@ fgco2abio=chunits(FG_ABIO_DIC * 12.0e-8, units="kg m-2 s-1")
 fgco2nat=chunits(FG_ALT_CO2 * 12.0e-8, units="kg m-2 s-1")
 flashrate=chunits((FLASHFRQ/60./AREA), units="m-2 s-1")
 fracLut=reduce_lu(PCT_LANDUNIT,landUse)
-gppGrass=chunits(CLM_pft_to_CMIP6_vegtype(GPP,"grass",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g/m^2/s")  #clm2.h1
-gppLut=chunits(CLM_landunit_to_CMIP6_Lut(GPP,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2/s")  #clm2.h2
-gppShrub=chunits(CLM_pft_to_CMIP6_vegtype(GPP,"shrub",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g/m^2/s")  #clm2.h1
-gppTree=chunits(CLM_pft_to_CMIP6_vegtype(GPP,"tree",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g/m^2/s")  #clm2.h1
-gppc13=chunits(C13_GPP, units="g/m^2/s")
-gppc14=chunits(C14_GPP, units="g/m^2/s")
+gppGrass=chunits(CLM_pft_to_CMIP6_vegtype(GPP,"grass",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
+gppLut=chunits(CLM_landunit_to_CMIP6_Lut(GPP,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g m-2 s-1")  #clm2.h2
+gppShrub=chunits(CLM_pft_to_CMIP6_vegtype(GPP,"shrub",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
+gppTree=chunits(CLM_pft_to_CMIP6_vegtype(GPP,"tree",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
+gppc13=chunits(C13_GPP, units="g m-2 s-1")
+gppc14=chunits(C14_GPP, units="g m-2 s-1")
 grassFracC3=yeartomonth_data((PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:]), time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
 grassFracC4=yeartomonth_data(PCT_NAT_PFT[:,14,:,:], time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
 hflsLut=CLM_landunit_to_CMIP6_Lut(EFLX_LH_TOT,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
@@ -772,7 +781,7 @@ hfssLut=CLM_landunit_to_CMIP6_Lut(FSH,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,g
 hus=vinth2p(Q,hyam,hybm,plev7h,PS,P0)
 hus27=vinth2p(Q,hyam,hybm,plev27,PS,P0)
 hussLut=CLM_landunit_to_CMIP6_Lut(Q2M,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
-irrLut=CLM_landunit_to_CMIP6_Lut(QIRRIG,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
+irrLut=chunits(CLM_landunit_to_CMIP6_Lut(QIRRIG,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="kg m-2 s-1")  #clm2.h2
 laiLut=CLM_landunit_to_CMIP6_Lut(TLAI,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 loaddust=BURDENDUSTdn
 loadso4=BURDENSO4dn
@@ -785,50 +794,50 @@ mrsoLut=CLM_landunit_to_CMIP6_Lut(TOTSOILICE+TOTSOILLIQ,"all",time,lat,lon,grid1
 mrsol=SOILLIQ+SOILICE
 mrsosLut=CLM_landunit_to_CMIP6_Lut(SOILWATER_10CM,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 mrtws=chunits(TWS, units="kg m-2")
-nLand=chunits(TOTECOSYSN, units="g/m^2")
-nLeaf=chunits(LEAFN, units="g/m^2")
-nLitter=chunits(TOTLITN, units="g/m^2")
-nLitterCwd=chunits(CWDN, units="g/m^2")
+nLand=chunits(TOTECOSYSN, units="g m-2")
+nLeaf=chunits(LEAFN, units="g m-2")
+nLitter=chunits(TOTLITN, units="g m-2")
+nLitterCwd=chunits(CWDN, units="g m-2")
 nMineral=chunits(SMINN/1000, units="kg/m^2")
-nMineralNH4=chunits(SMIN_NH4, units="g/m^2")
-nMineralNO3=chunits(SMIN_NO3, units="g/m^2")
-nProduct=chunits(TOT_WOODPRODN, units="g/m^2")
-nRoot=chunits(LIVECROOTN, units="g/m^2")+chunits(DEADCROOTN, units="g/m^2")+chunits(FROOTN, units="g/m^2")
-nSoil=chunits(TOTSOMN, units="g/m^2")
-nStem=chunits(DEADSTEMN, units="g/m^2")+chunits(LIVESTEMN, units="g/m^2")
-nVeg=chunits(TOTVEGN, units="g/m^2")
-nep=chunits(NEE, units="g/m^2/s")
-netAtmosLandC13Flux=chunits(C13_NBP, units="g/m^2/s")
-netAtmosLandC14Flux=chunits(C14_NBP, units="g/m^2/s")
-netAtmosLandCO2Flux=chunits(NBP, units="g/m^2/s")
-nppGrass=chunits(CLM_pft_to_CMIP6_vegtype(NPP,"grass",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g/m^2/s")  #clm2.h1
-nppLut=chunits(CLM_landunit_to_CMIP6_Lut(NPP,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2/s")  #clm2.h2
-nppOther=chunits(NPP_NUPTAKE, units="g/m^2/s")  #clm2.h0
-nppShrub=chunits(CLM_pft_to_CMIP6_vegtype(NPP,"shrub",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g/m^2/s")  #clm2.h1
-nppStem=chunits(WOODC_ALLOC, units="g/m^2/s")
-nppTree=chunits(CLM_pft_to_CMIP6_vegtype(NPP,"tree",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g/m^2/s")  #clm2.h1
+nMineralNH4=chunits(SMIN_NH4, units="g m-2")
+nMineralNO3=chunits(SMIN_NO3, units="g m-2")
+nProduct=chunits(TOT_WOODPRODN, units="g m-2")
+nRoot=chunits(LIVECROOTN, units="g m-2")+chunits(DEADCROOTN, units="g m-2")+chunits(FROOTN, units="g m-2")
+nSoil=chunits(TOTSOMN, units="g m-2")
+nStem=chunits(DEADSTEMN, units="g m-2")+chunits(LIVESTEMN, units="g m-2")
+nVeg=chunits(TOTVEGN, units="g m-2")
+nep=chunits(NEE, units="g m-2 s-1")
+netAtmosLandC13Flux=chunits(C13_NBP, units="g m-2 s-1")
+netAtmosLandC14Flux=chunits(C14_NBP, units="g m-2 s-1")
+netAtmosLandCO2Flux=chunits(NBP, units="g m-2 s-1")
+nppGrass=chunits(CLM_pft_to_CMIP6_vegtype(NPP,"grass",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
+nppLut=chunits(CLM_landunit_to_CMIP6_Lut(NPP,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g m-2 s-1")  #clm2.h2
+nppOther=chunits(NPP_NUPTAKE, units="g m-2 s-1")  #clm2.h0
+nppShrub=chunits(CLM_pft_to_CMIP6_vegtype(NPP,"shrub",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
+nppStem=chunits(WOODC_ALLOC, units="g m-2 s-1")
+nppTree=chunits(CLM_pft_to_CMIP6_vegtype(NPP,"tree",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
 nwdFracLut=yeartomonth_data(PCT_NAT_PFT, time, lat, lon)  #clm2.h3
-opottempmint=RHO0 *POP_bottom_layer_multadd(KMT,dz,TEMP)
+opottempmint=rho_sw *POP_bottom_layer_multadd(KMT,dz,TEMP)
 orog=usurf
 parasolRefl=RFL_PARASOL
 prCrop=Same as precipitation for grid cell
 ps=PS
-raGrass=chunits(CLM_pft_to_CMIP6_vegtype(AR,"grass",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g/m^2/s")  #clm2.h1
-raLeaf=chunits(LEAF_MR, units="g/m^2/s")
-raLut=chunits(CLM_landunit_to_CMIP6_Lut(AR,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2/s")  #clm2.h2
-raRoot=chunits(RR, units="g/m^2/s")
-raShrub=chunits(CLM_pft_to_CMIP6_vegtype(AR,"shrub",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g/m^2/s")  #clm2.h1
-raTree=chunits(CLM_pft_to_CMIP6_vegtype(AR,"tree",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g/m^2/s")  #clm2.h1
-rac13=chunits(C13_AR, units="g/m^2/s")
-rac14=chunits(C14_AR, units="g/m^2/s")
+raGrass=chunits(CLM_pft_to_CMIP6_vegtype(AR,"grass",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
+raLeaf=chunits(LEAF_MR, units="g m-2 s-1")
+raLut=chunits(CLM_landunit_to_CMIP6_Lut(AR,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g m-2 s-1")  #clm2.h2
+raRoot=chunits(RR, units="g m-2 s-1")
+raShrub=chunits(CLM_pft_to_CMIP6_vegtype(AR,"shrub",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
+raTree=chunits(CLM_pft_to_CMIP6_vegtype(AR,"tree",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
+rac13=chunits(C13_AR, units="g m-2 s-1")
+rac14=chunits(C14_AR, units="g m-2 s-1")
 rainmxrat27=vinth2p(QRAIN,hyam,hybm,plev27,PS,P0)
 reffclis=AREI/FREQI
 reffclws=AREL/FREQL
-rhLitter=chunits(LITTERC_HR, units="g/m^2/s")
-rhLut=chunits(CLM_landunit_to_CMIP6_Lut(HR,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2/s")  #clm2.h2
-rhSoil=chunits(SOILC_HR, units="g/m^2/s")
-rhc13=chunits(C13_HR, units="g/m^2/s")
-rhc14=chunits(C14_HR, units="g/m^2/s")
+rhLitter=chunits(LITTERC_HR, units="g m-2 s-1")
+rhLut=chunits(CLM_landunit_to_CMIP6_Lut(HR,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g m-2 s-1")  #clm2.h2
+rhSoil=chunits(SOILC_HR, units="g m-2 s-1")
+rhc13=chunits(C13_HR, units="g m-2 s-1")
+rhc14=chunits(C14_HR, units="g m-2 s-1")
 rls=FLNS
 rlusLut=CLM_landunit_to_CMIP6_Lut(FIRE,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 rsdoabsorb=QSW_3D(k,I,j)-QSW_3D(k+1,I,j)*delta(k=KMT(I,j)-1)
@@ -837,7 +846,7 @@ rsdsdiff=SOLLD+SOLSD
 rss=FSNS
 rsusLut=CLM_landunit_to_CMIP6_Lut(FSR,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 snowmxrat27=vinth2p(QSNOW,hyam,hybm,plev27,PS,P0)
-somint=RHO0 *POP_bottom_layer_multadd(KMT,dz,SALT)
+somint=rho_sw *POP_bottom_layer_multadd(KMT,dz,SALT)
 sweLut=CLM_landunit_to_CMIP6_Lut(H2OSNO,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 tasLut=CLM_landunit_to_CMIP6_Lut(TSA,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 tasmaxCrop=CLM_landunit_to_CMIP6_Lut(TREFMXAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
@@ -922,12 +931,12 @@ wap=OMEGA
 ############################
 baresoilFrac=PCT_NAT_PFT[:,0,:,:]*PCT_LANDUNIT[:,0,:,:]
 cLitter=chunits(TOTLITC, units="g/m^2")
-cLitterLut=chunits(TOTLITC, units="g/m^2")  #clm2.h3
+cLitterLut=chunits(CLM_landunit_to_CMIP6_Lut(TOTLITC,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2")  #clm2.h3
 cProduct=chunits(TOT_WOODPRODC, units="g/m^2")+chunits(CROPPROD1C, units="g/m^2")  #clm2.h3
 cSoil=chunits(TOTSOMC, units="g/m^2")  #clm2.h3
-cSoilLut=chunits(TOTSOMC, units="g/m^2")  #clm2.h3
+cSoilLut=chunits(CLM_landunit_to_CMIP6_Lut(TOTSOMC,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2")  #clm2.h3
 cVeg=chunits(TOTVEGC, units="g/m^2")  #clm2.h3
-cVegLut=chunits(TOTVEGC, units="g/m^2")  #clm2.h3
+cVegLut=chunits(CLM_landunit_to_CMIP6_Lut(TOTVEGC,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2")  #clm2.h3
 cropFrac=PCT_LANDUNIT[:,1,:,:]  #clm2.h3
 fracLut=reduce_lu(PCT_LANDUNIT,landUse)  #clm2.h3
 grassFrac=(PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:]+PCT_NAT_PFT[:,14,:,:])*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
@@ -956,13 +965,13 @@ hfss=FSH_ICE  #clm2.h0
 icem=chunits(QICE_MELT, units="kg m-2 s-1")  #clm2.h0
 litemptop=TSOI_ICE[:,0,:,:]  #clm2.h0
 mrroLi=chunits(QRUNOFF_ICE, units="kg m-2 s-1")  #clm2.h0
-prra=RAIN_ICE  #clm2.h0
-prsn=SNOW_ICE  #clm2.h0
+prra=chunits(RAIN_ICE, units="kg m-2 s-1")  #clm2.h0
+prsn=chunits(SNOW_ICE, units="kg m-2 s-1")  #clm2.h0
 rlds=FLDS_ICE  #clm2.h0
 rlus=FIRE_ICE  #clm2.h0
 rsds=FSDS  #clm2.h0
 rsus=FSR_ICE  #clm2.h0
-sbl=chunitS(QFLX_SUB_SNOW_ICE,units="kg m-2 s-1")  #clm2.h0
+sbl=chunits(QFLX_SUB_SNOW_ICE,units="kg m-2 s-1")  #clm2.h0
 snc=FSNO_ICE  #clm2.h0
 snicefreez=chunits(QSNOFRZ_ICE, units="kg m-2 s-1")  #clm2.h0
 snicem=chunits(QICE_MELT+QSNOMELT_ICE, units="kg m-2 s-1")  #clm2.h0
@@ -985,13 +994,13 @@ litempbotgr=yeartomonth_data(btemp * grounded_mask, time, y1, x1)  #cism.h
 litemptop=TSOI_ICE[:,0,:,:]  #clm2.h0
 mrroLi=chunits(QRUNOFF_ICE, units="kg m-2 s-1")  #clm2.h0
 orog=yeartomonth_data(usurf, time, y1, x1)  #cism.h
-prra=RAIN_ICE  #clm2.h0
-prsn=SNOW_ICE  #clm2.h0
+prra=chunits(RAIN_ICE, units="kg m-2 s-1")  #clm2.h0
+prsn=chunits(SNOW_ICE, units="kg m-2 s-1")  #clm2.h0
 rlds=FLDS_ICE  #clm2.h0
 rlus=FIRE_ICE  #clm2.h0
 rsds=FSDS  #clm2.h0
 rsus=FSR_ICE  #clm2.h0
-sbl=chunitS(QFLX_SUB_SNOW_ICE,units="kg m-2 s-1")  #clm2.h0
+sbl=chunits(QFLX_SUB_SNOW_ICE,units="kg m-2 s-1")  #clm2.h0
 snc=FSNO_ICE  #clm2.h0
 snicefreez=chunits(QSNOFRZ_ICE, units="kg m-2 s-1")  #clm2.h0
 snicem=chunits(QICE_MELT+QSNOMELT_ICE, units="kg m-2 s-1")  #clm2.h0
@@ -1050,7 +1059,7 @@ lwsnl=SNOWLIQ  #clm2.h0
 mrroIs=chunits(QRUNOFF_ICE, units="kg m-2 s-1")  #clm2.h0
 orogIs=TOPO_COL_ICE  #clm2.h0
 prraIs=chunits(RAIN_ICE,units="kg m-2 s-1")  #clm2.h0
-prsnIs=SNOW_ICE  #clm2.h0
+prsnIs=chunits(SNOW_ICE, units="kg m-2 s-1")  #clm2.h0
 rldsIs=FLDS_ICE  #clm2.h0
 rlusIs=FIRE_ICE  #clm2.h0
 rsdsIs=FSDS  #clm2.h0
@@ -1078,23 +1087,23 @@ tsnIs=masked_invalid(SNOTXMASS_ICE/(SNOWICE_ICE+SNOWLIQ_ICE))  #clm2.h0
 baresoilFrac=yeartomonth_data(PCT_NAT_PFT[:,0,:,:], time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
 c3PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,1-13,:,:], time, lat, lon))/100)*PCT_LANDUNIT[:,0,:,:]/100+((PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:])/100)*PCT_LANDUNIT[:,1,:,:]/100  #clm2.h3
 c4PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,14,:,:], time, lat, lon))/100)*PCT_LANDUNIT[:,0,:,:]/100+((PCT_CFT[:,2,:,:]+PCT_CFT[:,3,:,:]+PCT_CFT[:,52,:,:]+PCT_CFT[:,53,:,:]+PCT_CFT[:,60,:,:]+PCT_CFT[:,61,:,:])/100)*PCT_LANDUNIT[:,1,:,:]/100  #clm2.h3
-cCwd=chunits(CWDC, units="g/m^2")
-cLeaf=chunits(LEAFC, units="g/m^2")
-cLitter=chunits(TOTLITC, units="g/m^2")  #clm2.h0
-cProduct=chunits(TOT_WOODPRODC, units="g/m^2")+chunits(CROPPROD1C, units="g/m^2")
-cRoot=FROOTC+LIVECROOTC+DEADCROOTC
-cSoilFast=chunits(SOIL1C, units="g/m^2")
-cSoilMedium=chunits(SOIL2C, units="g/m^2")
-cSoilSlow=chunits(SOIL3C, units="g/m^2")
-cVeg=chunits(TOTVEGC, units="g/m^2")  #clm2.h0
+cCwd=chunits(CWDC, units="g m-2")
+cLeaf=chunits(LEAFC, units="g m-2")
+cLitter=chunits(TOTLITC, units="g m-2")  #clm2.h0
+cProduct=chunits(TOT_WOODPRODC, units="g m-2")+chunits(CROPPROD1C, units="g m-2")
+cRoot=chunits(FROOTC+LIVECROOTC+DEADCROOTC, units="g m-2")
+cSoilFast=chunits(SOIL1C, units="g m-2")
+cSoilMedium=chunits(SOIL2C, units="g m-2")
+cSoilSlow=chunits(SOIL3C, units="g m-2")
+cVeg=chunits(TOTVEGC, units="g m-2")  #clm2.h0
 cropFrac=PCT_LANDUNIT[:,1,:,:]
 evspsblsoi=chunits(QSOIL, units="kg m-2 s-1")
 evspsblveg=chunits(QVEGE, units="kg m-2 s-1")
-fFire=chunits(COL_FIRE_CLOSS, units="g/m^2/s")  #clm2.h0
-fHarvest=chunits(CROPPROD1C_LOSS, units="g/m^2/s")
-fLitterSoil=LITR1C_TO_SOIL1C+LITR2C_TO_SOIL1C+LITR3C_TO_SOIL2C
-fVegLitter=chunits(LITFALL, units="g/m^2/s")
-gpp=chunits(GPP, units="g/m^2/s")  #clm2.h0
+fFire=chunits(COL_FIRE_CLOSS, units="g m-2 s-1")  #clm2.h0
+fHarvest=chunits(CROPPROD1C_LOSS, units="g m-2 s-1")
+fLitterSoil=chunits((LITR1C_TO_SOIL1C+LITR2C_TO_SOIL1C+LITR3C_TO_SOIL2C), units="g m-2 s-1")
+fVegLitter=chunits(LITFALL, units="g m-2 s-1")
+gpp=chunits(GPP, units="g m-2 s-1")  #clm2.h0
 grassFrac=yeartomonth_data((PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:]+PCT_NAT_PFT[:,14,:,:]), time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
 lai=TLAI  #clm2.h0
 landCoverFrac=yeartomonth_data(PCT_NAT_PFT, time, lat, lon)*PCT_LANDUNIT  #clm2.h3
@@ -1103,17 +1112,17 @@ mrro=chunits(QRUNOFF, units="kg m-2 s-1")  #clm2.h0
 mrros=chunits(QOVER, units="kg m-2 s-1")
 mrso=sum((SOILLIQ + SOILICE), "levsoi")
 mrsos=SOILWATER_10CM  #clm2.h0
-nbp=chunits(NBP, units="g/m^2/s")
-npp=chunits(NPP, units="g/m^2/s")  #clm2.h0
-nppLeaf=chunits(LEAFC_ALLOC, units="g/m^2/s")
-nppRoot=chunits(FROOTC_ALLOC, units="g/m^2/s")
-nppWood=chunits(WOODC_ALLOC, units="g/m^2/s")
+nbp=chunits(NBP, units="g m-2 s-1")
+npp=chunits(NPP, units="g m-2 s-1")  #clm2.h0
+nppLeaf=chunits(LEAFC_ALLOC, units="g m-2 s-1")
+nppRoot=chunits(FROOTC_ALLOC, units="g m-2 s-1")
+nppWood=chunits(WOODC_ALLOC, units="g m-2 s-1")
 prveg=chunits(QINTR, units="kg m-2 s-1")
-rGrowth=chunits(GR, units="g/m^2/s")
-rMaint=chunits(MR, units="g/m^2/s")
-ra=chunits(AR, units="g/m^2/s")  #clm2.h0
+rGrowth=chunits(GR, units="g m-2 s-1")
+rMaint=chunits(MR, units="g m-2 s-1")
+ra=chunits(AR, units="g m-2 s-1")  #clm2.h0
 residualFrac=100-PCT_LANDUNIT[:,0,:,:]-PCT_LANDUNIT[:,1,:,:]
-rh=chunits(HR, units="g/m^2/s")  #clm2.h0
+rh=chunits(HR, units="g m-2 s-1")  #clm2.h0
 shrubFrac=yeartomonth_data((PCT_NAT_PFT[:,9,:,:]+PCT_NAT_PFT[:,10,:,:]+PCT_NAT_PFT[:,11,:,:]), time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
 tran=chunits(QVEGT, units="kg m-2 s-1")
 treeFrac=yeartomonth_data((PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]+PCT_NAT_PFT[:,3,:,:]+PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]+PCT_NAT_PFT[:,8,:,:]), time, lat, lon)*PCT_LANDUNIT[:,0,:,:]
@@ -1139,9 +1148,9 @@ tossq=SST2
 ############################
 agessc=IAGE
 hfds=SHF+QFLUX
-masscello=RHO0*dz(k)
-masso=masso   
-sfriver=sfriver   
+masscello=rho_sw*dz(k)
+masso=masso
+sfriver=sfriver
 so=SALT
 sos=SALT[:,0,:,:]
 tauuo=TAUX
@@ -1152,15 +1161,15 @@ tos=TEMP[:,0,:,:]
 uo=UVEL
 vo=VVEL
 volcello=TAREA(I,j) * dz(k)
-volo=volo   
+volo=volo
 wo=WVEL(t,k,I,j)
 ############################
 #  TABLE : Ofx
 ############################
 areacello=TAREA
 deptho=HT
-hfgeou=hfgeou[0,:,:]   
-masscello=RHO0*dz
+hfgeou=hfgeou[0,:,:]
+masscello=rho_sw*dz
 sftof=sftof(KMT)
 thkcello=expand_latlon(dz,nlat,nlon)
 volcello=TAREA* dz
@@ -1231,10 +1240,10 @@ fsn=NOx_FLUX+NHy_FLUX
 graz=graze_auto_TOT
 hfds=SHF+QFLUX
 hfevapds=EVAP_F*latent_heat_vapor
-hfgeou=hfgeou   
-hflso=EVAP_F*latent_heat_vapor + MELTH_F + QFLUX -(IOFF+SNOW_F)*latent_heat_fusion
+hfgeou=hfgeou
+hflso=EVAP_F*latent_heat_vapor + MELTH_F + QFLUX -(IOFF_F+SNOW_F)*latent_heat_fusion_mks
 hfsifrazil2d=QFLUX
-hfsnthermds2d=chunits(-SNOW_F/(1e-4 * latent_heat_fusion), units="kg s-3")
+hfsnthermds2d=-SNOW_F/latent_heat_fusion_mks
 hfsso=SENH_F
 icfriver=DIC_RIV_FLUX
 intdic=RHO0*12*POP_bottom_layer_multadd(KMT,dz,DIC)
@@ -1256,8 +1265,8 @@ limirrpico=sp_light_lim_Cweight_avg_100m
 limndiat=diat_N_lim_Cweight_avg_100m
 limndiaz=diaz_N_lim_Cweight_avg_100m
 limnpico=sp_N_lim_Cweight_avg_100m
-masscello=RHO0*dz
-masso=masso   
+masscello=rho_sw*dz
+masso=masso
 mlotst=HMXL_DR
 mlotstmax=XMXL_DR
 mlotstmin=TMXL_DR
@@ -1296,7 +1305,7 @@ rlntds=LWDN_F
 rsdo=QSW_3D
 rsntds=SHF_QSW
 sf6=SF6
-sfriver=sfriver   
+sfriver=sfriver
 si=SiO3[:,0,:,:]
 sios=SiO3[:,0,:,:]
 so=SALT
@@ -1313,17 +1322,17 @@ thetao=TEMP
 tob=POP_bottom_layer(KMT,TEMP)
 tos=TEMP[:,0,:,:]
 tossq=TEMP2[:,0,:,:]
-umo=0.5 * (UVEL(i,j) + UVEL(i,j-1)) * HTE(i,j) * dz(k) * rho_0
+umo=0.5 * (UVEL(i,j) + UVEL(i,j-1)) * HTE(i,j) * dz(k) * rho_sw
 uo=UVEL
-vmo=0.5 * (VVEL(i,j) + VVEL(i-1,j)) * HTN(i,j) * dz(k) * rho_0
+vmo=0.5 * (VVEL(i,j) + VVEL(i-1,j)) * HTN(i,j) * dz(k) * rho_sw
 vo=VVEL
 volcello=TAREA(I,j) * dz(k)
-volo=volo   
+volo=volo
 vsfevap=EVAP_F
 vsfpr=PREC_F
 vsfriver=ROFF_F
 vsfsit=MELF_F
-wmo=0.5 * (WVEL(i,j,k) + WVEL(i,j,k+1)) * TAREA(i,j) * rho_0
+wmo=0.5 * (WVEL(i,j,k) + WVEL(i,j,k+1)) * TAREA(i,j) * rho_sw
 wo=WVEL
 zo2min=O2_ZMIN_DEPTH
 zooc=zooC
@@ -1366,7 +1375,7 @@ graz=graze_auto_TOT
 no3=NO3
 o2=O2
 o2sat=O2+AOU
-opottempmint=RHO0 *POP_bottom_layer_multadd(KMT,dz,TEMP)
+opottempmint=rho_sw *POP_bottom_layer_multadd(KMT,dz,TEMP)
 phnat=pH_3D_ALT_CO2
 phyc=spC+diatC+diazC
 phyfe=spFe
@@ -1379,7 +1388,7 @@ remoc=DOC_remin+DOCr_remin+POC_REMIN_DIC
 rsdoabsorb=QSW_3D(k,I,j)-QSW_3D(k+1,I,j)*delta(k=KMT(I,j)-1)
 sf6=SF6
 si=SiO3
-somint=RHO0*POP_bottom_layer_multadd(KMT,dz,SALT)
+somint=rho_sw*POP_bottom_layer_multadd(KMT,dz,SALT)
 talknat=chunits(ALK_ALT_CO2 * 1e-3, units="mol m-3")
 volcello=TAREA(I,j) * dz(k)
 ############################
@@ -1444,12 +1453,12 @@ sihc=sihc
 siitdconc=aicen*100
 siitdsnthick=siitdsnthick
 siitdthick=siitdthick
-simass=vice*tarea*917
+simass=hi*tarea*917
 simassacrossline=chunits(cice_regions(hi, uvel, vvel,  HTE, HTN, siline, 917), units="kg/s")
 sipr=sipr
 sirdgconc=ardg
 sirdgthick=sirdgthick
-sisaltmass=vice*tarea*917*4
+sisaltmass=hi*tarea*917*4
 sishevel=shear
 sisnhc=sisnhc
 sisnmass=hs*rhos
@@ -1469,8 +1478,8 @@ sitimefrac=icepresent
 siu=siu
 siv=siu
 sivol=hi
-sivoln=sum(sum(hemisphere((vice*tarea),dim="nj",dr=">"),"ni"),"nj")
-sivols=sum(sum(hemisphere((vice*tarea),dim="nj",dr="<"),"ni"),"nj")
+sivoln=sum(sum(hemisphere((hi*tarea),dim="nj",dr=">"),"ni"),"nj")
+sivols=sum(sum(hemisphere((hi*tarea),dim="nj",dr="<"),"ni"),"nj")
 sfdsi=fsalt_ai
 sndmassmelt=sndmassmelt
 sndmasssnf=sndmasssnf
