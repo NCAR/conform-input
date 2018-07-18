@@ -4,28 +4,28 @@
 time1=xxtimexx
 time2=xxtimexx
 iceband=nc
+olevel=xxlevxx
 longitude=xxlonxx
 time=xxtimexx
 latitude=xxlatxx
-olevel=xxlevxx
 ############################
 #  Coords: land
 ############################
 site=
 longitude=xxlonxx
 sdepth=xxlevxx
+yant=xxlatxx
 ygre=xxlatxx
+vegtype=natpft
 alevel=xxlevxx
+soilpools=soilpools
 time1=xxtimexx
 time2=xxtimexx
+xant=xxlonxx
 time=xxtimexx
 latitude=xxlatxx
 landuse=landuse
 xgre=xxlonxx
-yant=xxlatxx
-xant=xxlonxx
-soilpools=soilpools
-vegtype=natpft
 ############################
 #  Coords: landIce
 ############################
@@ -35,30 +35,30 @@ level=xxlevxx
 ############################
 #  Coords: ocean
 ############################
-time1=xxtimexx
-time2=xxtimexx
 olevel=xxlevxx
-longitude=xxlonxx
+time2=xxtimexx
 rho=rho_sw
 time=xxtimexx
 latitude=xxlatxx
 gridlatitude=xxlatxx
+time1=xxtimexx
+longitude=xxlonxx
 ############################
 #  Coords: atmos
 ############################
+spectband=spectband
+alevhalf=ilev
 site=
+longitude=xxlonxx
+yant=xxlatxx
 ygre=xxlatxx
+alevel=lev
+time1=xxtimexx
 time2=xxtimexx
+xant=xxlonxx
 time=xxtimexx
 latitude=xxlatxx
-alevel=lev
 xgre=xxlonxx
-time1=xxtimexx
-longitude=xxlonxx
-alevhalf=ilev
-yant=xxlatxx
-xant=xxlonxx
-spectband=spectband
 ############################
 #  Coords: aerosol
 ############################
@@ -182,7 +182,7 @@ drybc=bc_a1DDF + bc_a4DDF+bc_c1DDF + bc_c4DDF
 drydust=dst_a1DDF+dst_a2DDF+dst_a3DDF+dst_c1DDF+dst_c2DDF+dst_c3DDF
 drynh3=DF_NH3
 drynh4=DF_NH4
-drynoy=DF_NO+DF_NO2+DF_HNO3+DF_HO2NO2+DF_NO3+DF_N2O5+DF_PAN+DF_ALKNIT+DF_HONITR+DF_IOSPNITA+DF_ISOPNITB+DF_ISOPNO3+DF_ONIT+DF_NOA+DF_TERPNIT
+drynoy=DF_NO+DF_NO2+DF_HNO3+DF_HO2NO2+DF_NO3+DF_N2O5+DF_PAN+DF_ALKNIT+DF_HONITR+DF_ISOPNITA+DF_ISOPNITB+DF_ISOPNO3+DF_ONIT+DF_NOA+DF_TERPNIT
 dryo3=DF_O3
 dryoa=pom_a1DDF+pom_a4DDF+soa_a1DDF+soa_a2DDF+pom_c1DDF+pom_c4DDF+soa_c1DDF+soa_c2DDF
 dryso2=DF_SO2
@@ -212,7 +212,7 @@ lossch4=chunits(CH4_CHML,units="mol m-3 s-1")
 lossco=chunits((CO_CHML*1.e6/6.022E23),units="mol m-3 s-1")
 lossn2o=chunits((N2O_CHML*1.e6/6.022E23),units="mol m-3 s-1")
 lwp=TGCLDLWP
-mmrbc=BC
+mmrbc=bc_a1+bc_a4+bc_c1+bc_c4
 mmrdust=(dst_a1+dst_a2+dst_a3)
 mmrnh4=NH4
 mmroa=(pom_a1+pom_a4+soa_a1+soa_a2)
@@ -226,7 +226,6 @@ no2=NO2
 o3=O3
 o3loss=O3_Loss*1.e6/6.022E23
 o3prod=O3_Prod*1.e6/6.022E23
-o3ste=O3S
 od550aer=AODVIS
 od550bc=AODBC
 od550dust=AODDUST
@@ -520,7 +519,7 @@ parasolRefl=RFL_PARASOL
 ############################
 #  TABLE : E1hr
 ############################
-pr=PREC_F
+pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
 psl=PSL
 rlut=FUL[:,-1,:,:]
@@ -718,8 +717,8 @@ clwmodis=CLWMODIS
 conccmcn=chunits(num_a3, units="m-3")
 conccn=chunits((num_a1+num_a2+num_a3+num_a4), units="m-3")
 concdust=(dst_a1+dst_a2+dst_a3)*delp/grav(delp=psdelta)
-cropFracC3=((PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:])/100)*PCT_LANDUNIT[:,1,:,:]
-cropFracC4=((PCT_CFT[:,2,:,:]+PCT_CFT[:,3,:,:]+PCT_CFT[:,52,:,:]+PCT_CFT[:,53,:,:]+PCT_CFT[:,60,:,:]+PCT_CFT[:,61,:,:])/100)*PCT_LANDUNIT[:,1,:,:]
+cropFracC3=yeartomonth_data((((PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:])/100)*PCT_LANDUNIT[:,1,:,:]), time, lat, lon)
+cropFracC4=yeartomonth_data((((PCT_CFT[:,2,:,:]+PCT_CFT[:,3,:,:]+PCT_CFT[:,52,:,:]+PCT_CFT[:,53,:,:]+PCT_CFT[:,60,:,:]+PCT_CFT[:,61,:,:])/100)*PCT_LANDUNIT[:,1,:,:]), time, lat, lon)
 depdust=dst_a1DDF+dst_a2DDF+dst_a3DDF+dst_c1DDF+dst_c2DDF+dst_c3DDF+dst_a1SFWET+dst_a2SFWET+dst_a3SFWET+dst_c1SFWET+dst_c2SFWET+dst_c3SFWET
 expcalc=CaCO3_FLUX_IN
 expfe=P_iron_FLUX_IN
@@ -908,7 +907,7 @@ hfss=SHFLX
 hus=Q
 huss=QREFHT
 mc=CMFMC + CMFMCDZM
-pr=PREC_F
+pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
 prw=TMQ
 ps=PS
@@ -1329,7 +1328,7 @@ vo=VVEL
 volcello=TAREA(I,j) * dz(k)
 volo=volo
 vsfevap=EVAP_F
-vsfpr=PREC_F
+vsfpr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 vsfriver=ROFF_F
 vsfsit=MELF_F
 wmo=0.5 * (WVEL(i,j,k) + WVEL(i,j,k+1)) * TAREA(i,j) * rho_sw
@@ -1399,7 +1398,6 @@ siconca=icefrac (atmos)
 sisnthick=sisnthick_d
 sispeed=sispeed_d
 sitemptop=sitemptop_d
-sithick=sithick
 sitimefrac=icepresent_d
 siu=siu_d
 siv=siv_d
@@ -1408,8 +1406,6 @@ siv=siv_d
 ############################
 siage=siage
 siareaacrossline=chunits(cice_regions(aice, uvel, vvel,  HTE, HTN, siline, 1), units="m^2/s")
-siarean=sum(sum(hemisphere((aice*tarea),dim="nj",dr=">"),"ni"),"nj")
-siareas=sum(sum(hemisphere((aice*tarea),dim="nj",dr="<"),"ni"),"nj")
 sicompstren=sicompstren
 siconc=aice
 siconca=ICEFRAC  #cam.h0
@@ -1428,18 +1424,14 @@ sidmassth=sidmassth
 sidmasstranx=sidmasstranx
 sidmasstrany=sidmasstrany
 sidragtop=sidragtop
-siextentn=sum(sum(hemisphere(cice_where(aice,">=",0.15,tarea,0),dim="nj",dr=">"),"ni"),"nj")
-siextents=sum(sum(hemisphere(cice_where(aice,">=",0.15,tarea,0),dim="nj",dr="<"),"ni"),"nj")
 sifb=sifb
 siflcondbot=siflcondbot
 siflcondtop=siflcondtop
-siflfwbot=siflfwbot
 siflfwdrain=siflfwdrain
 sifllatstop=sifllatstop
 sifllwdtop=sifllwdtop
 sifllwutop=sifllwutop
 siflsenstop=siflsenstop
-siflsensupbot=siflsensupbot
 siflswdbot=siflswdbot
 siflswdtop=siflswdtop
 siflswutop=siflswutop
@@ -1473,14 +1465,10 @@ sistryubot=sistryubot
 sitempbot=sitempbot
 sitempsnic=sitempsnic
 sitemptop=sitemptop
-sithick=sithick
 sitimefrac=icepresent
 siu=siu
 siv=siu
 sivol=hi
-sivoln=sum(sum(hemisphere((hi*tarea),dim="nj",dr=">"),"ni"),"nj")
-sivols=sum(sum(hemisphere((hi*tarea),dim="nj",dr="<"),"ni"),"nj")
-sfdsi=fsalt_ai
 sndmassmelt=sndmassmelt
 sndmasssnf=sndmasssnf
 sndmasssubl=sndmasssubl
@@ -1497,7 +1485,7 @@ huss=QREFHT
 mrro=chunits(QRUNOFF, units="kg m-2 s-1")
 mrso=TOTSOILLIQ+TOTSOILICE
 mrsos=SOILWATER_10CM
-pr=PREC_F
+pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
 prsn=SNOW_F
 psl=PSL
