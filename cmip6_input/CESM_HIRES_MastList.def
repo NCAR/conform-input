@@ -93,7 +93,7 @@ mrro=chunits(QRUNOFF, units="kg m-2 s-1")
 mrsos=SOILWATER_10CM
 pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
-prsn=SNOW_F
+prsn=SFSNOWQM
 ps=PS
 rlds=FLDS
 rldscs=FLDSC
@@ -288,7 +288,7 @@ cli=CLDICE
 clivi=TGCLDIWP
 clt=CLDTOT
 clw=CLDLIQ
-clwvi=TGCLDLWP
+clwvi=TGCLDLWP+TGCLDIWP
 co2=vinth2p(CO2,hyam, hybm, plev19, PS, P0)
 co2mass=chunits((28.966/44.) * co2vmr, units="kg")
 evspsbl=QFLX
@@ -304,15 +304,15 @@ n2oglobal=n2ovmr
 o3=vinth2p(O3,hyam,hybm,plev19,PS,P0)
 pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
-prsn=SNOW_F
+prsn=SFSNOWQM
 prw=TMQ
 ps=PS
 psl=PSL
 rlds=FLDS
 rldscs=FLDSC
 rlus=FLDS-FLNS
-rlut=FUL[:,-1,:,:]
-rlutcs=FULC[:,-1,:,:]
+rlut=FLUT
+rlutcs=FLUTC
 rsds=FSDS
 rsdscs=FSDSC
 rsdt=SOLIN
@@ -347,7 +347,7 @@ clt=CLDTOT
 cltc=CONCLD
 clwc=CLDLIQCON
 clws=CLDLIQSTR
-clwvi=TGCLDLWP
+clwvi=TGCLDLWP+TGCLDIWP
 dems=EMIS
 dtaus=TOT_ICLD_VISTAU
 evspsbl=QFLX
@@ -369,8 +369,8 @@ reffrains=AQRAIN/FREQR
 rlds=FLDS
 rldscs=FLDSC
 rlus=FLDS-FLNS
-rlut=FUL[:,-1,:,:]
-rlutcs=FULC[:,-1,:,:]
+rlut=FLUT
+rlutcs=FLUTC
 rsus=FSDS-FSNS
 rsuscs=FSCSC-FSNSC
 rsut=SOLIN-FSNTOA
@@ -394,14 +394,14 @@ clmcalipso=CLDMED_CAL
 cltcalipso=CLDTOT_CAL
 cltisccp=CLDTOT_ISCCP
 clw=CLDLIQ
-clwvi=TGCLDTWP
+clwvi=TGCLDLWP+TGCLDIWP
 hur=RELHUM
 hus=Q
 mc=CMFMC + CMFMCDZM
 pctisccp=MEANPTOP_ISCCP
 ps=PS
 rldscs=FLDSC
-rlutcs=FULC[:,-1,:,:]
+rlutcs=FLUC
 rsdscs=FSDSC
 rsdt=SOLIN
 rsuscs=FSDSC - FSNSC
@@ -431,19 +431,13 @@ cltcalipso=CLDTOT_CAL
 cltisccp=CLDTOT_ISCCP
 clwc=CLDLIQCON
 clws=CLDLIQSTR
-dmc=CMFDZM
+dmc=CMFMCDZM
 evu=vinth2p(KVH_CLUBB,hyam,hybm,plev39,PS,P0)
 hur=RELHUM
 hus=Q
 mcu=vinth2p(ZMMU,hyai,hybi,plev39,PS,P0)
 pctisccp=MEANPTOP_ISCCP
 ps=PS
-rld=FDL
-rldcs=FDLC
-rlu=FUL
-rlucs=FULC
-rsd=FDS
-rsu=FUS
 ta=T
 tnhus=QAP(n)-QAP(n-1)/dt
 tnhusa=TAQ
@@ -465,7 +459,7 @@ cli=CLDICE+QSNOW
 clivi=TGCLDIWP
 clt=CLDTOT
 clw=CLDLIQ
-clwvi=TGCLDTWP
+clwvi=TGCLDLWP+TGCLDIWP
 evspsbl=QFLX
 evu=KVH_CLUBB
 hfls=LHFLX
@@ -479,16 +473,13 @@ pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
 ps=PS
 psl=PSL
-rld=FDL
-rldcs=FDLC
 rlds=FLDS
 rldscs=FLDSC
 rlus=FLDS-FLNS
-rlut=FUL
-rlutcs=FULC[:,-1,:,:]
-rsd=FDS
+rlut=FLUT
+rlutcs=FLUTC
 rsus=FSDS-FSNS
-rsuscs=FSCSC-FSNSC
+rsuscs=FSDSC-FSNSC
 rsut=SOLIN-FSNTOA
 rsutcs=SOLIN-FSNTOAC
 sbl=QFLX_SUB_SNOW*landfrac
@@ -522,7 +513,7 @@ parasolRefl=RFL_PARASOL
 pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
 psl=PSL
-rlut=FUL[:,-1,:,:]
+rlut=FLUT
 ta=vinth2p(T,hyam, hybm, plev3, PS, P0)
 ta27=T
 ua=vinth2p(U,hyam, hybm, plev3, PS, P0)
@@ -531,8 +522,8 @@ wap=vinth2p(OMEGA,hyam, hybm, plev3, PS, P0)
 ############################
 #  TABLE : E1hrClimMon
 ############################
-rlut=FUL[:,-1,:,:]
-rlutcs=FULC[:,-1,:,:]
+rlut=FLUT
+rlutcs=FLUTC
 rsdt=SOLIN
 rsut=SOLIN - FSNTOA
 rsutcs=SOLIN - FSNTOAC
@@ -540,15 +531,15 @@ rsutcs=SOLIN - FSNTOAC
 #  TABLE : E3hr
 ############################
 clivi=TGCLDIWP
-clwvi=TGCLDTWP
+clwvi=TGCLDLWP
 gpp=chunits(GPP, units="g/m^2")
 prrc=chunits( 1000 * PRECC, units="kg m-2 s-1")
 prw=TMQ
 psl=PSL
 ra=chunits(AR, units="g/m^2")
 rh=chunits(HR, units="g/m^2")
-rlut=FUL[:,-1,:,:]
-rlutcs=FULC[:,-1,:,:]
+rlut=FLUT
+rlutcs=FLUTC
 rsdt=SOLIN
 rsut=SOLIN - FSNTOA
 rsutcs=SOLIN - FSNTOAC
@@ -674,7 +665,6 @@ zg=zonalmean(vinth2p(Z3,hyam, hybm, plev19, PS, P0))
 clayfrac=PCT_CLAY
 ksat=HKSAT
 ps=PS
-rsd=FDS
 sandfrac=PCT_SAND
 sftflf=floating_mask  #cism.h
 sftgrf=grounded_mask[0,:,:]  #cism.h
@@ -913,7 +903,7 @@ prw=TMQ
 ps=PS
 reffclis=AREI/FREQI
 reffclws=AREL/FREQL
-rlut=FUL[:,-1,:,:]
+rlut=FLUT
 rsdt=SOLIN
 rsut=SOLIN - FSNTOA
 ta=T
@@ -965,7 +955,7 @@ icem=chunits(QICE_MELT, units="kg m-2 s-1")  #clm2.h0
 litemptop=TSOI_ICE[:,0,:,:]  #clm2.h0
 mrroLi=chunits(QRUNOFF_ICE, units="kg m-2 s-1")  #clm2.h0
 prra=chunits(RAIN_ICE, units="kg m-2 s-1")  #clm2.h0
-prsn=chunits(SNOW_ICE, units="kg m-2 s-1")  #clm2.h0
+prsn=chunits(SFSNOWQM, units="kg m-2 s-1")  #clm2.h0
 rlds=FLDS_ICE  #clm2.h0
 rlus=FIRE_ICE  #clm2.h0
 rsds=FSDS  #clm2.h0
@@ -994,7 +984,7 @@ litemptop=TSOI_ICE[:,0,:,:]  #clm2.h0
 mrroLi=chunits(QRUNOFF_ICE, units="kg m-2 s-1")  #clm2.h0
 orog=yeartomonth_data(usurf, time, y1, x1)  #cism.h
 prra=chunits(RAIN_ICE, units="kg m-2 s-1")  #clm2.h0
-prsn=chunits(SNOW_ICE, units="kg m-2 s-1")  #clm2.h0
+prsn=chunits(SFSNOWQM, units="kg m-2 s-1")  #clm2.h0
 rlds=FLDS_ICE  #clm2.h0
 rlus=FIRE_ICE  #clm2.h0
 rsds=FSDS  #clm2.h0
@@ -1084,6 +1074,7 @@ tsnIs=masked_invalid(SNOTXMASS_ICE/(SNOWICE_ICE+SNOWLIQ_ICE))  #clm2.h0
 #  TABLE : Lmon
 ############################
 baresoilFrac=yeartomonth_data(PCT_NAT_PFT[:,0,:,:], time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
+burntFractionAll=FAREA_BURNED X #days/month X seconds/day X 100
 c3PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,1-13,:,:], time, lat, lon))/100)*PCT_LANDUNIT[:,0,:,:]/100+((PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:])/100)*PCT_LANDUNIT[:,1,:,:]/100  #clm2.h3
 c4PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,14,:,:], time, lat, lon))/100)*PCT_LANDUNIT[:,0,:,:]/100+((PCT_CFT[:,2,:,:]+PCT_CFT[:,3,:,:]+PCT_CFT[:,52,:,:]+PCT_CFT[:,53,:,:]+PCT_CFT[:,60,:,:]+PCT_CFT[:,61,:,:])/100)*PCT_LANDUNIT[:,1,:,:]/100  #clm2.h3
 cCwd=chunits(CWDC, units="g m-2")
@@ -1398,6 +1389,7 @@ siconca=icefrac (atmos)
 sisnthick=sisnthick_d
 sispeed=sispeed_d
 sitemptop=sitemptop_d
+sithick=sithick
 sitimefrac=icepresent_d
 siu=siu_d
 siv=siv_d
@@ -1405,7 +1397,8 @@ siv=siv_d
 #  TABLE : SImon
 ############################
 siage=siage
-siareaacrossline=chunits(cice_regions(aice, uvel, vvel,  HTE, HTN, siline, 1), units="m^2/s")
+siarean=sum(sum(hemisphere((aice*tarea),dim="nj",dr=">"),"ni"),"nj")
+siareas=sum(sum(hemisphere((aice*tarea),dim="nj",dr="<"),"ni"),"nj")
 sicompstren=sicompstren
 siconc=aice
 siconca=ICEFRAC  #cam.h0
@@ -1424,6 +1417,8 @@ sidmassth=sidmassth
 sidmasstranx=sidmasstranx
 sidmasstrany=sidmasstrany
 sidragtop=sidragtop
+siextentn=sum(sum(hemisphere(cice_where(aice,">=",0.15,tarea,0),dim="nj",dr=">"),"ni"),"nj")
+siextents=sum(sum(hemisphere(cice_where(aice,">=",0.15,tarea,0),dim="nj",dr="<"),"ni"),"nj")
 sifb=sifb
 siflcondbot=siflcondbot
 siflcondtop=siflcondtop
@@ -1465,6 +1460,7 @@ sistryubot=sistryubot
 sitempbot=sitempbot
 sitempsnic=sitempsnic
 sitemptop=sitemptop
+sithick=sithick
 sitimefrac=icepresent
 siu=siu
 siv=siu
@@ -1487,11 +1483,11 @@ mrso=TOTSOILLIQ+TOTSOILICE
 mrsos=SOILWATER_10CM
 pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
-prsn=SNOW_F
+prsn=SFSNOWQM
 psl=PSL
 rlds=FLDS
 rlus=FLDS-FLNS
-rlut=FUL[:,-1,:,:]
+rlut=FLUT
 rsds=FSDS
 rsus=FSDS - FSNS
 sfcWind=U10
