@@ -31,6 +31,8 @@ xgre=xxlonxx
 ############################
 ygre=xxlatxx
 xgre=xxlonxx
+yant=xxlatxx
+xant=xxlonxx
 level=xxlevxx
 ############################
 #  Coords: ocean
@@ -55,6 +57,7 @@ ygre=xxlatxx
 alevel=lev
 time1=xxtimexx
 time2=xxtimexx
+time3=xxtimexx
 xant=xxlonxx
 time=xxtimexx
 latitude=xxlatxx
@@ -66,6 +69,7 @@ site=
 ygre=xxlatxx
 time2=xxtimexx
 time=xxtimexx
+time3=xxtimexx
 latitude=xxlatxx
 alevel=lev
 xgre=xxlonxx
@@ -93,7 +97,6 @@ mrro=chunits(QRUNOFF, units="kg m-2 s-1")
 mrsos=SOILWATER_10CM
 pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
-prsn=SFSNOWQM
 ps=PS
 rlds=FLDS
 rldscs=FLDSC
@@ -144,7 +147,7 @@ zg500=Z500
 #  TABLE : AERday
 ############################
 cod=sum(TOT_CLD_VISTAU, "lev")
-od550aer=AODVIS
+od550aer=AODVISdn
 toz=O3 column
 zg500=Z500
 ############################
@@ -157,7 +160,7 @@ tas=TREFHT
 ############################
 #  TABLE : AERmon
 ############################
-abs550aer=AODABS
+abs550aer=AODABSdn
 airmass=MASS/AREA
 aoanh=AOA_NH
 bldep=PBLH
@@ -224,12 +227,12 @@ no2=NO2
 o3=O3
 o3loss=O3_Loss*1.e6/6.022E23
 o3prod=O3_Prod*1.e6/6.022E23
-od550aer=AODVIS
-od550bc=AODBC
-od550dust=AODDUST
-od550oa=AODSOA+AODPOM
-od550so4=AODSO4
-od550soa=AODSOA
+od550aer=AODVISdn
+od550bc=AODBCdn
+od550dust=AODDUSTdn
+od550oa=AODSOAdn+AODPOMdn
+od550so4=AODSO4dn
+od550soa=AODSOAdn
 od550ss=AODSS
 oh=OH
 pan=PAN
@@ -302,7 +305,6 @@ n2oglobal=n2ovmr
 o3=vinth2p(O3,hyam,hybm,plev19,PS,P0)
 pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
-prsn=SFSNOWQM
 prw=TMQ
 ps=PS
 psl=PSL
@@ -584,7 +586,7 @@ hfmlt=FSM
 hfss=SHFLX
 hus=vinth2p(Q,hyam,hybm,plev19,PS,P0)
 lai=TLAI
-loadbc=BURDENBC
+loadbc=BURDENBCdn
 loaddust=BURDENDUSTdn
 loadoa=BURDENPOMdn+BURDENSOAdn
 loadpoa=BURDENPOMdn
@@ -761,8 +763,8 @@ gppShrub=chunits(CLM_pft_to_CMIP6_vegtype(GPP,"shrub",time, lat, lon, grid1d_ixy
 gppTree=chunits(CLM_pft_to_CMIP6_vegtype(GPP,"tree",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
 gppc13=chunits(C13_GPP, units="g m-2 s-1")
 gppc14=chunits(C14_GPP, units="g m-2 s-1")
-grassFracC3=yeartomonth_data((PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:]), time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
-grassFracC4=yeartomonth_data(PCT_NAT_PFT[:,14,:,:], time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
+grassFracC3=yeartomonth_data((PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
+grassFracC4=yeartomonth_data(PCT_NAT_PFT[:,14,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 hflsLut=CLM_landunit_to_CMIP6_Lut(EFLX_LH_TOT,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 hfssLut=CLM_landunit_to_CMIP6_Lut(FSH,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 hus=vinth2p(Q,hyam,hybm,plev7h,PS,P0)
@@ -842,10 +844,10 @@ tntmp27=PTTEND
 tntrl27=zonalmean(vinth2p(QRL,hyam,hybm,plev27,PS,P0))
 tntrlcs=QRLC
 tntrscs=QRSC
-treeFracBdlDcd=yeartomonth_data((PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]), time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
-treeFracBdlEvg=yeartomonth_data((PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]), time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
-treeFracNdlDcd=yeartomonth_data(PCT_NAT_PFT[:,3,:,:], time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
-treeFracNdlEvg=yeartomonth_data((PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]), time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
+treeFracBdlDcd=yeartomonth_data((PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
+treeFracBdlEvg=yeartomonth_data((PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
+treeFracNdlDcd=yeartomonth_data(PCT_NAT_PFT[:,3,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
+treeFracNdlEvg=yeartomonth_data((PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 tslsiLut=CLM_landunit_to_CMIP6_Lut(TSKIN,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)
 twap=OMEGAT
 u2=UU
@@ -953,7 +955,6 @@ icem=chunits(QICE_MELT, units="kg m-2 s-1")  #clm2.h0
 litemptop=TSOI_ICE[:,0,:,:]  #clm2.h0
 mrroLi=chunits(QRUNOFF_ICE, units="kg m-2 s-1")  #clm2.h0
 prra=chunits(RAIN_ICE, units="kg m-2 s-1")  #clm2.h0
-prsn=chunits(SFSNOWQM, units="kg m-2 s-1")  #clm2.h0
 rlds=FLDS_ICE  #clm2.h0
 rlus=FIRE_ICE  #clm2.h0
 rsds=FSDS  #clm2.h0
@@ -982,7 +983,6 @@ litemptop=TSOI_ICE[:,0,:,:]  #clm2.h0
 mrroLi=chunits(QRUNOFF_ICE, units="kg m-2 s-1")  #clm2.h0
 orog=yeartomonth_data(usurf, time, y1, x1)  #cism.h
 prra=chunits(RAIN_ICE, units="kg m-2 s-1")  #clm2.h0
-prsn=chunits(SFSNOWQM, units="kg m-2 s-1")  #clm2.h0
 rlds=FLDS_ICE  #clm2.h0
 rlus=FIRE_ICE  #clm2.h0
 rsds=FSDS  #clm2.h0
@@ -1071,10 +1071,9 @@ tsnIs=masked_invalid(SNOTXMASS_ICE/(SNOWICE_ICE+SNOWLIQ_ICE))  #clm2.h0
 ############################
 #  TABLE : Lmon
 ############################
-baresoilFrac=yeartomonth_data(PCT_NAT_PFT[:,0,:,:], time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
-burntFractionAll=FAREA_BURNED X #days/month X seconds/day X 100
-c3PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,1-13,:,:], time, lat, lon))/100)*PCT_LANDUNIT[:,0,:,:]/100+((PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:])/100)*PCT_LANDUNIT[:,1,:,:]/100  #clm2.h3
-c4PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,14,:,:], time, lat, lon))/100)*PCT_LANDUNIT[:,0,:,:]/100+((PCT_CFT[:,2,:,:]+PCT_CFT[:,3,:,:]+PCT_CFT[:,52,:,:]+PCT_CFT[:,53,:,:]+PCT_CFT[:,60,:,:]+PCT_CFT[:,61,:,:])/100)*PCT_LANDUNIT[:,1,:,:]/100  #clm2.h3
+baresoilFrac=yeartomonth_data(PCT_NAT_PFT[:,0,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
+c3PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,1-13,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)/100+((yeartomonth_data(PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,1,:,:], time, lat, lon)/100  #clm2.h3
+c4PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,1-13,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)/100+((yeartomonth_data(PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,1,:,:], time, lat, lon)/100  #clm2.h3
 cCwd=chunits(CWDC, units="g m-2")
 cLeaf=chunits(LEAFC, units="g m-2")
 cLitter=chunits(TOTLITC, units="g m-2")  #clm2.h0
@@ -1092,9 +1091,9 @@ fHarvest=chunits(CROPPROD1C_LOSS, units="g m-2 s-1")
 fLitterSoil=chunits((LITR1C_TO_SOIL1C+LITR2C_TO_SOIL1C+LITR3C_TO_SOIL2C), units="g m-2 s-1")
 fVegLitter=chunits(LITFALL, units="g m-2 s-1")
 gpp=chunits(GPP, units="g m-2 s-1")  #clm2.h0
-grassFrac=yeartomonth_data((PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:]+PCT_NAT_PFT[:,14,:,:]), time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
+grassFrac=yeartomonth_data((PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:]+PCT_NAT_PFT[:,14,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 lai=TLAI  #clm2.h0
-landCoverFrac=yeartomonth_data(PCT_NAT_PFT, time, lat, lon)*PCT_LANDUNIT  #clm2.h3
+landCoverFrac=yeartomonth_data(PCT_NAT_PFT, time, lat, lon)*yeartomonth_data(PCT_LANDUNIT, time, lat, lon)  #clm2.h3
 mrfso=sum(SOILICE, "levsoi")
 mrro=chunits(QRUNOFF, units="kg m-2 s-1")  #clm2.h0
 mrros=chunits(QOVER, units="kg m-2 s-1")
@@ -1111,9 +1110,9 @@ rMaint=chunits(MR, units="g m-2 s-1")
 ra=chunits(AR, units="g m-2 s-1")  #clm2.h0
 residualFrac=100-PCT_LANDUNIT[:,0,:,:]-PCT_LANDUNIT[:,1,:,:]
 rh=chunits(HR, units="g m-2 s-1")  #clm2.h0
-shrubFrac=yeartomonth_data((PCT_NAT_PFT[:,9,:,:]+PCT_NAT_PFT[:,10,:,:]+PCT_NAT_PFT[:,11,:,:]), time, lat, lon)*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
+shrubFrac=yeartomonth_data((PCT_NAT_PFT[:,9,:,:]+PCT_NAT_PFT[:,10,:,:]+PCT_NAT_PFT[:,11,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 tran=chunits(QVEGT, units="kg m-2 s-1")
-treeFrac=yeartomonth_data((PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]+PCT_NAT_PFT[:,3,:,:]+PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]+PCT_NAT_PFT[:,8,:,:]), time, lat, lon)*PCT_LANDUNIT[:,0,:,:]
+treeFrac=yeartomonth_data((PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]+PCT_NAT_PFT[:,3,:,:]+PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]+PCT_NAT_PFT[:,8,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)
 tsl=TSOI
 ############################
 #  TABLE : Oclim
@@ -1387,8 +1386,8 @@ siconca=icefrac (atmos)
 sisnthick=sisnthick_d
 sispeed=sispeed_d
 sitemptop=sitemptop_d
-sithick=sithick
-sitimefrac=icepresent_d
+sithick=sithick_d
+sitimefrac=ice_present_d
 siu=siu_d
 siv=siv_d
 ############################
@@ -1405,12 +1404,12 @@ sidconcth=sidconcth
 sidivvel=divu
 sidmassdyn=sidmassdyn
 sidmassevapsubl=sidmassevapsubl
-sidmassgrowthbot=sidmassgrowthbot
-sidmassgrowthwat=sidmassgrowthwat
-sidmasslat=sidmasslat
-sidmassmeltbot=sidmassmeltbot
-sidmassmelttop=sidmassmelttop
-sidmasssi=sidmasssi
+sidmassgrowthbot=sidmassgrowthbot/1800
+sidmassgrowthwat=sidmassgrowthwat/1800
+sidmasslat=sidmasslat/1800
+sidmassmeltbot=sidmassmeltbot/1800
+sidmassmelttop=sidmassmelttop/1800
+sidmasssi=sidmasssi/1800
 sidmassth=sidmassth
 sidmasstranx=sidmasstranx
 sidmasstrany=sidmasstrany
@@ -1459,11 +1458,11 @@ sitempbot=sitempbot
 sitempsnic=sitempsnic
 sitemptop=sitemptop
 sithick=sithick
-sitimefrac=icepresent
+sitimefrac=ice_present
 siu=siu
 siv=siu
 sivol=hi
-sndmassmelt=sndmassmelt
+sndmassmelt=sndmassmelt/1800
 sndmasssnf=sndmasssnf
 sndmasssubl=sndmasssubl
 ############################
@@ -1481,7 +1480,6 @@ mrso=TOTSOILLIQ+TOTSOILICE
 mrsos=SOILWATER_10CM
 pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
-prsn=SFSNOWQM
 psl=PSL
 rlds=FLDS
 rlus=FLDS-FLNS
