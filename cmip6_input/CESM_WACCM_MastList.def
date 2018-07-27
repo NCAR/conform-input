@@ -29,11 +29,11 @@ xgre=xxlonxx
 ############################
 #  Coords: landIce
 ############################
+yant=xxlatxx
+level=xxlevxx
 ygre=xxlatxx
 xgre=xxlonxx
-yant=xxlatxx
 xant=xxlonxx
-level=xxlevxx
 ############################
 #  Coords: ocean
 ############################
@@ -52,30 +52,30 @@ spectband=spectband
 alevhalf=ilev
 site=
 longitude=xxlonxx
+xant=xxlonxx
 yant=xxlatxx
 ygre=xxlatxx
 alevel=lev
 time1=xxtimexx
 time2=xxtimexx
 time3=xxtimexx
-xant=xxlonxx
 time=xxtimexx
 latitude=xxlatxx
 xgre=xxlonxx
 ############################
 #  Coords: aerosol
 ############################
-site=
-ygre=xxlatxx
-time2=xxtimexx
-time=xxtimexx
-time3=xxtimexx
-latitude=xxlatxx
-alevel=lev
-xgre=xxlonxx
-time1=xxtimexx
-longitude=xxlonxx
 alevhalf=ilev
+site=
+longitude=xxlonxx
+ygre=xxlatxx
+alevel=lev
+time1=xxtimexx
+time2=xxtimexx
+time3=xxtimexx
+time=xxtimexx
+latitude=xxlatxx
+xgre=xxlonxx
 ############################
 #  Coords: ocnBgChem
 ############################
@@ -103,7 +103,7 @@ rldscs=FLDSC
 rlus=FLDS-FLNS
 rsds=FSDS
 rsdscs=FSDSC
-rsdsdiff= SOLLD + SOLSD
+rsdsdiff=SOLLD + SOLSD
 rsus=FSDS - FSNS
 rsuscs=FSDSC - FSNSC
 tas=TREFHT
@@ -172,8 +172,8 @@ cdnc=chunits(NUMLIQ,units="m-3")
 ch3coch3=CH3COCH3
 ch4=CH4
 cheaqpso4=(so4_c1AQH2SO4+so4_c2AQH2SO4+so4_c3AQH2SO4+so4_c1AQSO4+so4_c2AQSO4+so4_c3AQSO4)*96.06/115.11
-chegpso4=(so4_a1_sfgaex1+so4_a2_sfgaex1+so4_a3_sfgaex1)  *96.06/115.11
-chepsoa=soa1_a1_sfgaex1 + soa1_a2_sfgaex1 + soa2_a1_sfgaex1 + soa2_a2_sfgaex1 + soa3_a1_sfgaex1 + soa3_a2_sfgaex1 + soa4_a1_sfgaex1 + soa4_a2_sfgaex1 + soa5_a1_sfgaex1 + soa5_a2_sfgaex1 
+chegpso4=(so4_a1_sfgaex1+so4_a2_sfgaex1+so4_a3_sfgaex1) *96.06/115.11
+chepsoa=soa1_a1_sfgaex1 + soa1_a2_sfgaex1 + soa2_a1_sfgaex1 + soa2_a2_sfgaex1 + soa3_a1_sfgaex1 + soa3_a2_sfgaex1 + soa4_a1_sfgaex1 + soa4_a2_sfgaex1 + soa5_a1_sfgaex1 + soa5_a2_sfgaex1
 cltc=max(CONCLD, "lev")
 co=CO
 co2=CO2
@@ -202,7 +202,7 @@ emioa=SFpom_a4+soa_a1_sfgaex1+soa_a2_sfgaex1
 emiso2=SFSO2 + chunits( SO2_CLXF/6.02e23*64.066, units="g/cm2/s" )
 emiso4=SFso4_a1 + SFso4_a2 + chunits( (so4_a1_CLXF+so4_a2_CLXF)/6.02e+23*96.06, units="g/cm2/s" )
 emiss=SFncl_a1+SFncl_a2+SFncl_a3
-emivoc=SFBENZENE/78 + SFBIGALK/72 + SFBIGENE/56 + SFC2H2/26 + SFC2H4/28 + SFC2H5OH/46 + SFC2H6/30 + SFC3H6/42 + SFC3H8/44 + SFCH2O/30 + SFCH3CHO/44 + SFCH3COCH3/58 + SFCH3COCHO/72 + SFCH3COOH/60 + SFCH3OH/32 + SFGLYALD/60 + SFHCOOH/46 + SFISOP/68 + SFMEK/72 + SFMTERP/136 + SFTOLUENE/92 + SFXYLENES/106
+emivoc=SFBENZENE/78 + SFBIGALK/72 + SFBIGENE/56 + SFC2H2/26 + SFC2H4/28 +  SFC2H5OH/46 + SFC2H6/30 + SFC3H6/42 + SFC3H8/44 + SFCH2O/30 +  SFCH3CHO/44 + SFCH3COCH3/58 + SFCH3COCHO/72 + SFCH3COOH/60  + SFCH3OH/32 + SFGLYALD/60 + SFHCOOH/46 + SFISOP/68 + SFMEK/72 +  SFMTERP/136 + SFTOLUENE/92 + SFXYLENES/106
 h2o=(Q+CLDICE+CLDLIQ)
 hcho=CH2O
 hcl=HCL
@@ -576,10 +576,9 @@ albsn=(SNOFSRVD+SNOFSRVI+SNOFSRND+SNOFSRNI)/(FSDSVD+FSDSVI+FSDSND+FSDSNI)
 cldnvi=CDNUMC
 clt=CLDTOT
 cw=H20CAN
-ec=chunits(QVEGE, units="kg m-2 s-1") 
+ec=chunits(QVEGE, units="kg m-2 s-1")
 es=chunits(QSOIL, units="kg m-2 s-1")
 esn=chunits(QSNOEVAP, units="kg m-2 s-1")
-et=chunits((QVEGE+QSOIL+QVEGT), units="kg m-2 s-1")
 hfdsl=FGR12
 hfls=EFLX_LH_TOT
 hfmlt=FSM
@@ -698,9 +697,9 @@ cfadDbze94=CFAD_DBZE94_CS
 cfadLidarsr532=CFAD_SR532_CAL
 clcalipsoice=CLD_CAL_ICE
 clcalipsoliq=CLD_CAL_LIQ
-cldicemxrat27=CLDICE
+cldicemxrat27=vinth2p(CLDICE,hyam,hybm,plev27,PS,P0)
 cldnvi=CDNUMC
-cldwatmxrat27=CLDLIQ
+cldwatmxrat27=vinth2p(CLDLIQ,hyam,hybm,plev27,PS,P0)
 clmisr=CLD_MISR
 cltmodis=CLDTOT_MODIS
 clwmodis=CLWMODIS
@@ -743,15 +742,7 @@ fVegFire=chunits(PFT_FIRE_CLOSS, units="g m-2 s-1")
 fVegLitterMortality=chunits(LITFALL - (LEAFC_TO_LITTER + FROOTC_TO_LITTER), units="g m-2 s-1")
 fVegLitterSenescence=chunits(LEAFC_TO_LITTER + FROOTC_TO_LITTER, units="g m-2 s-1")
 fahLut=CLM_landunit_to_CMIP6_Lut((URBAN_HEAT+WASTEHEAT),"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
-fbddtdin=Jint_100m_NO3+Jint_100m_NH4
-fbddtdip=Jint_100m_PO4
-fbddtdisi=Jint_100m_SiO3
 fddtalk=chunits( 1.0e-5 * tend_zint_100m_ALK, units="mol m-2 s-1")
-fddtdic=tend_zint_100m_DIC
-fddtdife=tend_zint_100m_Fe
-fddtdin=tend_zint_100m_NO3+tend_zint_100m_NH4
-fddtdip=tend_zint_100m_PO4
-fddtdisi=tend_zint_100m_SiO3
 fg14co2abio=FG_ABIO_DIC14
 fgco2abio=chunits(FG_ABIO_DIC * 12.0e-8, units="kg m-2 s-1")
 fgco2nat=chunits(FG_ALT_CO2 * 12.0e-8, units="kg m-2 s-1")
@@ -840,8 +831,8 @@ sweLut=CLM_landunit_to_CMIP6_Lut(H2OSNO,"all",time,lat,lon,grid1d_ixy,grid1d_jxy
 tasLut=CLM_landunit_to_CMIP6_Lut(TSA,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 tasmaxCrop=CLM_landunit_to_CMIP6_Lut(TREFMXAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 tasminCrop=CLM_landunit_to_CMIP6_Lut(TREFMNAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
-tntmp27=PTTEND
-tntrl27=zonalmean(vinth2p(QRL,hyam,hybm,plev27,PS,P0))
+tntmp27=vinth2p(PTTEND,hyam,hybm,plev27,PS,P0)
+tntrl27=vinth2p(QRL,hyam,hybm,plev27,PS,P0)
 tntrlcs=QRLC
 tntrscs=QRSC
 treeFracBdlDcd=yeartomonth_data((PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
@@ -851,7 +842,7 @@ treeFracNdlEvg=yeartomonth_data((PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]), tim
 tslsiLut=CLM_landunit_to_CMIP6_Lut(TSKIN,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)
 twap=OMEGAT
 u2=UU
-ua27=U
+ua27=vinth2p(U,hyam,hybm,plev27,PS,P0)
 utendnogw=vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev19,PS,P0)
 utendogw=vinth2p(UTGWORO,hyam,hybm,plev19,PS,P0)
 v2=VV
@@ -977,7 +968,7 @@ icem=chunits(QICE_MELT, units="kg m-2 s-1")  #clm2.h0
 libmassbffl=yeartomonth_data(basal_mbal_flux * floating_mask, time, y1, x1)  #cism.h
 libmassbfgr=yeartomonth_data(basal_mbal_flux * grounded_mask, time, y1, x1)  #cism.h
 licalvf=yeartomonth_data(calving_flux, time, y1, x1)  #cism.h
-litempbotfl=yeartomonth_data(btemp * floating_mask, time, y1, x1)   #cism.h
+litempbotfl=yeartomonth_data(btemp * floating_mask, time, y1, x1)  #cism.h
 litempbotgr=yeartomonth_data(btemp * grounded_mask, time, y1, x1)  #cism.h
 litemptop=TSOI_ICE[:,0,:,:]  #clm2.h0
 mrroLi=chunits(QRUNOFF_ICE, units="kg m-2 s-1")  #clm2.h0
@@ -1007,8 +998,8 @@ modelCellAreai=cell_area  #cism.h
 hfgeoubed=bheatflx  #cism.h
 iareafl=iareaf  #cism.h
 iareagr=iareag  #cism.h
-libmassbffl=basal_mbal_flux * floating_mask   #cism.h
-libmassbfgr=basal_mbal_flux * grounded_mask   #cism.h
+libmassbffl=basal_mbal_flux * floating_mask  #cism.h
+libmassbfgr=basal_mbal_flux * grounded_mask  #cism.h
 licalvf=calving_flux  #cism.h
 lim=imass  #cism.h
 limnsw=imass_above_flotation  #cism.h
@@ -1039,8 +1030,8 @@ zvelsurf=wsfc  #cism.h
 ############################
 acabfIs=chunits(QICE, units="kg m-2 s-1")  #clm2.h0
 hflsIs=EFLX_LH_TOT_ICE  #clm2.h0
-hfssIs=FSH_ICE   #clm2.h0
-icemIs=chunits(QICE_MELT, units="kg m-2 s-1")   #clm2.h0
+hfssIs=FSH_ICE  #clm2.h0
+icemIs=chunits(QICE_MELT, units="kg m-2 s-1")  #clm2.h0
 litemptopIs=TSOI_ICE[:,0,:,:]  #clm2.h0
 lwsnl=SNOWLIQ  #clm2.h0
 mrroIs=chunits(QRUNOFF_ICE, units="kg m-2 s-1")  #clm2.h0
@@ -1167,25 +1158,25 @@ agessc=IAGE
 cfc11=CFC11
 cfc12=CFC12
 chl=diatChl[:,0,:,:]+spChl[:,0,:,:]+diazChl[:,0,:,:]
-chldiat=diatChl[:,0,:,:]
+chldiat=diatChl
 chldiatos=diatChl[:,0,:,:]
-chldiaz=diazChl[:,0,:,:]
+chldiaz=diazChl
 chldiazos=diazChl[:,0,:,:]
 chlos=diatChl[:,0,:,:]+spChl[:,0,:,:]+diazChl[:,0,:,:]
-chlpico=spChl[:,0,:,:]
+chlpico=spChl
 chlpicoos=spChl[:,0,:,:]
 co3=CO3
 co3nat=CO3_ALT_CO2
 co3satarag=co3_sat_arag
 co3satcalc=co3_sat_calc
-dfe=Fe[:,0,:,:]
+dfe=Fe
 dfeos=Fe[:,0,:,:]
-dissi14cabio=ABIO_DIC14[:,0,:,:]
+dissi14cabio=ABIO_DIC14
 dissi14cabioos=ABIO_DIC14[:,0,:,:]
 dissic=DIC
-dissicabio=ABIO_DIC[:,0,:,:]
+dissicabio=ABIO_DIC
 dissicabioos=ABIO_DIC[:,0,:,:]
-dissicnat=DIC_ALT_CO2[:,0,:,:]
+dissicnat=DIC_ALT_CO2
 dissicnatos=DIC_ALT_CO2[:,0,:,:]
 dissoc=DOC+DOCr
 dpco2=chunits( 0.101325 * DpCO2, units="Pa")
@@ -1263,12 +1254,12 @@ msftmz=chunits(ocean_basin((1e9 * rho_sw *MOC),0,basin),units="kg/s")
 msftmzmpa=chunits(ocean_basin((1e9 * rho_sw *MOC),1,basin),units="kg/s")
 msftmzsmpa=chunits(ocean_basin((1e9 * rho_sw *MOC),2,basin),units="kg/s")
 nh4=NH4
-no3=NO3[:,0,:,:]
+no3=NO3
 no3os=NO3[:,0,:,:]
-o2=O2[:,0,:,:]
+o2=O2
 o2min=O2_ZMIN
 o2os=O2[:,0,:,:]
-o2sat=O2[:,0,:,:]+AOU[:,0,:,:]
+o2sat=O2+AOU
 o2satos=O2[:,0,:,:]+AOU[:,0,:,:]
 ocfriver=DOC_RIV_FLUX+DOCr_RIV_FLUX
 ph=pH_3D
@@ -1276,24 +1267,24 @@ phabio=ABIO_PH_SURF
 phabioos=ABIO_PH_SURF
 phnat=PH_ALT_CO2
 phnatos=PH_ALT_CO2
-phyc=spC[:,0,:,:]+diatC[:,0,:,:]+diazC[:,0,:,:]
+phyc=spC+diatC+diazC
 phycos=spC[:,0,:,:]+diatC[:,0,:,:]+diazC[:,0,:,:]
 phydiat=diatC
 phydiaz=diazC
-phyfe=spFe[:,0,:,:]+diatFe[:,0,:,:]+diazFe[:,0,:,:]
+phyfe=spFe+diatFe+diazFe
 phyfeos=spFe[:,0,:,:]+diatFe[:,0,:,:]+diazFe[:,0,:,:]
 phypico=spC
-physi=diatSi[:,0,:,:]
+physi=diatSi
 physios=diatSi[:,0,:,:]
 po4=PO4
-pp=photoC_TOT[:,0,:,:]
+pp=photoC_TOT
 prsn=SNOW_F
 rlntds=LWDN_F
 rsdo=QSW_3D
 rsntds=SHF_QSW
 sf6=SF6
 sfriver=sfriver
-si=SiO3[:,0,:,:]
+si=SiO3
 sios=SiO3[:,0,:,:]
 so=SALT
 sob=POP_bottom_layer(KMT,SALT)
@@ -1301,7 +1292,7 @@ sos=SALT[:,0,:,:]
 sossq=SSS2
 spco2=chunits( 0.101325 * pCO2SURF, units="Pa")
 talk=chunits(ALK * 1e-3, units="mol m-3")
-talknat=chunits(ALK_ALT_CO2[:,0,:,:] * 1e-3, units="mol m-3")
+talknat=chunits(ALK_ALT_CO2 * 1e-3, units="mol m-3")
 talknatos=chunits(ALK_ALT_CO2[:,0,:,:] * 1e-3, units="mol m-3")
 tauuo=TAUX
 tauvo=TAUY
@@ -1438,7 +1429,7 @@ siitdconc=aicen*100
 siitdsnthick=siitdsnthick
 siitdthick=siitdthick
 simass=hi*tarea*917
-simassacrossline=chunits(cice_regions(hi, uvel, vvel,  HTE, HTN, siline, 917), units="kg/s")
+simassacrossline=chunits(cice_regions(hi, uvel, vvel, HTE, HTN, siline, 917), units="kg/s")
 sipr=sipr
 sirdgconc=ardg
 sirdgthick=sirdgthick
