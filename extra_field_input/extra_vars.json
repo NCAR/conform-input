@@ -147,7 +147,16 @@
         "datatype": "double",
         "definition": "time_bnds",
         "dimensions": [
-            "time",
+            "time2",
+            "nbnd"
+        ]
+    },
+    "time3_bnds": {
+        "attributes": {},
+        "datatype": "double",
+        "definition": "time_bnds",
+        "dimensions": [
+            "time3",
             "nbnd"
         ]
     },
