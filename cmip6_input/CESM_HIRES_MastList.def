@@ -77,7 +77,7 @@ time=xxtimexx
 latitude=xxlatxx
 xgre=xxlonxx
 ############################
-#  Coords: ocnBgChem
+#  Coords: ocnBgchem
 ############################
 time1=xxtimexx
 time2=xxtimexx
@@ -121,29 +121,29 @@ va=V
 ############################
 bldep=PBLH
 hurs=RHREFHT
-hus4=vinth2p(Q,hyam,hybm,plev4,PS,P0)
+hus4=vinth2p(Q,hyam,hybm,plev,PS,P0)
 pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 psl=PSL
 sfcWind=U10
 tas=TREFHT
-wap4=vinth2p(OMEGA,hyam,hybm,plev4,PS,P0)
+wap4=vinth2p(OMEGA,hyam,hybm,plev,PS,P0)
 zg1000=Z1000
 ############################
 #  TABLE : 6hrPlevPt
 ############################
-cldicemxrat27=vinth2p(CLDICE,hyam,hybm,plev27,PS,P0)
-cldwatmxrat27=vinth2p(CLDLIQ,hyam,hybm,plev27,PS,P0)
+cldicemxrat27=vinth2p(CLDICE,hyam,hybm,plev,PS,P0)
+cldwatmxrat27=vinth2p(CLDLIQ,hyam,hybm,plev,PS,P0)
 dtaus=TOT_ICLD_VISTAU:allcloud
 hus27=vinth2p(Q,hyam,hybm,plev27,PS,P0)
 hus7h=vinth2p(Q,hyam,hybm,plev7h,PS,P0)
 huss=QREFHT
 psl=PSL
-rainmxrat27=vinth2p(QRAIN,hyam,hybm,plev27,PS,P0)
+rainmxrat27=vinth2p(QRAIN,hyam,hybm,plev,PS,P0)
 sfcWind=U10
-snowmxrat27=vinth2p(QSNOW,hyam,hybm,plev27,PS,P0)
+snowmxrat27=vinth2p(QSNOW,hyam,hybm,plev,PS,P0)
 tas=TREFHT
 ts=TS
-ua=vinth2p(U,hyam,hybm,plev3,PS,P0)
+ua=vinth2p(U,hyam,hybm,plev,PS,P0)
 zg500=Z500
 ############################
 #  TABLE : AERday
@@ -266,27 +266,27 @@ ztp=TROP_Z
 ############################
 #  TABLE : AERmonZ
 ############################
-bry=zonalmean(vinth2p(BRY,hyam,hybm,plev39,PS,P0))
-ch4=zonalmean(vinth2p(CH4,hyam, hybm, plev39, PS, P0))
-cly=zonalmean(vinth2p(CLY,hyam,hybm,plev39,PS,P0))
-h2o=zonalmean(vinth2p((Q+CLDICE+CLDLIQ),hyam,hybm,plev39,PS,P0))
-hcl=zonalmean(vinth2p(HCL,hyam,hybm,plev39,PS,P0))
-hno3=zonalmean(vinth2p(HNO3,hyam,hybm,plev39,PS,P0))
-ho2=zonalmean(vinth2p(HO2,hyam,hybm,plev39,PS,P0))
-meanage=chunits(ageofair(zonalmean(vinth2p(AOA1,hyam,hybm,plev39,PS,P0)),date,time,lat,plev39),units="yr")
-n2o=zonalmean(vinth2p(N2O,hyam,hybm,plev39,PS,P0))
-noy=zonalmean(vinth2p(NOY,hyam,hybm,plev39,PS,P0))
-o3=zonalmean(vinth2p(O3, hyam, hybm, plev39, PS, P0))
-oh=zonalmean(vinth2p(OH,hyam,hybm,plev39,PS,P0))
-ta=zonalmean(vinth2p(T,hyam,hybm,plev39,PS,P0))
-ua=zonalmean(vinth2p(U,hyam,hybm,plev39,PS,P0))
+bry=zonalmean(vinth2p(BRY,hyam,hybm,plev,PS,P0))
+ch4=zonalmean(vinth2p(CH4,hyam, hybm, plev, PS, P0))
+cly=zonalmean(vinth2p(CLY,hyam,hybm,plev,PS,P0))
+h2o=zonalmean(vinth2p((Q+CLDICE+CLDLIQ),hyam,hybm,plev,PS,P0))
+hcl=zonalmean(vinth2p(HCL,hyam,hybm,plev,PS,P0))
+hno3=zonalmean(vinth2p(HNO3,hyam,hybm,plev,PS,P0))
+ho2=zonalmean(vinth2p(HO2,hyam,hybm,plev,PS,P0))
+meanage=chunits(ageofair(zonalmean(vinth2p(AOA1,hyam,hybm,plev,PS,P0)),date,time,lat,plev),units="yr")
+n2o=zonalmean(vinth2p(N2O,hyam,hybm,plev,PS,P0))
+noy=zonalmean(vinth2p(NOY,hyam,hybm,plev,PS,P0))
+o3=zonalmean(vinth2p(O3, hyam, hybm, plev, PS, P0))
+oh=zonalmean(vinth2p(OH,hyam,hybm,plev,PS,P0))
+ta=zonalmean(vinth2p(T,hyam,hybm,plev,PS,P0))
+ua=zonalmean(vinth2p(U,hyam,hybm,plev,PS,P0))
 ############################
 #  TABLE : Amon
 ############################
 cfc11global=f11vmr
 cfc12global=f12vmr
-ch4=vinth2p(CH4, hyam, hybm, plev19, PS, P0)
-ch4Clim=vinth2p(CH4,hyam,hybm,plev19,PS,P0)
+ch4=vinth2p(CH4, hyam, hybm, plev, PS, P0)
+ch4Clim=vinth2p(CH4,hyam,hybm,plev,PS,P0)
 ch4global=ch4vmr
 ci=FREQZM
 cl=CLOUD
@@ -295,19 +295,19 @@ clivi=TGCLDIWP
 clt=CLDTOT
 clw=CLDLIQ
 clwvi=TGCLDLWP+TGCLDIWP
-co2=vinth2p(CO2,hyam, hybm, plev19, PS, P0)
+co2=vinth2p(CO2,hyam, hybm, plev, PS, P0)
 co2mass=chunits((28.966/44.) * co2vmr, units="kg")
 evspsbl=QFLX
 hfls=LHFLX
 hfss=SHFLX
-hur=vinth2p(RELHUM,hyam, hybm, plev19, PS, P0)
+hur=vinth2p(RELHUM,hyam, hybm, plev, PS, P0)
 hurs=RHREFHT
-hus=vinth2p(Q,hyam, hybm, plev19, PS, P0)
+hus=vinth2p(Q,hyam, hybm, plev, PS, P0)
 huss=QREFHT
 mc=CMFMC + CMFMCDZM
-n2o=vinth2p(N2O,hyam, hybm, plev19, PS, P0)
+n2o=vinth2p(N2O,hyam, hybm, plev, PS, P0)
 n2oglobal=n2ovmr
-o3=vinth2p(O3,hyam,hybm,plev19,PS,P0)
+o3=vinth2p(O3,hyam,hybm,plev,PS,P0)
 pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
 prw=TMQ
@@ -328,17 +328,17 @@ rsutcs=SOLIN - FSNTOAC
 rtmt=FSNT - FLNT
 sbl=chunits(QFLX_SUB_SNOW,units="kg/m2/s")*landfrac  #clm2.h0
 sfcWind=U10
-ta=vinth2p(T,hyam, hybm, plev19, PS, P0)
+ta=vinth2p(T,hyam, hybm, plev, PS, P0)
 tas=TREFHT
 tasmax=TREFHTMX
 tasmin=TREFHTMN
 tauu=-1*(TAUX+TAUGWX+TAUBLJX)
 tauv=-1*(TAUY+TAUGWY+TAUBLJY)
 ts=TS
-ua=vinth2p(U,hyam, hybm, plev19, PS, P0)
-va=vinth2p(V,hyam, hybm, plev19, PS, P0)
-wap=vinth2p(OMEGA,hyam, hybm, plev19, PS, P0)
-zg=vinth2p(Z3,hyam, hybm, plev19, PS, P0)
+ua=vinth2p(U,hyam, hybm, plev, PS, P0)
+va=vinth2p(V,hyam, hybm, plev, PS, P0)
+wap=vinth2p(OMEGA,hyam, hybm, plev, PS, P0)
+zg=vinth2p(Z3,hyam, hybm, plev, PS, P0)
 ############################
 #  TABLE : CF3hr
 ############################
@@ -437,10 +437,10 @@ cltisccp=CLDTOT_ISCCP
 clwc=CLDLIQCON
 clws=CLDLIQSTR
 dmc=CMFMCDZM
-evu=vinth2p(KVH_CLUBB,hyam,hybm,plev39,PS,P0)
+evu=KVH_CLUBB
 hur=RELHUM
 hus=Q
-mcu=vinth2p(ZMMU,hyai,hybi,plev39,PS,P0)
+mcu=ZMMU
 pctisccp=MEANPTOP_ISCCP
 ps=PS
 ta=T
@@ -519,11 +519,11 @@ pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
 prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
 psl=PSL
 rlut=FLUT
-ta=vinth2p(T,hyam, hybm, plev3, PS, P0)
+ta=vinth2p(T,hyam, hybm, plev, PS, P0)
 ta27=T
-ua=vinth2p(U,hyam, hybm, plev3, PS, P0)
-ua27=U
-wap=vinth2p(OMEGA,hyam, hybm, plev3, PS, P0)
+ua=vinth2p(U,hyam, hybm, plev, PS, P0)
+ua27=vinth2p(U,hyam, hybm, plev, PS, P0)
+wap=vinth2p(OMEGA,hyam, hybm, plev, PS, P0)
 ############################
 #  TABLE : E1hrClimMon
 ############################
@@ -565,7 +565,7 @@ clmisr=CLD_MISR
 cltcalipso=CLDTOT_CAL
 co2=CO2
 hus=Q
-hus7h=vinth2p(Q,hyam,hybm,plev7h,PS,P0)
+hus7h=vinth2p(Q,hyam,hybm,plev,PS,P0)
 n2o=N2O
 o3=O3
 parasolRefl=RFL_PARASOL
@@ -588,7 +588,7 @@ hfdsl=FGR12
 hfls=EFLX_LH_TOT
 hfmlt=FSM
 hfss=SHFLX
-hus=vinth2p(Q,hyam,hybm,plev19,PS,P0)
+hus=vinth2p(Q,hyam,hybm,plev,PS,P0)
 lai=TLAI
 loadbc=BURDENBCdn
 loaddust=BURDENDUSTdn
@@ -643,26 +643,26 @@ tran=chunits(QVEGT, units="kg m-2 s-1")
 ts=TS
 tsl=TSOI
 tsn=masked_invalid(SNOTXMASS/(SNOWICE+SNOWLIQ))  #clm2.h0
-zg=vinth2p(Z3,hyam, hybm, plev19, PS, P0)
+zg=vinth2p(Z3,hyam, hybm, plev, PS, P0)
 zmla=PBLH
 ############################
 #  TABLE : EdayZ
 ############################
-epfy=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-epfz=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-hus=zonalmean(vinth2p(Q,hyam, hybm, plev19, PS, P0))
-psitem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-ta=zonalmean(vinth2p(T,hyam, hybm, plev19, PS, P0))
-ua=zonalmean(vinth2p(U,hyam, hybm, plev39, PS, P0))
-utendepfd=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-utendnogw=zonalmean(vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev39,PS,P0))
-utendogw=zonalmean(vinth2p(UTGWORO,hyam,hybm,plev39,PS,P0))
-utendvtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-utendwtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-va=zonalmean(vinth2p(V,hyam, hybm, plev19, PS, P0))
-vtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-wtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-zg=zonalmean(vinth2p(Z3,hyam, hybm, plev19, PS, P0))
+epfy=mean(vinth2p(dynvarmip_epfy(time, ilev, lat, Uzm, UVzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+epfz=mean(vinth2p(dynvarmip_epfz(time, ilev, lat, UZm, UWzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+hus=zonalmean(vinth2p(Q,hyam, hybm, plev, PS, P0))
+psitem=mean(vinth2p(dynvarmip_psitem(time, ilev, lat, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+ta=zonalmean(vinth2p(T,hyam, hybm, plev, PS, P0))
+ua=zonalmean(vinth2p(U,hyam, hybm, plev, PS, P0))
+utendepfd=mean(vinth2p(dynvarmip_utendepfd(time, ilev, lat, Uzm, UVzm, UWzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+utendnogw=zonalmean(vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev,PS,P0))
+utendogw=zonalmean(vinth2p(UTGWORO,hyam,hybm,plev,PS,P0))
+utendvtem=mean(vinth2p(dynvarmip_utendvtem(time, ilev, lat, Uzm, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+utendwtem=mean(vinth2p(dynvarmip_utendwtem(time, ilev, lat, Uzm, Wzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+va=zonalmean(vinth2p(V,hyam, hybm, plev, PS, P0))
+vtem=mean(vinth2p(dynvarmip_vtem(time, ilev, lat, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+wtem=mean(vinth2p(dynvarmip_wtem(time, ilev, lat, Wzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+zg=zonalmean(vinth2p(Z3,hyam, hybm, plev, PS, P0))
 ############################
 #  TABLE : Efx
 ############################
@@ -702,9 +702,9 @@ cfadDbze94=CFAD_DBZE94_CS
 cfadLidarsr532=CFAD_SR532_CAL
 clcalipsoice=CLD_CAL_ICE
 clcalipsoliq=CLD_CAL_LIQ
-cldicemxrat27=vinth2p(CLDICE,hyam,hybm,plev27,PS,P0)
+cldicemxrat27=vinth2p(CLDICE,hyam,hybm,plev,PS,P0)
 cldnvi=CDNUMC
-cldwatmxrat27=vinth2p(CLDLIQ,hyam,hybm,plev27,PS,P0)
+cldwatmxrat27=vinth2p(CLDLIQ,hyam,hybm,plev,PS,P0)
 clmisr=CLD_MISR
 cltmodis=CLDTOT_MODIS
 clwmodis=CLWMODIS
@@ -747,10 +747,6 @@ fVegFire=chunits(PFT_FIRE_CLOSS, units="g m-2 s-1")
 fVegLitterMortality=chunits(LITFALL - (LEAFC_TO_LITTER + FROOTC_TO_LITTER), units="g m-2 s-1")
 fVegLitterSenescence=chunits(LEAFC_TO_LITTER + FROOTC_TO_LITTER, units="g m-2 s-1")
 fahLut=CLM_landunit_to_CMIP6_Lut((URBAN_HEAT+WASTEHEAT),"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
-fddtalk=chunits( 1.0e-5 * tend_zint_100m_ALK, units="mol m-2 s-1")
-fg14co2abio=FG_ABIO_DIC14
-fgco2abio=chunits(FG_ABIO_DIC * 12.0e-8, units="kg m-2 s-1")
-fgco2nat=chunits(FG_ALT_CO2 * 12.0e-8, units="kg m-2 s-1")
 flashrate=chunits((FLASHFRQ/60./AREA), units="m-2 s-1")
 fracLut=reduce_lu(PCT_LANDUNIT,landUse)
 gppGrass=chunits(CLM_pft_to_CMIP6_vegtype(GPP,"grass",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
@@ -763,8 +759,8 @@ grassFracC3=yeartomonth_data((PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:]), time
 grassFracC4=yeartomonth_data(PCT_NAT_PFT[:,14,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 hflsLut=CLM_landunit_to_CMIP6_Lut(EFLX_LH_TOT,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 hfssLut=CLM_landunit_to_CMIP6_Lut(FSH,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
-hus=vinth2p(Q,hyam,hybm,plev7h,PS,P0)
-hus27=vinth2p(Q,hyam,hybm,plev27,PS,P0)
+hus=vinth2p(Q,hyam,hybm,plev,PS,P0)
+hus27=vinth2p(Q,hyam,hybm,plev,PS,P0)
 hussLut=CLM_landunit_to_CMIP6_Lut(Q2M,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 irrLut=chunits(CLM_landunit_to_CMIP6_Lut(QIRRIG,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="kg m-2 s-1")  #clm2.h2
 laiLut=CLM_landunit_to_CMIP6_Lut(TLAI,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
@@ -827,7 +823,7 @@ raShrub=chunits(CLM_pft_to_CMIP6_vegtype(AR,"shrub",time, lat, lon, grid1d_ixy, 
 raTree=chunits(CLM_pft_to_CMIP6_vegtype(AR,"tree",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
 rac13=chunits(C13_AR, units="g m-2 s-1")
 rac14=chunits(C14_AR, units="g m-2 s-1")
-rainmxrat27=vinth2p(QRAIN,hyam,hybm,plev27,PS,P0)
+rainmxrat27=vinth2p(QRAIN,hyam,hybm,plev,PS,P0)
 reffclis=AREI/FREQI
 reffclws=AREL/FREQL
 rhLitter=chunits(LITTERC_HR, units="g m-2 s-1")
@@ -842,14 +838,14 @@ rsdscsdiff=SOLLD+SOLSD
 rsdsdiff=SOLLD+SOLSD
 rss=FSNS
 rsusLut=CLM_landunit_to_CMIP6_Lut(FSR,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
-snowmxrat27=vinth2p(QSNOW,hyam,hybm,plev27,PS,P0)
+snowmxrat27=vinth2p(QSNOW,hyam,hybm,plev,PS,P0)
 somint=rho_sw *POP_bottom_layer_multadd(KMT,dz,SALT)
 sweLut=CLM_landunit_to_CMIP6_Lut(H2OSNO,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 tasLut=CLM_landunit_to_CMIP6_Lut(TSA,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 tasmaxCrop=CLM_landunit_to_CMIP6_Lut(TREFMXAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 tasminCrop=CLM_landunit_to_CMIP6_Lut(TREFMNAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
-tntmp27=vinth2p(PTTEND,hyam,hybm,plev27,PS,P0)
-tntrl27=vinth2p(QRL,hyam,hybm,plev27,PS,P0)
+tntmp27=vinth2p(PTTEND,hyam,hybm,plev,PS,P0)
+tntrl27=vinth2p(QRL,hyam,hybm,plev,PS,P0)
 tntrlcs=QRLC
 tntrscs=QRSC
 treeFracBdlDcd=yeartomonth_data((PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
@@ -859,9 +855,9 @@ treeFracNdlEvg=yeartomonth_data((PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]), tim
 tslsiLut=CLM_landunit_to_CMIP6_Lut(TSKIN,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)
 twap=OMEGAT
 u2=UU
-ua27=vinth2p(U,hyam,hybm,plev27,PS,P0)
-utendnogw=vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev19,PS,P0)
-utendogw=vinth2p(UTGWORO,hyam,hybm,plev19,PS,P0)
+ua27=vinth2p(U,hyam,hybm,plev,PS,P0)
+utendnogw=vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev,PS,P0)
+utendogw=vinth2p(UTGWORO,hyam,hybm,plev,PS,P0)
 v2=VV
 vegFrac=PCT_LANDUNIT[:,0,:,:]+PCT_LANDUNIT[:,1,:,:]
 vegHeight=HTOP  #clm2.h0
@@ -877,27 +873,27 @@ wetlandFrac=FINUNDATED
 ############################
 #  TABLE : EmonZ
 ############################
-epfy=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-epfz=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-jo2=chunits(zonalmean(vinth2p((jo2_a+jo2_b),hyam,hybm,plev39,PS,P0)),units="s-1")
-jo3=chunits(zonalmean(vinth2p((jo3_a+jo3_b),hyam,hybm,plev39,PS,P0)),units="s-1")
-oxloss=zonalmean(vinth2p((O3_Loss*1.e6/6.022E23),hyam,hybm,plev39,PS,P0))
-oxprod=zonalmean(vinth2p((O3_Prod*1.e6/6.022E23),hyam,hybm,plev39,PS,P0))
+epfy=mean(vinth2p(dynvarmip_epfy(time, ilev, lat, Uzm, UVzm, VTHzm, THzm), hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+epfz=mean(vinth2p(dynvarmip_epfz(time, ilev, lat, UZm, UWzm, VTHzm, THzm), hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+jo2=chunits(zonalmean(vinth2p((jo2_a+jo2_b),hyam,hybm,plev,PS,P0)),units="s-1")
+jo3=chunits(zonalmean(vinth2p((jo3_a+jo3_b),hyam,hybm,plev,PS,P0)),units="s-1")
+oxloss=zonalmean(vinth2p((O3_Loss*1.e6/6.022E23),hyam,hybm,plev,PS,P0))
+oxprod=zonalmean(vinth2p((O3_Prod*1.e6/6.022E23),hyam,hybm,plev,PS,P0))
 sltbasin=N_SALT(:,:,transport_comp=1,:)*rho_sw
 sltnortha=N_SALT(:,transport_region=2,transport_comp=1,:)*rho_sw
-tntmp=zonalmean(vinth2p(PTTEND,hyam,hybm,plev39,PS,P0))
-tntnogw=zonalmean(vinth2p(TTGWSPEC,hyam,hybm,plev39,PS,P0))
-tntogw=zonalmean(vinth2p(TTGWORO,hyam,hybm,plev39,PS,P0))
-tntrl=zonalmean(vinth2p(QRL,hyam,hybm,plev39,PS,P0))
-tntrlcs=zonalmean(vinth2p(QRLC,hyam,hybm,plev39,PS,P0))
-tntrs=zonalmean(vinth2p(QRS,hyam,hybm,plev39,PS,P0))
-tntrscs=zonalmean(vinth2p(QRSC,hyam,hybm,plev39,PS,P0))
-utendepfd=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-utendnogw=zonalmean(vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev39,PS,P0))
-vmrox=zonalmean(vinth2p((O3+O+O1D),hyam,hybm,plev39,PS,P0))
-vtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-wtem=dynvarmipdiags(Uzm,THzm,VTHzm,Vzm,UVzm,UWzm,Wzm)
-zmtnt=zonalmean(vinth2p(PTTEND,hyam,hybm,plev39,PS,P0))
+tntmp=zonalmean(vinth2p(PTTEND,hyam,hybm,plev,PS,P0))
+tntnogw=zonalmean(vinth2p(TTGWSPEC,hyam,hybm,plev,PS,P0))
+tntogw=zonalmean(vinth2p(TTGWORO,hyam,hybm,plev,PS,P0))
+tntrl=zonalmean(vinth2p(QRL,hyam,hybm,plev,PS,P0))
+tntrlcs=zonalmean(vinth2p(QRLC,hyam,hybm,plev,PS,P0))
+tntrs=zonalmean(vinth2p(QRS,hyam,hybm,plev,PS,P0))
+tntrscs=zonalmean(vinth2p(QRSC,hyam,hybm,plev,PS,P0))
+utendepfd=mean(vinth2p(dynvarmip_utendepfd(time, ilev, lat, Uzm, UVzm, UWzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+utendnogw=zonalmean(vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev,PS,P0))
+vmrox=zonalmean(vinth2p((O3+O+O1D),hyam,hybm,plev,PS,P0))
+vtem=mean(vinth2p(dynvarmip_vtem(time, ilev, lat, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+wtem=mean(vinth2p(dynvarmip_wtem(time, ilev, lat, Wzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+zmtnt=zonalmean(vinth2p(PTTEND,hyam,hybm,plev,PS,P0))
 ############################
 #  TABLE : Esubhr
 ############################
@@ -1126,11 +1122,11 @@ tsl=TSOI
 ############################
 #  TABLE : Oclim
 ############################
-diftrblo=KAPPA_THIC
-diftrelo=KAPPA_ISOP
-difvho=VDC_T
-difvmo=VVC
-difvso=VDC_S
+diftrblo=oclim(KAPPA_THIC)
+diftrelo=oclim(KAPPA_ISOP)
+difvho=oclim(VDC_T)
+difvmo=oclim(VVC)
+difvso=oclim(VDC_S)
 ############################
 #  TABLE : Oday
 ############################
@@ -1165,7 +1161,6 @@ wo=WVEL(t,k,I,j)
 ############################
 areacello=TAREA
 deptho=HT
-hfgeou=hfgeou[0,:,:]
 masscello=expand_latlon((rho_sw*dz),nlat,nlon)
 sftof=sftof(KMT)
 thkcello=expand_latlon(dz,nlat,nlon)
@@ -1464,7 +1459,7 @@ siitdconc=aicen*100
 siitdsnthick=siitdsnthick
 siitdthick=siitdthick
 simass=chunits((hi*917), units="kg m-2")
-simassacrossline=chunits(cice_regions(hi, uvel, vvel, HTE, HTN, siline, 917), units="kg/s")
+simassacrossline=chunits(cice_regions(hi, siu, siv, HTE, HTN, siline, 917), units="kg/s")
 sipr=sipr
 sirdgconc=ardg
 sirdgthick=sirdgthick
@@ -1500,9 +1495,9 @@ sndmasssubl=sndmasssubl
 clt=CLDTOT
 hfls=LHFLX
 hfss=SHFLX
-hur=vinth2p(RELHUM,hyam, hybm, plev8, PS, P0)
+hur=vinth2p(RELHUM,hyam, hybm, plev, PS, P0)
 hurs=RHREFHT
-hus=vinth2p(Q,hyam, hybm, plev8, PS, P0)
+hus=vinth2p(Q,hyam, hybm, plev, PS, P0)
 huss=QREFHT
 mrro=chunits(QRUNOFF, units="kg m-2 s-1")
 mrso=TOTSOILLIQ+TOTSOILICE
@@ -1518,15 +1513,15 @@ rsus=FSDS - FSNS
 sfcWind=U10
 snc=FSNO
 snw=chunits(H2OSNO, units="kg m-2")
-ta=vinth2p(T,hyam, hybm, plev8, PS, P0)
+ta=vinth2p(T,hyam, hybm, plev, PS, P0)
 tas=TREFHT
 tasmax=TREFHTMX
 tasmin=TREFHTMN
 tslsi=TSKIN
-ua=vinth2p(U,hyam, hybm, plev8, PS, P0)
-va=vinth2p(V,hyam, hybm, plev8, PS, P0)
-wap=vinth2p(OMEGA,hyam, hybm, plev8, PS, P0)
-zg=vinth2p(Z3,hyam,hybm,plev8,PS,P0)
+ua=vinth2p(U,hyam, hybm, plev, PS, P0)
+va=vinth2p(V,hyam, hybm, plev, PS, P0)
+wap=vinth2p(OMEGA,hyam, hybm, plev, PS, P0)
+zg=vinth2p(Z3,hyam,hybm,plev,PS,P0)
 ############################
 #  TABLE : fx
 ############################
