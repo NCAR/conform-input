@@ -3,7 +3,7 @@
 ############################
 time1=xxtimexx
 time2=xxtimexx
-iceband=nc
+iceband=NCAT
 olevel=xxlevxx
 longitude=xxlonxx
 time=xxtimexx
@@ -184,7 +184,7 @@ drybc=bc_a1DDF + bc_a4DDF+bc_c1DDF + bc_c4DDF
 drydust=dst_a1DDF+dst_a2DDF+dst_a3DDF+dst_c1DDF+dst_c2DDF+dst_c3DDF
 drynh3=DF_NH3
 drynh4=DF_NH4
-drynoy=DF_NO+DF_NO2+DF_HNO3+DF_HO2NO2+DF_NO3+DF_N2O5+DF_PAN+DF_ALKNIT+DF_HONITR+DF_IOSPNITA+DF_ISOPNITB+DF_ISOPNO3+DF_ONIT+DF_NOA+DF_TERPNIT
+drynoy=DF_NO+DF_NO2+DF_HNO3+DF_HO2NO2+DF_PAN+DF_ALKNIT+DF_HONITR+DF_IOSPNITA+DF_ISOPNITB+DF_ONITR+DF_NOA+DF_TERPNIT
 dryo3=DF_O3
 dryoa=pom_a1DDF+pom_a4DDF+pom_c1DDF+pom_c4DDF+soa1_a1DDF+soa1_a2DDF+soa1_c1DDF+soa1_c2DDF+soa2_a1DDF+soa2_a2DDF+soa2_c1DDF+soa2_c2DDF+soa3_a1DDF+soa3_a2DDF+soa3_c1DDF+soa3_c2DDF+soa4_a1DDF+soa4_a2DDF+soa4_c1DDF+soa4_c2DDF+soa5_a1DDF+soa5_a2DDF+soa5_c1DDF+soa5_c2DDF
 dryso2=DF_SO2
@@ -709,8 +709,8 @@ clwmodis=CLWMODIS
 conccmcn=chunits(num_a3, units="m-3")
 conccn=chunits((num_a1+num_a2+num_a3+num_a4), units="m-3")
 concdust=(dst_a1+dst_a2+dst_a3)*delp/grav(delp=psdelta)
-cropFracC3=yeartomonth_data((((PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:])/100)*PCT_LANDUNIT[:,1,:,:]), time, lat, lon)
-cropFracC4=yeartomonth_data((((PCT_CFT[:,2,:,:]+PCT_CFT[:,3,:,:]+PCT_CFT[:,52,:,:]+PCT_CFT[:,53,:,:]+PCT_CFT[:,60,:,:]+PCT_CFT[:,61,:,:])/100)*PCT_LANDUNIT[:,1,:,:]), time, lat, lon)
+cropFracC3=yeartomonth_data((((PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:])/100)*PCT_LANDUNIT[:,1,:,:]), time, lat, lon)  #clm2.h0
+cropFracC4=yeartomonth_data((((PCT_CFT[:,2,:,:]+PCT_CFT[:,3,:,:]+PCT_CFT[:,52,:,:]+PCT_CFT[:,53,:,:]+PCT_CFT[:,60,:,:]+PCT_CFT[:,61,:,:])/100)*PCT_LANDUNIT[:,1,:,:]), time, lat, lon)  #clm2.h0
 depdust=dst_a1DDF+dst_a2DDF+dst_a3DDF+dst_c1DDF+dst_c2DDF+dst_c3DDF+dst_a1SFWET+dst_a2SFWET+dst_a3SFWET+dst_c1SFWET+dst_c2SFWET+dst_c3SFWET
 expcalc=CaCO3_FLUX_IN
 expfe=P_iron_FLUX_IN
@@ -846,7 +846,7 @@ tntmp27=vinth2p(PTTEND,hyam,hybm,plev,PS,P0)
 tntrl27=vinth2p(QRL,hyam,hybm,plev,PS,P0)
 tntrlcs=QRLC
 tntrscs=QRSC
-treeFracBdlDcd=yeartomonth_data((PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
+treeFracBdlDcd=yeartomonth_data((PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]+PCT_NAT_PFT[:,8,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 treeFracBdlEvg=yeartomonth_data((PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 treeFracNdlDcd=yeartomonth_data(PCT_NAT_PFT[:,3,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 treeFracNdlEvg=yeartomonth_data((PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
@@ -1076,8 +1076,8 @@ tsnIs=masked_invalid(SNOTXMASS_ICE/(SNOWICE_ICE+SNOWLIQ_ICE))  #clm2.h0
 #  TABLE : Lmon
 ############################
 baresoilFrac=yeartomonth_data(PCT_NAT_PFT[:,0,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
-c3PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,1-13,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)/100+((yeartomonth_data(PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,1,:,:], time, lat, lon)/100  #clm2.h3
-c4PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,1-13,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)/100+((yeartomonth_data(PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,1,:,:], time, lat, lon)/100  #clm2.h3
+c3PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]+PCT_NAT_PFT[:,3,:,:]+PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]+PCT_NAT_PFT[:,8,:,:]+PCT_NAT_PFT[:,9,:,:]+PCT_NAT_PFT[:,10,:,:]+PCT_NAT_PFT[:,11,:,:]+PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)/100+((yeartomonth_data(PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,1,:,:], time, lat, lon)/100  #clm2.h3
+c4PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,14,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)/100+((yeartomonth_data(PCT_CFT[:,2,:,:]+PCT_CFT[:,3,:,:]+PCT_CFT[:,52,:,:]+PCT_CFT[:,53,:,:]+PCT_CFT[:,60,:,:]+PCT_CFT[:,61,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,1,:,:], time, lat, lon)/100  #clm2.h3
 cCwd=chunits(CWDC, units="g m-2")
 cLeaf=chunits(LEAFC, units="g m-2")
 cLitter=chunits(TOTLITC, units="g m-2")  #clm2.h0
@@ -1337,63 +1337,63 @@ zsatcalc=zsatcalc
 #  TABLE : Oyr
 ############################
 bddtalk=chunits( 1.0e-3 * J_ALK, units="mol m-3 s-1")
-bddtdic=J_DIC
+bddtdic=monthtoyear_noleap(J_DIC)  #pop.h
 bddtdife=J_Fe
 bddtdin=J_NO3+J_NH4
 bddtdip=J_PO4
 bddtdisi=J_SiO3
-cfc11=CFC11
-cfc12=CFC12
-chl=diatChl+spChl+diazChl
-chldiat=diatChl
-chldiaz=diazChl
-chlpico=spChl
-dfe=Fe
-diftrblo=KAPPA_THIC
-diftrelo=KAPPA_ISOP
-dissi14cabio=ABIO_DIC14
-dissicabio=ABIO_DIC
-dissicnat=DIC_ALT_CO2
-expc=POC_FLUX_IN
+cfc11=monthtoyear_noleap(CFC11)  #pop.h
+cfc12=monthtoyear_noleap(CFC12)  #pop.h
+chl=monthtoyear_noleap(diatChl+spChl+diazChl)  #pop.h
+chldiat=monthtoyear_noleap(diatChl)  #pop.h
+chldiaz=monthtoyear_noleap(diazChl)  #pop.h
+chlpico=monthtoyear_noleap(spChl)  #pop.h
+dfe=monthtoyear_noleap(Fe)  #pop.h
+diftrblo=monthtoyear_noleap(KAPPA_THIC)  #pop.h
+diftrelo=monthtoyear_noleap(KAPPA_ISOP)  #pop.h
+dissi14cabio=monthtoyear_noleap(ABIO_DIC14)  #pop.h
+dissicabio=monthtoyear_noleap(ABIO_DIC)  #pop.h
+dissicnat=monthtoyear_noleap(DIC_ALT_CO2)  #pop.h
+expc=monthtoyear_noleap(POC_FLUX_IN)  #pop.h
 expcalc=CaCO3_FLUX_IN
-expfe=P_iron_FLUX_IN
-expn=(16.0/117.0)*POC_FLUX_IN
-expp=POP_FLUX_IN
-expsi=SiO2_FLUX_IN
-fg14co2abio=FG_ABIO_DIC14
-fgco2abio=chunits(FG_ABIO_DIC * 12.0e-8, units="kg m-2 s-1")
-fgco2nat=chunits(FG_ALT_CO2 * 12.0e-8, units="kg m-2 s-1")
+expfe=monthtoyear_noleap(P_iron_FLUX_IN)  #pop.h
+expn=monthtoyear_noleap((16.0/117.0)*POC_FLUX_IN)  #pop.h
+expp=monthtoyear_noleap(POP_FLUX_IN)  #pop.h
+expsi=monthtoyear_noleap(SiO2_FLUX_IN)  #pop.h
+fg14co2abio=monthtoyear_noleap(FG_ABIO_DIC14)  #pop.h
+fgco2abio=monthtoyear_noleap(chunits(FG_ABIO_DIC * 12.0e-8, units="kg m-2 s-1"))  #pop.h
+fgco2nat=monthtoyear_noleap(chunits(FG_ALT_CO2 * 12.0e-8, units="kg m-2 s-1"))  #pop.h
 graz=graze_auto_TOT
-no3=NO3
-o2=O2
-o2sat=O2+AOU
-opottempdiff=rho_sw*(-1)*diff_axis1_ind0bczero_4d(DIA_IMPVF_SALT)
-opottempmint=rho_sw *POP_bottom_layer_multadd(KMT,dz,TEMP)
-opottemppadvect=cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP)
-opottemppmdiff=cp_sw*rho_sw*dz*Redi_TEND_TEMP
-opottemppsmadvect=cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP)
-opottemprmadvect=cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP+ADV_3D_TEMP)
-opottemptend=cp_sw*rho_sw*dz*TEND_TEMP
-osaltdiff=rho_sw*(-1)*diff_axis1_ind0bczero_4d(DIA_IMPVF_SALT)
-osaltpadvect=rho_sw*dz*(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT)
-osaltpmdiff=rho_sw*dz*Redi_TEND_SALT
-osaltpsmadvect=rho_sw*dz*(SUBM_ADV_TEND_SALT)
-osaltrmadvect=rho_sw*dz*(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT+ADV_3D_SALT)
-osalttend=rho_sw*dz*TEND_SALT
-phnat=pH_3D_ALT_CO2
-phyc=spC+diatC+diazC
-phyfe=spFe
-phyn=(diatC+spC+diazC)*.137
-phyp=(diatC+spC)*.00855+diazC*.002735
-physi=diatSi
-pnitrate=photoC_NO3_TOT
-pp=photoC_TOT
+no3=monthtoyear_noleap(NO3)  #pop.h
+o2=monthtoyear_noleap(O2)  #pop.h
+o2sat=monthtoyear_noleap(O2+AOU)  #pop.h
+opottempdiff=monthtoyear_noleap(rho_sw*(-1)*diff_axis1_ind0bczero_4d(DIA_IMPVF_SALT))  #pop.h
+opottempmint=monthtoyear_noleap(rho_sw *POP_bottom_layer_multadd(KMT,dz,TEMP))  #pop.h
+opottemppadvect=monthtoyear_noleap(cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP))  #pop.h
+opottemppmdiff=monthtoyear_noleap(cp_sw*rho_sw*dz*Redi_TEND_TEMP)  #pop.h
+opottemppsmadvect=monthtoyear_noleap(cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP))  #pop.h
+opottemprmadvect=monthtoyear_noleap(cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP+ADV_3D_TEMP))  #pop.h
+opottemptend=monthtoyear_noleap(cp_sw*rho_sw*dz*TEND_TEMP)  #pop.h
+osaltdiff=monthtoyear_noleap(rho_sw*(-1)*diff_axis1_ind0bczero_4d(DIA_IMPVF_SALT))  #pop.h
+osaltpadvect=monthtoyear_noleap(rho_sw*dz*(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT))  #pop.h
+osaltpmdiff=monthtoyear_noleap(rho_sw*dz*Redi_TEND_SALT)  #pop.h
+osaltpsmadvect=monthtoyear_noleap(rho_sw*dz*(SUBM_ADV_TEND_SALT))  #pop.h
+osaltrmadvect=monthtoyear_noleap(rho_sw*dz*(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT+ADV_3D_SALT))  #pop.h
+osalttend=monthtoyear_noleap(rho_sw*dz*TEND_SALT)  #pop.h
+phnat=monthtoyear_noleap(pH_3D_ALT_CO2)  #pop.h
+phyc=monthtoyear_noleap(spC+diatC+diazC)  #pop.h
+phyfe=monthtoyear_noleap(spFe)  #pop.h
+phyn=monthtoyear_noleap((diatC+spC+diazC)*.137)  #pop.h
+phyp=monthtoyear_noleap((diatC+spC)*.00855+diazC*.002735)  #pop.h
+physi=monthtoyear_noleap(diatSi)  #pop.h
+pnitrate=monthtoyear_noleap(photoC_NO3_TOT)  #pop.h
+pp=monthtoyear_noleap(photoC_TOT)  #pop.h
 remoc=DOC_remin+DOCr_remin+POC_REMIN_DIC
-rsdoabsorb=QSW_3D(k,I,j)-QSW_3D(k+1,I,j)*delta(k=KMT(I,j)-1)
-sf6=SF6
-si=SiO3
-somint=rho_sw*POP_bottom_layer_multadd(KMT,dz,SALT)
-talknat=chunits(ALK_ALT_CO2 * 1e-3, units="mol m-3")
+rsdoabsorb=monthtoyear_noleap(QSW_3D(k,I,j)-QSW_3D(k+1,I,j)*delta(k=KMT(I,j)-1))  #pop.h
+sf6=monthtoyear_noleap(SF6)  #pop.h
+si=monthtoyear_noleap(SiO3)  #pop.h
+somint=monthtoyear_noleap(rho_sw*POP_bottom_layer_multadd(KMT,dz,SALT))  #pop.h
+talknat=monthtoyear_noleap(chunits(ALK_ALT_CO2 * 1e-3, units="mol m-3"))  #pop.h
 volcello=TAREA(I,j) * dz(k)
 ############################
 #  TABLE : SIday

@@ -18,6 +18,15 @@
         "datatype": "int",
         "dimensions": ["nj"]
     },
+    "nc": {
+        "attributes": {
+            "long_name": "category maximum thickness",
+            "units": "m"
+        },
+        "datatype": "int",
+        "definition": "nc",
+        "dimensions": ["nc"]
+    },
     "latitude_bnds": {
         "attributes": {
             "units": "degrees_north"
@@ -55,7 +64,7 @@
     "iceband_bnds": {
         "attributes": {},
         "datatype": "double",
-        "definition": "bounds(iceband,bdim=\"d2\")",
+        "definition": "bounds(NCAT,bdim=\"d2\")",
         "dimensions": [
             "iceband",
             "d2"
