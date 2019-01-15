@@ -95,12 +95,12 @@ hfss=SHFLX
 huss=QREFHT
 mrro=chunits(QRUNOFF, units="kg m-2 s-1")
 mrsos=SOILWATER_10CM
-pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
 ps=PS
 rlds=FLDS
 rldscs=FLDSC
-rlus=FLDS-FLNS
+rlus=FLDS+FLNS
 rsds=FSDS
 rsdscs=FSDSC
 rsdsdiff=SOLLD + SOLSD
@@ -120,9 +120,9 @@ va=V
 #  TABLE : 6hrPlev
 ############################
 bldep=PBLH
-hurs=RHREFHT
+hurs=chunits(RHREFHT,units="%")
 hus4=vinth2p(Q,hyam,hybm,plev,PS,P0)
-pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
 psl=PSL
 sfcWind=U10
 tas=TREFHT
@@ -150,6 +150,7 @@ zg500=Z500
 ############################
 cod=sum(TOT_CLD_VISTAU, "lev")
 od550aer=AODVISdn
+sfo3max=Max(O3_SRF)
 toz=TMO3/2.1415E-5
 zg500=Z500
 ############################
@@ -186,7 +187,7 @@ drybc=bc_a1DDF + bc_a4DDF+bc_c1DDF + bc_c4DDF
 drydust=dst_a1DDF+dst_a2DDF+dst_a3DDF+dst_c1DDF+dst_c2DDF+dst_c3DDF
 drynh3=DF_NH3
 drynh4=DF_NH4
-drynoy=DF_NO+DF_NO2+DF_HNO3+DF_HO2NO2+DF_PAN+DF_ALKNIT+DF_HONITR+DF_IOSPNITA+DF_ISOPNITB+DF_ONITR+DF_NOA+DF_TERPNIT
+drynoy=DF_NO+DF_NO2+DF_HNO3+DF_HO2NO2+DF_PAN+DF_ALKNIT+DF_HONITR+DF_ISOPNITA+DF_ISOPNITB+DF_ONITR+DF_NOA+DF_TERPNIT
 dryo3=DF_O3
 dryoa=pom_a1DDF+pom_a4DDF+soa_a1DDF+soa_a2DDF+pom_c1DDF+pom_c4DDF+soa_c1DDF+soa_c2DDF
 dryso2=DF_SO2
@@ -234,7 +235,7 @@ o3prod=O3_Prod*1.e6/6.022E23
 o3ste=O3S
 od550aer=AODVISdn
 od550bc=AODBCdn
-od550dust=AODDUSTdn
+od550dust=AODdnDUST1+AODdnDUST2+AODdnDUST3
 od550oa=AODSOAdn+AODPOMdn
 od550so4=AODSO4dn
 od550soa=AODSOAdn
@@ -301,21 +302,21 @@ evspsbl=QFLX
 hfls=LHFLX
 hfss=SHFLX
 hur=vinth2p(RELHUM,hyam, hybm, plev, PS, P0)
-hurs=RHREFHT
+hurs=chunits(RHREFHT,units="%")
 hus=vinth2p(Q,hyam, hybm, plev, PS, P0)
 huss=QREFHT
 mc=CMFMC + CMFMCDZM
 n2o=vinth2p(N2O,hyam, hybm, plev, PS, P0)
 n2oglobal=n2ovmr
 o3=vinth2p(O3,hyam,hybm,plev,PS,P0)
-pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
 prw=TMQ
 ps=PS
 psl=PSL
 rlds=FLDS
 rldscs=FLDSC
-rlus=FLDS-FLNS
+rlus=FLDS+FLNS
 rlut=FLUT
 rlutcs=FLUTC
 rsds=FSDS
@@ -332,8 +333,8 @@ ta=vinth2p(T,hyam, hybm, plev, PS, P0)
 tas=TREFHT
 tasmax=TREFHTMX
 tasmin=TREFHTMN
-tauu=-1*(TAUX+TAUGWX+TAUBLJX)
-tauv=-1*(TAUY+TAUGWY+TAUBLJY)
+tauu=-1*(TAUX+TAUBLJX-TAUGWX)
+tauv=-1*(TAUY+TAUBLJY-TAUGWY)
 ts=TS
 ua=vinth2p(U,hyam, hybm, plev, PS, P0)
 va=vinth2p(V,hyam, hybm, plev, PS, P0)
@@ -359,9 +360,9 @@ evspsbl=QFLX
 h2o=Q+CLDICE+CLDLIQ
 hfls=LHFLX
 hfss=SHFLX
-hurs=RHREFHT
-pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
+hurs=chunits(RHREFHT,units="%")
+pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
 prlsns=LS_FLXSNW
 prlsprof=LS_FLXPRC-LS_FLXSNW
 prsnc=ZMFLXSNW
@@ -373,7 +374,7 @@ reffclws=AREL/FREQL
 reffrains=AQRAIN/FREQR
 rlds=FLDS
 rldscs=FLDSC
-rlus=FLDS-FLNS
+rlus=FLDS+FLNS
 rlut=FLUT
 rlutcs=FLUTC
 rsus=FSDS-FSNS
@@ -470,17 +471,17 @@ evu=KVH_CLUBB
 hfls=LHFLX
 hfss=SHFLX
 hur=RELHUM
-hurs=RHREFHT
+hurs=chunits(RHREFHT,units="%")
 hus=Q
 huss=QREFHT
 mc=CMFMC+CMFMCDZM
-pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
 ps=PS
 psl=PSL
 rlds=FLDS
 rldscs=FLDSC
-rlus=FLDS-FLNS
+rlus=FLDS+FLNS
 rlut=FLUT
 rlutcs=FLUTC
 rsus=FSDS-FSNS
@@ -515,8 +516,8 @@ parasolRefl=RFL_PARASOL
 ############################
 #  TABLE : E1hr
 ############################
-pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
 psl=PSL
 rlut=FLUT
 ta=vinth2p(T,hyam, hybm, plev, PS, P0)
@@ -538,7 +539,7 @@ rsutcs=SOLIN - FSNTOAC
 clivi=TGCLDIWP
 clwvi=TGCLDLWP
 gpp=chunits(GPP, units="g/m^2/s")
-prrc=chunits( 1000 * PRECC, units="kg m-2 s-1")
+prrc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
 prw=TMQ
 psl=PSL
 ra=chunits(AR, units="g/m^2/s")
@@ -632,9 +633,9 @@ ta850=T850
 tasmaxCrop=CLM_landunit_to_CMIP6_Lut(TREFMXAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h5
 tasminCrop=CLM_landunit_to_CMIP6_Lut(TREFMNAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h5
 tau=TAUX
-tauu=-1*(TAUX+TAUGWX+TAUBLJX)
+tauu=-1*(TAUX+TAUBLJX-TAUGWX)
 tauupbl=-1*(TAUX)
-tauv=-1*(TAUY+TAUGWY+TAUBLJY)
+tauv=-1*(TAUY+TAUBLJY-TAUGWY)
 tauvpbl=-1*(TAUY)
 tcs=TV
 tgs=TG
@@ -711,8 +712,8 @@ clwmodis=CLWMODIS
 conccmcn=chunits(num_a3, units="m-3")
 conccn=chunits((num_a1+num_a2+num_a3+num_a4), units="m-3")
 concdust=(dst_a1+dst_a2+dst_a3)*delp/grav(delp=psdelta)
-cropFracC3=yeartomonth_data((((PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:])/100)*PCT_LANDUNIT[:,1,:,:]), time, lat, lon)  #clm2.h0
-cropFracC4=yeartomonth_data((((PCT_CFT[:,2,:,:]+PCT_CFT[:,3,:,:]+PCT_CFT[:,52,:,:]+PCT_CFT[:,53,:,:]+PCT_CFT[:,60,:,:]+PCT_CFT[:,61,:,:])/100)*PCT_LANDUNIT[:,1,:,:]), time, lat, lon)  #clm2.h0
+cropFracC3=yeartomonth_data(((PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:])*PCT_LANDUNIT[:,1,:,:]), time, lat, lon)  #clm2.h0
+cropFracC4=yeartomonth_data(((PCT_CFT[:,2,:,:]+PCT_CFT[:,3,:,:]+PCT_CFT[:,52,:,:]+PCT_CFT[:,53,:,:]+PCT_CFT[:,60,:,:]+PCT_CFT[:,61,:,:])*PCT_LANDUNIT[:,1,:,:]), time, lat, lon)  #clm2.h0
 depdust=dst_a1DDF+dst_a2DDF+dst_a3DDF+dst_c1DDF+dst_c2DDF+dst_c3DDF+dst_a1SFWET+dst_a2SFWET+dst_a3SFWET+dst_c1SFWET+dst_c2SFWET+dst_c3SFWET
 expcalc=CaCO3_FLUX_IN
 expfe=P_iron_FLUX_IN
@@ -728,7 +729,6 @@ fFireAll=chunits(COL_FIRE_CLOSS, units="g m-2 s-1")  #clm2.h0
 fHarvestToProduct=chunits(WOOD_HARVESTC, units="g m-2 s-1")  #clm2.h0
 fLuc=chunits((DWT_CONV_CFLUX+TOT_WOODPRODC_LOSS), units="g m-2 s-1")
 fLulccAtmLut=chunits(CLM_landunit_to_CMIP6_Lut(DWT_CONV_CFLUX_PATCH,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g m-2 s-1")  #clm2.h2
-fLulccProductLut=chunits(CLM_landunit_to_CMIP6_Lut((WOOD_HARVESTC+(DWT_PROD100C_GAIN_PATCH+DWT_PROD10C_GAIN_PATCH)*100/PCT_LANDUNIT+GRAINC_TO_FOOD),"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g m-2 s-1")  #clm2.h2
 fLulccResidueLut=chunits(CLM_landunit_to_CMIP6_Lut(SLASH_HARVESTC+DWT_SLASH_CFLUX,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g m-2 s-1")  #clm2.h2
 fNLitterSoil=chunits((LITR1N_TO_SOIL1N+LITR2N_TO_SOIL1N+LITR3N_TO_SOIL2N), units="g m-2 s-1")
 fNProduct=chunits(TOT_WOODPRODN_LOSS, units="g m-2 s-1")
@@ -746,7 +746,6 @@ fProductDecomp=chunits(TOT_WOODPRODC_LOSS, units="g m-2 s-1")+chunits(CROPPROD1C
 fVegFire=chunits(PFT_FIRE_CLOSS, units="g m-2 s-1")
 fVegLitterMortality=chunits(LITFALL - (LEAFC_TO_LITTER + FROOTC_TO_LITTER), units="g m-2 s-1")
 fVegLitterSenescence=chunits(LEAFC_TO_LITTER + FROOTC_TO_LITTER, units="g m-2 s-1")
-fahLut=CLM_landunit_to_CMIP6_Lut((URBAN_HEAT+WASTEHEAT),"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 flashrate=chunits((FLASHFRQ/60./AREA), units="m-2 s-1")
 fracLut=reduce_lu(PCT_LANDUNIT,landUse)
 gppGrass=chunits(CLM_pft_to_CMIP6_vegtype(GPP,"grass",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
@@ -797,15 +796,14 @@ nppOther=chunits(NPP_NUPTAKE, units="g m-2 s-1")  #clm2.h0
 nppShrub=chunits(CLM_pft_to_CMIP6_vegtype(NPP,"shrub",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
 nppStem=chunits(WOODC_ALLOC, units="g m-2 s-1")
 nppTree=chunits(CLM_pft_to_CMIP6_vegtype(NPP,"tree",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
-nwdFracLut=yeartomonth_data3D(get_nonwoodyveg(PCT_NAT_PFT,landfrac,landUse), time, lat, lon,landUse)  #clm2.h3
+nwdFracLut=yeartomonth_data3D(get_nonwoodyveg(PCT_NAT_PFT,PCT_LANDUNIT,landfrac,landUse), time, lat, lon,landUse)  #clm2.h3
 opottempdiff=cp_sw*rho_sw*(-1)*diff_axis1_ind0bczero_4d(DIA_IMPVF_TEMP)
-opottempmint=rho_sw *POP_bottom_layer_multadd(KMT,dz,TEMP)
+opottempmint=rho_sw *POP_layer_sum_mult(KMT,dz,TEMP)
 opottemppadvect=cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP)
 opottemppmdiff=cp_sw*rho_sw*dz*Redi_TEND_TEMP
 opottemppsmadvect=cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP)
 opottemprmadvect=cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP+ADV_3D_TEMP)
 opottemptend=cp_sw*rho_sw*dz*TEND_TEMP
-orog=usurf
 osaltdiff=rho_sw*(-1)*diff_axis1_ind0bczero_4d(DIA_IMPVF_SALT)
 osaltpadvect=rho_sw*dz*(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT)
 osaltpmdiff=rho_sw*dz*Redi_TEND_SALT
@@ -839,7 +837,7 @@ rsdsdiff=SOLLD+SOLSD
 rss=FSNS
 rsusLut=CLM_landunit_to_CMIP6_Lut(FSR,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 snowmxrat27=vinth2p(QSNOW,hyam,hybm,plev,PS,P0)
-somint=rho_sw *POP_bottom_layer_multadd(KMT,dz,SALT)
+somint=rho_sw *POP_layer_sum_mult(KMT,dz,SALT)
 sweLut=CLM_landunit_to_CMIP6_Lut(H2OSNO,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 tasLut=CLM_landunit_to_CMIP6_Lut(TSA,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 tasmaxCrop=CLM_landunit_to_CMIP6_Lut(TREFMXAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
@@ -903,8 +901,8 @@ hfss=SHFLX
 hus=Q
 huss=QREFHT
 mc=CMFMC + CMFMCDZM
-pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
 prw=TMQ
 ps=PS
 reffclis=AREI/FREQI
@@ -925,7 +923,7 @@ wap=OMEGA
 #  TABLE : Eyr
 ############################
 baresoilFrac=PCT_NAT_PFT[:,0,:,:]*PCT_LANDUNIT[:,0,:,:]
-cLitter=chunits(TOTLITC, units="g/m^2")
+cLitter=chunits(TOTLITC, units="g/m^2")  #clm2.h3
 cLitterLut=chunits(CLM_landunit_to_CMIP6_Lut(TOTLITC,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2")  #clm2.h4
 cProduct=chunits(TOT_WOODPRODC, units="g/m^2")+chunits(CROPPROD1C, units="g/m^2")  #clm2.h3
 cSoil=chunits(TOTSOMC, units="g/m^2")  #clm2.h3
@@ -935,7 +933,7 @@ cVegLut=chunits(CLM_landunit_to_CMIP6_Lut(TOTVEGC,"all",time,lat,lon,grid1d_ixy,
 cropFrac=PCT_LANDUNIT[:,1,:,:]  #clm2.h3
 fracLut=reduce_lu(PCT_LANDUNIT,landUse)  #clm2.h3
 grassFrac=(PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:]+PCT_NAT_PFT[:,14,:,:])*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
-residualFrac=100-PCT_LANDUNIT[:,0,:,:]-PCT_LANDUNIT[:,1,:,:]  #clm2.h3
+residualFrac=1-PCT_LANDUNIT[:,0,:,:]-PCT_LANDUNIT[:,1,:,:]  #clm2.h3
 shrubFrac=(PCT_NAT_PFT[:,9,:,:]+PCT_NAT_PFT[:,10,:,:]+PCT_NAT_PFT[:,11,:,:])*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
 treeFrac=(PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]+PCT_NAT_PFT[:,3,:,:]+PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]+PCT_NAT_PFT[:,8,:,:])*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
 vegFrac=PCT_LANDUNIT[:,0,:,:]+PCT_LANDUNIT[:,1,:,:]  #clm2.h3
@@ -1078,8 +1076,9 @@ tsnIs=masked_invalid(SNOTXMASS_ICE/(SNOWICE_ICE+SNOWLIQ_ICE))  #clm2.h0
 #  TABLE : Lmon
 ############################
 baresoilFrac=yeartomonth_data(PCT_NAT_PFT[:,0,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
-c3PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]+PCT_NAT_PFT[:,3,:,:]+PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]+PCT_NAT_PFT[:,8,:,:]+PCT_NAT_PFT[:,9,:,:]+PCT_NAT_PFT[:,10,:,:]+PCT_NAT_PFT[:,11,:,:]+PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)/100+((yeartomonth_data(PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,1,:,:], time, lat, lon)/100  #clm2.h3
-c4PftFrac=((yeartomonth_data(PCT_NAT_PFT[:,14,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)/100+((yeartomonth_data(PCT_CFT[:,2,:,:]+PCT_CFT[:,3,:,:]+PCT_CFT[:,52,:,:]+PCT_CFT[:,53,:,:]+PCT_CFT[:,60,:,:]+PCT_CFT[:,61,:,:], time, lat, lon))/100)*yeartomonth_data(PCT_LANDUNIT[:,1,:,:], time, lat, lon)/100  #clm2.h3
+burntFractionAll=chunits(burntFraction(FAREA_BURNED),units="%")
+c3PftFrac=yeartomonth_data(PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]+PCT_NAT_PFT[:,3,:,:]+PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]+PCT_NAT_PFT[:,8,:,:]+PCT_NAT_PFT[:,9,:,:]+PCT_NAT_PFT[:,10,:,:]+PCT_NAT_PFT[:,11,:,:]+PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)+yeartomonth_data(PCT_CFT[:,4,:,:]+PCT_CFT[:,5,:,:]+PCT_CFT[:,8,:,:]+PCT_CFT[:,9,:,:]+PCT_CFT[:,26,:,:]+PCT_CFT[:,27,:,:]+PCT_CFT[:,46,:,:]+PCT_CFT[:,47,:,:]+PCT_CFT[:,62,:,:]+PCT_CFT[:,63,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,1,:,:], time, lat, lon)  #clm2.h3
+c4PftFrac=yeartomonth_data(PCT_NAT_PFT[:,14,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)+yeartomonth_data(PCT_CFT[:,2,:,:]+PCT_CFT[:,3,:,:]+PCT_CFT[:,52,:,:]+PCT_CFT[:,53,:,:]+PCT_CFT[:,60,:,:]+PCT_CFT[:,61,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,1,:,:], time, lat, lon)  #clm2.h3
 cCwd=chunits(CWDC, units="g m-2")
 cLeaf=chunits(LEAFC, units="g m-2")
 cLitter=chunits(TOTLITC, units="g m-2")  #clm2.h0
@@ -1113,11 +1112,11 @@ prveg=chunits(QINTR, units="kg m-2 s-1")
 rGrowth=chunits(GR, units="g m-2 s-1")
 rMaint=chunits(MR, units="g m-2 s-1")
 ra=chunits(AR, units="g m-2 s-1")  #clm2.h0
-residualFrac=100-PCT_LANDUNIT[:,0,:,:]-PCT_LANDUNIT[:,1,:,:]
+residualFrac=1-PCT_LANDUNIT[:,0,:,:]-PCT_LANDUNIT[:,1,:,:]
 rh=chunits(HR, units="g m-2 s-1")  #clm2.h0
 shrubFrac=yeartomonth_data((PCT_NAT_PFT[:,9,:,:]+PCT_NAT_PFT[:,10,:,:]+PCT_NAT_PFT[:,11,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 tran=chunits(QVEGT, units="kg m-2 s-1")
-treeFrac=yeartomonth_data((PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]+PCT_NAT_PFT[:,3,:,:]+PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]+PCT_NAT_PFT[:,8,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)
+treeFrac=yeartomonth_data((PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]+PCT_NAT_PFT[:,3,:,:]+PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]+PCT_NAT_PFT[:,8,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 tsl=TSOI
 ############################
 #  TABLE : Oclim
@@ -1142,8 +1141,7 @@ agessc=IAGE
 hfbasin=N_HEAT(:,transport_reg=:,transport_comp=1,:)
 hfds=SHF+QFLUX
 masscello=rho_sw*dz(k)
-masso=masso
-sfriver=sfriver
+sfdsi=SALT_F-chunits(QFLUX/latent_heat_fusion_mks*sea_ice_salinity*1e-3,units="kg/m^2/s")
 so=SALT
 sos=SALT[:,0,:,:]
 tauuo=TAUX
@@ -1154,7 +1152,6 @@ tos=TEMP[:,0,:,:]
 uo=UVEL
 vo=VVEL
 volcello=TAREA(I,j) * dz(k)
-volo=volo
 wo=WVEL(t,k,I,j)
 ############################
 #  TABLE : Ofx
@@ -1169,6 +1166,7 @@ volcello=TAREA* dz
 #  TABLE : Omon
 ############################
 agessc=IAGE
+calc=spCaCO3
 cfc11=CFC11
 cfc12=CFC12
 chl=diatChl+spChl+diazChl
@@ -1216,7 +1214,7 @@ fddtdife=tend_zint_100m_Fe
 fddtdin=tend_zint_100m_NO3+tend_zint_100m_NH4
 fddtdip=tend_zint_100m_PO4
 fddtdisi=tend_zint_100m_SiO3
-fg14co2abio=FG_ABIO_DIC14
+fg14co2abio=chunits(FG_ABIO_DIC14 * 12.0e-8, units="kg m-2 s-1")
 fgcfc11=STF_CFC11
 fgcfc12=STF_CFC12
 fgco2=chunits(FG_CO2 * 12.0e-8, units="kg m-2 s-1")
@@ -1226,9 +1224,10 @@ fgo2=STF_O2
 fgsf6=STF_SF6
 frfe=pfeToSed
 fric=chunits( 1.0e-5 * calcToSed, units="mol m-2 s-1")
-frn=Integrate -DENITRIF over z_t (if (kmt(i,j).ge.k) then cm dat2d(i,j)
+frn=POP_layer_sum_mult(KMT,dz,chunits(DENITRIF, units="nmol/cm^3/s"))+SedDenitrif+ponToSed
 froc=chunits( 1.0e-5 * pocToSed, units="mol m-2 s-1")
-fsn=NOx_FLUX+NHy_FLUX
+fsfe=chunits(IRON_FLUX+Fe_RIV_FLUX,units="nmol/cm^2/s")
+fsn=NOx_FLUX+NHy_FLUX+chunits(NO3_RIV_FLUX+DON_RIV_FLUX+DONr_RIV_FLUX,units="nmol/cm^2/s")
 graz=graze_auto_TOT
 hfbasinpadv=N_HEAT(:,transport_reg=:,transport_comp=4,:)+ N_HEAT(:,transport_reg=:,transport_comp=5,:)
 hfbasinpmadv=N_HEAT(:,transport_reg=:,transport_comp=4,:)
@@ -1236,17 +1235,18 @@ hfbasinpmdiff=N_HEAT(:,transport_reg=:,transport_comp=3,:)-N_HEAT(:,transport_re
 hfbasinpsmadv=N_HEAT(:,transport_reg=:,transport_comp=5:)
 hfds=SHF+QFLUX
 hfevapds=EVAP_F*latent_heat_vapor
-hfgeou=hfgeou
 hflso=EVAP_F*latent_heat_vapor + MELTH_F + QFLUX -(IOFF_F+SNOW_F)*latent_heat_fusion_mks
 hfsifrazil2d=QFLUX
 hfsnthermds2d=-SNOW_F/latent_heat_fusion_mks
 hfsso=SENH_F
 icfriver=DIC_RIV_FLUX
-intdic=RHO0*12*POP_bottom_layer_multadd(KMT,dz,DIC)
-intdoc=RHO0*12*POP_bottom_layer_multadd(KMT,dz,(DOC+DOCr))
-intpbsi=Integrate (-bSi_f m) over z_t_150m (if (kmt(i,j).ge.k) then cm dat2d(i,j)
-intpcalcite=Integrate -1*CaCO3_f m over z_t_150m (if (kmt(i,j).ge.k) then cm dat2d(i,j)
-intpn2=Integrate diaz_Nfix over z_t_150m (if (kmt(i,j).ge.k) then cm dat2d(i,j)
+intdic=chunits(1.0e-9*12.0*1.0e-3*1.0e4*POP_layer_sum_mult(KMT,dz,DIC),units="kg m-2")
+intdoc=chunits(1.0e-9*12.0*1.0e-3*1.0e4*POP_layer_sum_mult(KMT,dz,DOC+DOCr),units="kg m-2")
+intpbfe=POP_layer_sum_mult(KMT,dz,photoFe_sp+photoFe_diat+photoFe_diaz)
+intpbn=(16.0/117.0)*photoC_TOT_zint
+intpbsi=POP_layer_sum_mult(KMT,dz,bsi_form)
+intpcalcite=CaCO3_form_zint
+intpn2=POP_layer_sum_mult(KMT,dz,diaz_Nfix)
 intpp=photoC_TOT_zint
 intppdiat=photoC_diat_zint
 intppdiaz=photoC_diaz_zint
@@ -1261,7 +1261,6 @@ limirrpico=sp_light_lim_Cweight_avg_100m
 limndiat=diat_N_lim_Cweight_avg_100m
 limndiaz=diaz_N_lim_Cweight_avg_100m
 limnpico=sp_N_lim_Cweight_avg_100m
-masso=masso
 mlotst=HMXL_DR
 mlotstmax=XMXL_DR
 mlotstmin=TMXL_DR
@@ -1289,17 +1288,22 @@ phydiat=diatC
 phydiaz=diazC
 phyfe=spFe+diatFe+diazFe
 phyfeos=spFe[:,0,:,:]+diatFe[:,0,:,:]+diazFe[:,0,:,:]
+phyn=(diatC+spC+diazC)*.137
+phynos=(diatC[:,0,:,:]+spC[:,0,:,:]+diazC[:,0,:,:])*.137
+phyp=diatP+spP+diazP
 phypico=spC
+phypos=diatP[:,0,:,:]+spP[:,0,:,:]+diazP[:,0,:,:]
 physi=diatSi
 physios=diatSi[:,0,:,:]
 po4=PO4
 pp=photoC_TOT
+ppos=photoC_TOT[:,0,:,:]
 prsn=SNOW_F
-rlntds=LWDN_F
+rlntds=LWDN_F+LWUP_F
 rsdo=QSW_3D
 rsntds=SHF_QSW
 sf6=SF6
-sfriver=sfriver
+sfdsi=SALT_F-chunits(QFLUX/latent_heat_fusion_mks*sea_ice_salinity*1e-3,units="kg/m^2/s")
 si=SiO3
 sios=SiO3[:,0,:,:]
 so=SALT
@@ -1307,6 +1311,7 @@ sob=POP_bottom_layer(KMT,SALT)
 sos=SALT[:,0,:,:]
 sossq=SSS2
 spco2=chunits( 0.101325 * pCO2SURF, units="Pa")
+spco2abio=chunits( 0.101325 * ABIO_pCO2SURF, units="Pa")
 talk=chunits(ALK * 1e-3, units="mol m-3")
 talknat=chunits(ALK_ALT_CO2 * 1e-3, units="mol m-3")
 talknatos=chunits(ALK_ALT_CO2[:,0,:,:] * 1e-3, units="mol m-3")
@@ -1321,11 +1326,11 @@ uo=UVEL
 vmo=0.5 * (VVEL(i,j) + VVEL(i-1,j)) * HTN(i,j) * dz(k) * rho_sw
 vo=VVEL
 volcello=TAREA(I,j) * dz(k)
-volo=volo
+vsf=ROFF_F+IOFF_F+EVAP_F+PREC_F+MELT_F-QFLUX/latent_heat_fusion_mks
 vsfevap=EVAP_F
-vsfpr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
-vsfriver=ROFF_F
-vsfsit=MELF_F
+vsfpr=PREC_F
+vsfriver=ROFF_F+IOFF_F
+vsfsit=MELT_F-QFLUX/latent_heat_fusion_mks
 wmo=0.5 * (WVEL(i,j,k) + WVEL(i,j,k+1)) * TAREA(i,j) * rho_sw
 wo=WVEL
 zo2min=O2_ZMIN_DEPTH
@@ -1335,6 +1340,21 @@ zossq=SSH2
 zostoga=ave_slc_t from Aixue's SLC code; derived from SSH PD TEMP SALT
 zsatarag=zsatarag
 zsatcalc=zsatcalc
+calcos=spCaCO3[:,0,:,;]
+co3natos=CO3_ALT_CO2[:,0,:,:]
+co3os=CO3[:,0,:,:]
+co3sataragos=co3_sat_arag[:,0,:,:]
+co3satcalcos=co3_sat_calc[:,0,:,:]
+dissicos=DIC[:,0,:,:]
+dissocos=DOC[:,0,:,:]+DOCr[:,0,:,:]
+nh4os=NH4[:,0,:,:]
+phos=PH
+phydiatos=diatC[:,0,:,:]
+phydiazos=diazC[:,0,:,:]
+phypicoos=spC[:,0,:,:]
+po4os=PO4[:,0,:,:]
+talkos=chunits(ALK[:,0,:,:] * 1e-3, units="mol m-3")
+zoocos=zooC[:,0,:,:]
 ############################
 #  TABLE : Oyr
 ############################
@@ -1350,6 +1370,7 @@ chl=monthtoyear_noleap(diatChl+spChl+diazChl)  #pop.h
 chldiat=monthtoyear_noleap(diatChl)  #pop.h
 chldiaz=monthtoyear_noleap(diazChl)  #pop.h
 chlpico=monthtoyear_noleap(spChl)  #pop.h
+dcalc=CaCO3_REMIN
 dfe=monthtoyear_noleap(Fe)  #pop.h
 diftrblo=monthtoyear_noleap(KAPPA_THIC)  #pop.h
 diftrelo=monthtoyear_noleap(KAPPA_ISOP)  #pop.h
@@ -1362,31 +1383,37 @@ expfe=monthtoyear_noleap(P_iron_FLUX_IN)  #pop.h
 expn=monthtoyear_noleap((16.0/117.0)*POC_FLUX_IN)  #pop.h
 expp=monthtoyear_noleap(POP_FLUX_IN)  #pop.h
 expsi=monthtoyear_noleap(SiO2_FLUX_IN)  #pop.h
-fg14co2abio=monthtoyear_noleap(FG_ABIO_DIC14)  #pop.h
+fediss=monthtoyear_noleap(P_iron_REMIN)
+fescav=monthtoyear_noleap(Fe_scavenge)
+fg14co2abio=monthtoyear_noleap(chunits(FG_ABIO_DIC14 * 12.0e-8, units="kg m-2 s-1"))  #pop.h
+fgco2=monthtoyear_noleap(chunits(FG_CO2 * 12.0e-8, units="kg m-2 s-1"))
 fgco2abio=monthtoyear_noleap(chunits(FG_ABIO_DIC * 12.0e-8, units="kg m-2 s-1"))  #pop.h
 fgco2nat=monthtoyear_noleap(chunits(FG_ALT_CO2 * 12.0e-8, units="kg m-2 s-1"))  #pop.h
 graz=graze_auto_TOT
 no3=monthtoyear_noleap(NO3)  #pop.h
 o2=monthtoyear_noleap(O2)  #pop.h
 o2sat=monthtoyear_noleap(O2+AOU)  #pop.h
-opottempdiff=monthtoyear_noleap(rho_sw*(-1)*diff_axis1_ind0bczero_4d(DIA_IMPVF_SALT))  #pop.h
-opottempmint=monthtoyear_noleap(rho_sw *POP_bottom_layer_multadd(KMT,dz,TEMP))  #pop.h
-opottemppadvect=monthtoyear_noleap(cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP))  #pop.h
-opottemppmdiff=monthtoyear_noleap(cp_sw*rho_sw*dz*Redi_TEND_TEMP)  #pop.h
-opottemppsmadvect=monthtoyear_noleap(cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP))  #pop.h
-opottemprmadvect=monthtoyear_noleap(cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP+ADV_3D_TEMP))  #pop.h
-opottemptend=monthtoyear_noleap(cp_sw*rho_sw*dz*TEND_TEMP)  #pop.h
-osaltdiff=monthtoyear_noleap(rho_sw*(-1)*diff_axis1_ind0bczero_4d(DIA_IMPVF_SALT))  #pop.h
-osaltpadvect=monthtoyear_noleap(rho_sw*dz*(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT))  #pop.h
-osaltpmdiff=monthtoyear_noleap(rho_sw*dz*Redi_TEND_SALT)  #pop.h
-osaltpsmadvect=monthtoyear_noleap(rho_sw*dz*(SUBM_ADV_TEND_SALT))  #pop.h
-osaltrmadvect=monthtoyear_noleap(rho_sw*dz*(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT+ADV_3D_SALT))  #pop.h
-osalttend=monthtoyear_noleap(rho_sw*dz*TEND_SALT)  #pop.h
+opottempdiff=monthtoyear_noleap(diff_axis1_ind0bczero_4d(DIA_IMPVF_TEMP))*rho_sw*(-1)  #pop.h
+opottempmint=monthtoyear_noleap(POP_layer_sum_mult(KMT,dz,TEMP))*rho_sw  #pop.h
+opottemppadvect=monthtoyear_noleap(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP)*cp_sw*rho_sw*dz  #pop.h
+opottemppmdiff=monthtoyear_noleap(Redi_TEND_TEMP)*cp_sw*rho_sw*dz  #pop.h
+opottemppsmadvect=monthtoyear_noleap(SUBM_ADV_TEND_TEMP)*cp_sw*rho_sw*dz  #pop.h
+opottemprmadvect=monthtoyear_noleap(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP+ADV_3D_TEMP)*cp_sw*rho_sw*dz  #pop.h
+opottemptend=monthtoyear_noleap(TEND_TEMP)*cp_sw*rho_sw*dz  #pop.h
+osaltdiff=monthtoyear_noleap(diff_axis1_ind0bczero_4d(DIA_IMPVF_SALT))*rho_sw*(-1)  #pop.h
+osaltpadvect=monthtoyear_noleap(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT)*rho_sw*dz  #pop.h
+osaltpmdiff=monthtoyear_noleap(Redi_TEND_SALT)*rho_sw*dz  #pop.h
+osaltpsmadvect=monthtoyear_noleap(SUBM_ADV_TEND_SALT)*rho_sw*dz  #pop.h
+osaltrmadvect=monthtoyear_noleap(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT+ADV_3D_SALT)*rho_sw*dz  #pop.h
+osalttend=monthtoyear_noleap(TEND_SALT)*rho_sw*dz  #pop.h
+pbfe=monthtoyear_noleap(photoFe_sp+photoFe_diat+photoFe_diaz)
+pbsi=monthtoyear_noleap(bsi_form)
+pcalc=CaCO3_form
 phnat=monthtoyear_noleap(pH_3D_ALT_CO2)  #pop.h
 phyc=monthtoyear_noleap(spC+diatC+diazC)  #pop.h
 phyfe=monthtoyear_noleap(spFe)  #pop.h
 phyn=monthtoyear_noleap((diatC+spC+diazC)*.137)  #pop.h
-phyp=monthtoyear_noleap((diatC+spC)*.00855+diazC*.002735)  #pop.h
+phyp=monthtoyear_noleap(diatP+spP+diazP)  #pop.h
 physi=monthtoyear_noleap(diatSi)  #pop.h
 pnitrate=monthtoyear_noleap(photoC_NO3_TOT)  #pop.h
 pp=monthtoyear_noleap(photoC_TOT)  #pop.h
@@ -1394,9 +1421,24 @@ remoc=DOC_remin+DOCr_remin+POC_REMIN_DIC
 rsdoabsorb=monthtoyear_noleap(QSW_3D(k,I,j)-QSW_3D(k+1,I,j)*delta(k=KMT(I,j)-1))  #pop.h
 sf6=monthtoyear_noleap(SF6)  #pop.h
 si=monthtoyear_noleap(SiO3)  #pop.h
-somint=monthtoyear_noleap(rho_sw*POP_bottom_layer_multadd(KMT,dz,SALT))  #pop.h
+somint=monthtoyear_noleap(rho_sw*POP_layer_sum_mult(KMT,dz,SALT))  #pop.h
 talknat=monthtoyear_noleap(chunits(ALK_ALT_CO2 * 1e-3, units="mol m-3"))  #pop.h
 volcello=TAREA(I,j) * dz(k)
+calc=monthtoyear_noleap(spCaCO3)
+co3=monthtoyear_noleap(CO3)
+co3nat=monthtoyear_noleap(CO3_ALT_CO2)
+co3satarag=monthtoyear_noleap(co3_sat_arag)
+co3satcalc=monthtoyear_noleap(co3_sat_calc)
+dissic=monthtoyear_noleap(DIC)
+dissoc=monthtoyear_noleap(DOC+DOCr)
+nh4=monthtoyear_noleap(NH4)
+ph=monthtoyear_noleap(pH_3D)
+phydiat=monthtoyear_noleap(diatC)
+phydiaz=monthtoyear_noleap(diazC)
+phypico=monthtoyear_noleap(spC)
+po4=monthtoyear_noleap(PO4)
+talk=monthtoyear_noleap(chunits(ALK * 1e-3, units="mol m-3"))
+zooc=monthtoyear_noleap(zooC)
 ############################
 #  TABLE : SIday
 ############################
@@ -1496,17 +1538,17 @@ clt=CLDTOT
 hfls=LHFLX
 hfss=SHFLX
 hur=vinth2p(RELHUM,hyam, hybm, plev, PS, P0)
-hurs=RHREFHT
+hurs=chunits(RHREFHT,units="%")
 hus=vinth2p(Q,hyam, hybm, plev, PS, P0)
 huss=QREFHT
 mrro=chunits(QRUNOFF, units="kg m-2 s-1")
 mrso=TOTSOILLIQ+TOTSOILICE
 mrsos=SOILWATER_10CM
-pr=chunits( ((1e-3*1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1e-3*1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
 psl=PSL
 rlds=FLDS
-rlus=FLDS-FLNS
+rlus=FLDS+FLNS
 rlut=FLUT
 rsds=FSDS
 rsus=FSDS - FSNS
@@ -1527,6 +1569,6 @@ zg=vinth2p(Z3,hyam,hybm,plev,PS,P0)
 ############################
 areacella=AREA[0,:,:]
 mrsofc=sum(WATSAT, "levgrnd")*sum(DZSOI, "levgrnd")
-orog=PHIS/g  #cam.h0
-sftgif=PCT_LANDUNT[:,3,:,:]
+orog=chunits(PHIS[0,:,:]/9.80616,units="m")  #cam.h0
+sftgif=PCT_LANDUNIT[0,3,:,:]  #clm2.h3
 sftlf=LANDFRAC[0,:,:]
