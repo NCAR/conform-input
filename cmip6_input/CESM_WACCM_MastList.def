@@ -795,14 +795,14 @@ nppShrub=chunits(CLM_pft_to_CMIP6_vegtype(NPP,"shrub",time, lat, lon, grid1d_ixy
 nppStem=chunits(WOODC_ALLOC, units="g m-2 s-1")
 nppTree=chunits(CLM_pft_to_CMIP6_vegtype(NPP,"tree",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
 nwdFracLut=yeartomonth_data3D(get_nonwoodyveg(PCT_NAT_PFT,PCT_LANDUNIT,landfrac,landUse), time, lat, lon,landUse)  #clm2.h3
-opottempdiff=cp_sw*rho_sw*(-1)*diff_axis1_ind0bczero_4d(DIA_IMPVF_TEMP)
+opottempdiff=cp_sw*rho_sw*(-1)*diff_axis1_ind0bczero_4d(KMT,DIA_IMPVF_TEMP)
 opottempmint=rho_sw *POP_layer_sum_mult(KMT,dz,TEMP)
 opottemppadvect=cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP)
 opottemppmdiff=cp_sw*rho_sw*dz*Redi_TEND_TEMP
 opottemppsmadvect=cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP)
 opottemprmadvect=cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP+ADV_3D_TEMP)
 opottemptend=cp_sw*rho_sw*dz*TEND_TEMP
-osaltdiff=rho_sw*(-1)*diff_axis1_ind0bczero_4d(DIA_IMPVF_SALT)
+osaltdiff=rho_sw*(-1)*diff_axis1_ind0bczero_4d(KMT,DIA_IMPVF_SALT)
 osaltpadvect=rho_sw*dz*(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT)
 osaltpmdiff=rho_sw*dz*Redi_TEND_SALT
 osaltpsmadvect=rho_sw*dz*(SUBM_ADV_TEND_SALT)
@@ -829,7 +829,7 @@ rhc13=chunits(C13_HR, units="g m-2 s-1")
 rhc14=chunits(C14_HR, units="g m-2 s-1")
 rls=FLNS
 rlusLut=CLM_landunit_to_CMIP6_Lut(FIRE,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
-rsdoabsorb=QSW_3D(k,I,j)-QSW_3D(k+1,I,j)*delta(k=KMT(I,j)-1)
+rsdoabsorb=rsdoabsorb(KMT, QSW_3D)
 rsdscsdiff=SOLLD+SOLSD
 rsdsdiff=SOLLD+SOLSD
 rss=FSNS
@@ -1391,14 +1391,14 @@ graz=graze_auto_TOT
 no3=monthtoyear_noleap(NO3)  #pop.h
 o2=monthtoyear_noleap(O2)  #pop.h
 o2sat=monthtoyear_noleap(O2+AOU)  #pop.h
-opottempdiff=monthtoyear_noleap(diff_axis1_ind0bczero_4d(DIA_IMPVF_TEMP))*rho_sw*(-1)  #pop.h
+opottempdiff=monthtoyear_noleap(diff_axis1_ind0bczero_4d(KMT,DIA_IMPVF_TEMP))*rho_sw*(-1)  #pop.h
 opottempmint=monthtoyear_noleap(POP_layer_sum_mult(KMT,dz,TEMP))*rho_sw  #pop.h
 opottemppadvect=monthtoyear_noleap(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP)*cp_sw*rho_sw*dz  #pop.h
 opottemppmdiff=monthtoyear_noleap(Redi_TEND_TEMP)*cp_sw*rho_sw*dz  #pop.h
 opottemppsmadvect=monthtoyear_noleap(SUBM_ADV_TEND_TEMP)*cp_sw*rho_sw*dz  #pop.h
 opottemprmadvect=monthtoyear_noleap(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP+ADV_3D_TEMP)*cp_sw*rho_sw*dz  #pop.h
 opottemptend=monthtoyear_noleap(TEND_TEMP)*cp_sw*rho_sw*dz  #pop.h
-osaltdiff=monthtoyear_noleap(diff_axis1_ind0bczero_4d(DIA_IMPVF_SALT))*rho_sw*(-1)  #pop.h
+osaltdiff=monthtoyear_noleap(diff_axis1_ind0bczero_4d(KMT,DIA_IMPVF_SALT))*rho_sw*(-1)  #pop.h
 osaltpadvect=monthtoyear_noleap(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT)*rho_sw*dz  #pop.h
 osaltpmdiff=monthtoyear_noleap(Redi_TEND_SALT)*rho_sw*dz  #pop.h
 osaltpsmadvect=monthtoyear_noleap(SUBM_ADV_TEND_SALT)*rho_sw*dz  #pop.h
@@ -1416,7 +1416,7 @@ physi=monthtoyear_noleap(diatSi)  #pop.h
 pnitrate=monthtoyear_noleap(photoC_NO3_TOT)  #pop.h
 pp=monthtoyear_noleap(photoC_TOT)  #pop.h
 remoc=DOC_remin+DOCr_remin+POC_REMIN_DIC
-rsdoabsorb=monthtoyear_noleap(QSW_3D(k,I,j)-QSW_3D(k+1,I,j)*delta(k=KMT(I,j)-1))  #pop.h
+rsdoabsorb=monthtoyear_noleap(rsdoabsorb(KMT, QSW_3D))  #pop.h
 sf6=monthtoyear_noleap(SF6)  #pop.h
 si=monthtoyear_noleap(SiO3)  #pop.h
 somint=monthtoyear_noleap(rho_sw*POP_layer_sum_mult(KMT,dz,SALT))  #pop.h
