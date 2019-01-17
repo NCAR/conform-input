@@ -795,14 +795,14 @@ nppShrub=chunits(CLM_pft_to_CMIP6_vegtype(NPP,"shrub",time, lat, lon, grid1d_ixy
 nppStem=chunits(WOODC_ALLOC, units="g m-2 s-1")
 nppTree=chunits(CLM_pft_to_CMIP6_vegtype(NPP,"tree",time, lat, lon, grid1d_ixy, grid1d_jxy, grid1d_lon,grid1d_lat, land1d_lon, land1d_lat, land1d_ityplunit,pfts1d_lon, pfts1d_lat, pfts1d_active, pfts1d_itype_veg,pfts1d_wtgcell, pfts1d_wtlunit), units="g m-2 s-1")  #clm2.h1
 nwdFracLut=yeartomonth_data3D(get_nonwoodyveg(PCT_NAT_PFT,PCT_LANDUNIT,landfrac,landUse), time, lat, lon,landUse)  #clm2.h3
-opottempdiff=cp_sw*rho_sw*(-1)*diff_axis1_ind0bczero_4d(KMT,DIA_IMPVF_TEMP)
+opottempdiff=cp_sw*rho_sw*(-1)*diff_axis1_ind0bczero_4d(KMT,z_t,DIA_IMPVF_TEMP)
 opottempmint=rho_sw *POP_layer_sum_mult(KMT,dz,TEMP)
 opottemppadvect=cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP)
 opottemppmdiff=cp_sw*rho_sw*dz*Redi_TEND_TEMP
 opottemppsmadvect=cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP)
 opottemprmadvect=cp_sw*rho_sw*dz*(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP+ADV_3D_TEMP)
 opottemptend=cp_sw*rho_sw*dz*TEND_TEMP
-osaltdiff=rho_sw*(-1)*diff_axis1_ind0bczero_4d(KMT,DIA_IMPVF_SALT)
+osaltdiff=rho_sw*(-1)*diff_axis1_ind0bczero_4d(KMT,z_t,DIA_IMPVF_SALT)
 osaltpadvect=rho_sw*dz*(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT)
 osaltpmdiff=rho_sw*dz*Redi_TEND_SALT
 osaltpsmadvect=rho_sw*dz*(SUBM_ADV_TEND_SALT)
@@ -829,7 +829,7 @@ rhc13=chunits(C13_HR, units="g m-2 s-1")
 rhc14=chunits(C14_HR, units="g m-2 s-1")
 rls=FLNS
 rlusLut=CLM_landunit_to_CMIP6_Lut(FIRE,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
-rsdoabsorb=rsdoabsorb(KMT, QSW_3D)
+rsdoabsorb=rsdoabsorb(KMT,z_t,QSW_3D)
 rsdscsdiff=SOLLD+SOLSD
 rsdsdiff=SOLLD+SOLSD
 rss=FSNS
@@ -935,7 +935,6 @@ residualFrac=1-PCT_LANDUNIT[:,0,:,:]-PCT_LANDUNIT[:,1,:,:]  #clm2.h3
 shrubFrac=(PCT_NAT_PFT[:,9,:,:]+PCT_NAT_PFT[:,10,:,:]+PCT_NAT_PFT[:,11,:,:])*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
 treeFrac=(PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]+PCT_NAT_PFT[:,3,:,:]+PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]+PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]+PCT_NAT_PFT[:,8,:,:])*PCT_LANDUNIT[:,0,:,:]  #clm2.h3
 vegFrac=PCT_LANDUNIT[:,0,:,:]+PCT_LANDUNIT[:,1,:,:]  #clm2.h3
-zfullo=z_t(k)
 ############################
 #  TABLE : IfxAnt
 ############################
@@ -1141,16 +1140,19 @@ hfds=SHF+QFLUX
 masscello=rho_sw*dz(k)
 sfdsi=SALT_F-chunits(QFLUX/latent_heat_fusion_mks*sea_ice_salinity*1e-3,units="kg/m^2/s")
 so=SALT
+soga=POP_3D_mean(KMT,dz,TAREA,SALT)
 sos=SALT[:,0,:,:]
+sosga=POP_surf_mean(KMT,TAREA,SALT[:,0,:,:])
 tauuo=TAUX
 tauvo=TAUY
 thetao=TEMP
+thetaoga=POP_3D_mean(KMT,dz,TAREA,TEMP)
 thkcello=dz
 tos=TEMP[:,0,:,:]
+tosga=POP_surf_mean(KMT,TAREA,TEMP[:,0,:,:])
 uo=UVEL
 vo=VVEL
-volcello=TAREA(I,j) * dz(k)
-wo=WVEL(t,k,I,j)
+wo=WVEL
 ############################
 #  TABLE : Ofx
 ############################
@@ -1235,7 +1237,7 @@ hfds=SHF+QFLUX
 hfevapds=EVAP_F*latent_heat_vapor
 hflso=EVAP_F*latent_heat_vapor + MELTH_F + QFLUX -(IOFF_F+SNOW_F)*latent_heat_fusion_mks
 hfsifrazil2d=QFLUX
-hfsnthermds2d=-SNOW_F/latent_heat_fusion_mks
+hfsnthermds2d=-SNOW_F*latent_heat_fusion_mks
 hfsso=SENH_F
 icfriver=DIC_RIV_FLUX
 intdic=chunits(1.0e-9*12.0*1.0e-3*1.0e4*POP_layer_sum_mult(KMT,dz,DIC),units="kg m-2")
@@ -1263,7 +1265,7 @@ mlotst=HMXL_DR
 mlotstmax=XMXL_DR
 mlotstmin=TMXL_DR
 mlotstsq=HMXL_DR2
-msftbarot=BSF*rho_sw
+msftbarot=chunits(BSF, units="1e6 m3 s-1")*rho_sw
 msftmz=chunits(ocean_basin((1e9 * rho_sw *MOC),0,basin),units="kg/s")
 msftmzmpa=chunits(ocean_basin((1e9 * rho_sw *MOC),1,basin),units="kg/s")
 msftmzsmpa=chunits(ocean_basin((1e9 * rho_sw *MOC),2,basin),units="kg/s")
@@ -1278,7 +1280,7 @@ o2satos=O2[:,0,:,:]+AOU[:,0,:,:]
 ocfriver=DOC_RIV_FLUX+DOCr_RIV_FLUX
 ph=pH_3D
 phabioos=ABIO_PH_SURF
-phnat=PH_ALT_CO2
+phnat=pH_3D_ALT_CO2
 phnatos=PH_ALT_CO2
 phyc=spC+diatC+diazC
 phycos=spC[:,0,:,:]+diatC[:,0,:,:]+diazC[:,0,:,:]
@@ -1306,7 +1308,9 @@ si=SiO3
 sios=SiO3[:,0,:,:]
 so=SALT
 sob=POP_bottom_layer(KMT,SALT)
+soga=POP_3D_mean(KMT,dz,TAREA,SALT)
 sos=SALT[:,0,:,:]
+sosga=POP_surf_mean(KMT,TAREA,SALT[:,0,:,:])
 sossq=SSS2
 spco2=chunits( 0.101325 * pCO2SURF, units="Pa")
 spco2abio=chunits( 0.101325 * ABIO_pCO2SURF, units="Pa")
@@ -1316,14 +1320,15 @@ talknatos=chunits(ALK_ALT_CO2[:,0,:,:] * 1e-3, units="mol m-3")
 tauuo=TAUX
 tauvo=TAUY
 thetao=TEMP
+thetaoga=POP_3D_mean(KMT,dz,TAREA,TEMP)
 tob=POP_bottom_layer(KMT,TEMP)
 tos=TEMP[:,0,:,:]
+tosga=POP_surf_mean(KMT,TAREA,TEMP[:,0,:,:])
 tossq=TEMP2[:,0,:,:]
 umo=0.5 * (UVEL(i,j) + UVEL(i,j-1)) * HTE(i,j) * dz(k) * rho_sw
 uo=UVEL
 vmo=0.5 * (VVEL(i,j) + VVEL(i-1,j)) * HTN(i,j) * dz(k) * rho_sw
 vo=VVEL
-volcello=TAREA(I,j) * dz(k)
 vsf=ROFF_F+IOFF_F+EVAP_F+PREC_F+MELT_F-QFLUX/latent_heat_fusion_mks
 vsfevap=EVAP_F
 vsfpr=PREC_F
@@ -1391,14 +1396,14 @@ graz=graze_auto_TOT
 no3=monthtoyear_noleap(NO3)  #pop.h
 o2=monthtoyear_noleap(O2)  #pop.h
 o2sat=monthtoyear_noleap(O2+AOU)  #pop.h
-opottempdiff=monthtoyear_noleap(diff_axis1_ind0bczero_4d(KMT,DIA_IMPVF_TEMP))*rho_sw*(-1)  #pop.h
+opottempdiff=monthtoyear_noleap(diff_axis1_ind0bczero_4d(KMT,z_t,DIA_IMPVF_TEMP))*cp_sw*rho_sw*(-1)  #pop.h
 opottempmint=monthtoyear_noleap(POP_layer_sum_mult(KMT,dz,TEMP))*rho_sw  #pop.h
 opottemppadvect=monthtoyear_noleap(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP)*cp_sw*rho_sw*dz  #pop.h
 opottemppmdiff=monthtoyear_noleap(Redi_TEND_TEMP)*cp_sw*rho_sw*dz  #pop.h
 opottemppsmadvect=monthtoyear_noleap(SUBM_ADV_TEND_TEMP)*cp_sw*rho_sw*dz  #pop.h
 opottemprmadvect=monthtoyear_noleap(SUBM_ADV_TEND_TEMP+ISOP_ADV_TEND_TEMP+ADV_3D_TEMP)*cp_sw*rho_sw*dz  #pop.h
 opottemptend=monthtoyear_noleap(TEND_TEMP)*cp_sw*rho_sw*dz  #pop.h
-osaltdiff=monthtoyear_noleap(diff_axis1_ind0bczero_4d(KMT,DIA_IMPVF_SALT))*rho_sw*(-1)  #pop.h
+osaltdiff=monthtoyear_noleap(diff_axis1_ind0bczero_4d(KMT,z_t,DIA_IMPVF_SALT))*rho_sw*(-1)  #pop.h
 osaltpadvect=monthtoyear_noleap(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT)*rho_sw*dz  #pop.h
 osaltpmdiff=monthtoyear_noleap(Redi_TEND_SALT)*rho_sw*dz  #pop.h
 osaltpsmadvect=monthtoyear_noleap(SUBM_ADV_TEND_SALT)*rho_sw*dz  #pop.h
@@ -1416,12 +1421,11 @@ physi=monthtoyear_noleap(diatSi)  #pop.h
 pnitrate=monthtoyear_noleap(photoC_NO3_TOT)  #pop.h
 pp=monthtoyear_noleap(photoC_TOT)  #pop.h
 remoc=DOC_remin+DOCr_remin+POC_REMIN_DIC
-rsdoabsorb=monthtoyear_noleap(rsdoabsorb(KMT, QSW_3D))  #pop.h
+rsdoabsorb=monthtoyear_noleap(rsdoabsorb(KMT,z_t,QSW_3D))  #pop.h
 sf6=monthtoyear_noleap(SF6)  #pop.h
 si=monthtoyear_noleap(SiO3)  #pop.h
 somint=monthtoyear_noleap(rho_sw*POP_layer_sum_mult(KMT,dz,SALT))  #pop.h
 talknat=monthtoyear_noleap(chunits(ALK_ALT_CO2 * 1e-3, units="mol m-3"))  #pop.h
-volcello=TAREA(I,j) * dz(k)
 calc=monthtoyear_noleap(spCaCO3)
 co3=monthtoyear_noleap(CO3)
 co3nat=monthtoyear_noleap(CO3_ALT_CO2)
