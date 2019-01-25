@@ -135,10 +135,12 @@ cldicemxrat27=vinth2p(CLDICE,hyam,hybm,plev,PS,P0)
 cldwatmxrat27=vinth2p(CLDLIQ,hyam,hybm,plev,PS,P0)
 dtaus=TOT_ICLD_VISTAU:allcloud
 huss=QREFHT
+mrsos=SOILWATER_10CM
 psl=PSL
 rainmxrat27=vinth2p(QRAIN,hyam,hybm,plev,PS,P0)
 sfcWind=U10
 snowmxrat27=vinth2p(QSNOW,hyam,hybm,plev,PS,P0)
+snw=chunits(H2OSNO, units="kg m-2")
 tas=TREFHT
 ts=TS
 ua=vinth2p(U,hyam,hybm,plev,PS,P0)
@@ -325,7 +327,7 @@ rsuscs=FSDSC - FSNSC
 rsut=FSUTOA
 rsutcs=SOLIN - FSNTOAC
 rtmt=FSNT - FLNT
-sbl=chunits(QFLX_SUB_SNOW,units="kg/m2/s")*landfrac  #clm2.h0
+sbl=chunits(QFLX_SUB_SNOW,units="kg/m2/s")*landfrac
 sfcWind=U10
 ta=vinth2p(T,hyam, hybm, plev, PS, P0)
 tas=TREFHT
@@ -369,7 +371,6 @@ ps=PS
 psl=PSL
 reffclis=AREI/FREQI
 reffclws=AREL/FREQL
-reffrains=AQRAIN/FREQR
 rlds=FLDS
 rldscs=FLDSC
 rlus=FLDS+FLNS
@@ -482,6 +483,7 @@ rldscs=FLDSC
 rlus=FLDS+FLNS
 rlut=FLUT
 rlutcs=FLUTC
+rsds=FSDS
 rsus=FSDS-FSNS
 rsuscs=FSDSC-FSNSC
 rsut=SOLIN-FSNTOA
@@ -536,12 +538,12 @@ rsutcs=SOLIN - FSNTOAC
 ############################
 clivi=TGCLDIWP
 clwvi=TGCLDLWP
-gpp=chunits(GPP, units="g/m^2/s")
+gpp=chunits(GPP, units="g/m^2/s")  #clm2.h7
 prrc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
 prw=TMQ
 psl=PSL
-ra=chunits(AR, units="g/m^2/s")
-rh=chunits(HR, units="g/m^2/s")
+ra=chunits(AR, units="g/m^2/s")  #clm2.h7
+rh=chunits(HR, units="g/m^2/s")  #clm2.h7
 rlut=FLUT
 rlutcs=FLUTC
 rsdt=SOLIN
@@ -576,19 +578,19 @@ ps=PSIRS
 ############################
 #  TABLE : Eday
 ############################
-albsn=(SNOFSRVD+SNOFSRVI+SNOFSRND+SNOFSRNI)/(FSDSVD+FSDSVI+FSDSND+FSDSNI)
+albsn=(SNOFSRVD+SNOFSRVI+SNOFSRND+SNOFSRNI)/(FSDSVD+FSDSVI+FSDSND+FSDSNI)  #clm2.h5
 cldnvi=CDNUMC
 clt=CLDTOT
-cw=H20CAN
-ec=chunits(QVEGE, units="kg m-2 s-1")
-es=chunits(QSOIL, units="kg m-2 s-1")
-esn=chunits(QSNOEVAP, units="kg m-2 s-1")
-hfdsl=FGR12
-hfls=EFLX_LH_TOT
-hfmlt=FSM
+cw=H20CAN  #clm2.h5
+ec=chunits(QVEGE, units="kg m-2 s-1")  #clm2.h5
+es=chunits(QSOIL, units="kg m-2 s-1")  #clm2.h5
+esn=chunits(QSNOEVAP, units="kg m-2 s-1")  #clm2.h5
+hfdsl=FGR12  #clm2.h5
+hfls=EFLX_LH_TOT  #clm2.h5
+hfmlt=FSM  #clm2.h5
 hfss=SHFLX
 hus=vinth2p(Q,hyam,hybm,plev,PS,P0)
-lai=TLAI
+lai=TLAI  #clm2.h5
 loadbc=BURDENBCdn
 loaddust=BURDENDUSTdn
 loadoa=BURDENPOMdn+BURDENSOAdn
@@ -596,54 +598,55 @@ loadpoa=BURDENPOMdn
 loadso4=BURDENSO4dn
 loadsoa=BURDENSOAdn
 loadss=BURDENSEASALTdn
-lwsnl=SNOWLIQ
+lwsnl=SNOWLIQ  #clm2.h5
 mlotst=HMXL_DR_2
-mrfsofr=SOILICE/(SOILICE+SOILLIQ)
-mrlqso=SOILLIQ/(SOILICE+SOILLIQ)
-mrrob=chunits((QDRAI+QDRAI_PERCH), units="kg m-2 s-1")
-mrros=chunits(QOVER, units="kg m-2 s-1")
-mrsfl=SOILICE
-mrsll=SOILLIQ
-mrsol=SOILLIQ+SOILICE
-mrtws=chunits(TWS, units="kg m-2")
+mrfsofr=SOILICE/(SOILICE+SOILLIQ)  #clm2.h5
+mrlqso=SOILLIQ/(SOILICE+SOILLIQ)  #clm2.h5
+mrrob=chunits((QDRAI+QDRAI_PERCH), units="kg m-2 s-1")  #clm2.h5
+mrros=chunits(QOVER, units="kg m-2 s-1")  #clm2.h5
+mrsfl=SOILICE  #clm2.h5
+mrsll=SOILLIQ  #clm2.h5
+mrsol=SOILLIQ+SOILICE  #clm2.h5
+mrtws=chunits(TWS, units="kg m-2")  #clm2.h5
 parasolRefl=RFL_PARASOL
-prCrop=RAIN+SNOW  #clm2.h4
-prra=RAIN+SNOW
+prCrop=chunits(RAIN+SNOW,units="kg m-2 s-1")  #clm2.h5
+prra=chunits(RAIN+SNOW,units="kg m-2 s-1")  #clm2.h5
 prsnc=ZMFLXSNW
-prveg=chunits(QINTR, units="kg m-2 s-1")
+prveg=chunits(QINTR, units="kg m-2 s-1")  #clm2.h5
 prw=TMQ
 reffsclwtop=ACTREL/FCTL
-rivo=RIVER_DISCHARGE_OVER_LAND_LIQ
+rivo=RIVER_DISCHARGE_OVER_LAND_LIQ  #mosart.h1
 rls=FLNS
 rsdscsdiff=SOLLD+SOLSD
 rsdsdiff=SOLLD+SOLSD
 rss=FSA
-sbl=chunits(QFLX_SUB_SNOW, units="kg m-2 s-1")
+sbl=chunits(QFLX_SUB_SNOW, units="kg m-2 s-1")  #clm2.h5
 scldncl=ACTNL/FCTL
-snd=SNOWDP
-snmsl=QFLX_SNOW_DRAIN
-snrefr=QSNOFRZ
-snwc=SNOCAN
-sootsn=SNOBCMSL
-sw=chunits(H2OSFC, units="kg m-2")
+snd=SNOWDP  #clm2.h5
+snmsl=QFLX_SNOW_DRAIN  #clm2.h5
+snrefr=QSNOFRZ  #clm2.h5
+snwc=SNOCAN  #clm2.h5
+sootsn=SNOBCMSL  #clm2.h5
+sw=chunits(H2OSFC, units="kg m-2")  #clm2.h5
 ta500=T500
 ta850=T850
-tasmaxCrop=CLM_landunit_to_CMIP6_Lut(TREFMXAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h5
-tasminCrop=CLM_landunit_to_CMIP6_Lut(TREFMNAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h5
+tasmaxCrop=CLM_landunit_to_CMIP6_Lut(TREFMXAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h6
+tasminCrop=CLM_landunit_to_CMIP6_Lut(TREFMNAV,"crop",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h6
 tau=TAUX
 tauu=-1*(TAUX+TAUBLJX-TAUGWX)
 tauupbl=-1*(TAUX)
 tauv=-1*(TAUY+TAUBLJY-TAUGWY)
 tauvpbl=-1*(TAUY)
-tcs=TV
-tgs=TG
+tcs=TV  #clm2.h5
+tgs=TG  #clm2.h5
 tr=TS
-tran=chunits(QVEGT, units="kg m-2 s-1")
+tran=chunits(QVEGT, units="kg m-2 s-1")  #clm2.h5
 ts=TS
-tsl=TSOI
-tsn=masked_invalid(SNOTXMASS/(SNOWICE+SNOWLIQ))  #clm2.h0
+tsl=TSOI  #clm2.h5
+tsn=masked_invalid(SNOTXMASS/(SNOWICE+SNOWLIQ))  #clm2.h5
 zg=vinth2p(Z3,hyam, hybm, plev, PS, P0)
 zmla=PBLH
+evspsbl=QFLX_EVAP_TOT  #clm2.h5
 ############################
 #  TABLE : EdayZ
 ############################
@@ -732,7 +735,7 @@ fNLitterSoil=chunits((LITR1N_TO_SOIL1N+LITR2N_TO_SOIL1N+LITR3N_TO_SOIL2N), units
 fNProduct=chunits(TOT_WOODPRODN_LOSS, units="g m-2 s-1")
 fNVegLitter=chunits(LITFALL_N, units="g m-2 s-1")
 fNdep=chunits(NDEP_TO_SMINN, units="g m-2 s-1")
-fNfert=chunits(NFERTILIZATION, units="g m-2 s-1")
+fNfert=chunits(NFERTILIZATION, units="g m-2 s-1")  #clm2.h0
 fNgas=chunits(PFT_FIRE_NLOSS,units="g m-2 s-1") + chunits(F_N2O_NIT,units="g m-2 s-1") + chunits(F_DENIT,units="g m-2 s-1")
 fNgasFire=chunits(PFT_FIRE_NLOSS,units="g m-2 s-1")
 fNgasNonFire=chunits(F_N2O_NIT,units="g m-2 s-1") + chunits(F_DENIT,units="g m-2 s-1")
@@ -1553,12 +1556,12 @@ rsds=FSDS
 rsus=FSDS - FSNS
 sfcWind=U10
 snc=FSNO
-snw=chunits(H2OSNO, units="kg m-2")
+snw=chunits(H2OSNO, units="kg m-2")  #clm2.h5
 ta=vinth2p(T,hyam, hybm, plev, PS, P0)
 tas=TREFHT
 tasmax=TREFHTMX
 tasmin=TREFHTMN
-tslsi=TSKIN
+tslsi=TSKIN  #clm2.h5
 ua=vinth2p(U,hyam, hybm, plev, PS, P0)
 va=vinth2p(V,hyam, hybm, plev, PS, P0)
 wap=vinth2p(OMEGA,hyam, hybm, plev, PS, P0)
