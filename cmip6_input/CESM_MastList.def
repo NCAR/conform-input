@@ -327,7 +327,7 @@ rsuscs=FSDSC - FSNSC
 rsut=FSUTOA
 rsutcs=SOLIN - FSNTOAC
 rtmt=FSNT - FLNT
-sbl=chunits(QFLX_SUB_SNOW,units="kg/m2/s")*landfrac
+sbl=chunits(QFLX_SUB_SNOW,units="kg/m2/s")*landfrac  #clm2.h0
 sfcWind=U10
 ta=vinth2p(T,hyam, hybm, plev, PS, P0)
 tas=TREFHT
@@ -488,7 +488,6 @@ rsus=FSDS-FSNS
 rsuscs=FSDSC-FSNSC
 rsut=SOLIN-FSNTOA
 rsutcs=SOLIN-FSNTOAC
-sbl=QFLX_SUB_SNOW*landfrac
 sfcWind=U10
 tas=TREFHT
 tnhus=QAP(n)-QAP(n-1)/dt
@@ -1019,7 +1018,7 @@ limnsw=imass_above_flotation  #cism.h
 litempbotfl=btemp * floating_mask  #cism.h
 litempbotgr=btemp * grounded_mask  #cism.h
 litemptop=tempstag[:,0,:,:]  #cism.h
-lithk=thk  #cism.h
+lithk=thk  #cism.h 
 orog=usurf  #cism.h
 sftflf=floating_mask  #cism.h
 sftgif=ice_mask  #cism.h
@@ -1445,7 +1444,7 @@ zooc=monthtoyear_noleap(zooC)
 #  TABLE : SIday
 ############################
 siconc=aice_d
-siconca=icefrac (atmos)
+siconca=ICEFRAC  #cam.h1
 sisnthick=sisnthick_d
 sispeed=sispeed_d
 sitemptop=sitemptop_d

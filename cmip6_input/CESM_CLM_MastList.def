@@ -329,7 +329,7 @@ rsuscs=FSDSC - FSNSC
 rsut=FSUTOA
 rsutcs=SOLIN - FSNTOAC
 rtmt=FSNT - FLNT
-sbl=chunits(QFLX_SUB_SNOW,units="kg/m2/s")*landfrac
+sbl=chunits(QFLX_SUB_SNOW,units="kg/m2/s")*landfrac #clm2.h0
 sfcWind=U10 #clm2.h0
 ta=vinth2p(T,hyam, hybm, plev, PS, P0)
 tas=TSA #clm2.h0
@@ -493,7 +493,6 @@ rsus=FSR
 rsuscs=FSDSC-FSNSC
 rsut=SOLIN-FSNTOA
 rsutcs=SOLIN-FSNTOAC
-sbl=QFLX_SUB_SNOW*landfrac
 sfcWind=U10
 tas=TSA
 tnhus=QAP(n)-QAP(n-1)/dt
@@ -1451,7 +1450,7 @@ zooc=monthtoyear_noleap(zooC)
 #  TABLE : SIday
 ############################
 siconc=aice_d
-siconca=icefrac (atmos)
+siconca=ICEFRAC  #cam.h1
 sisnthick=sisnthick_d
 sispeed=sispeed_d
 sitemptop=sitemptop_d
