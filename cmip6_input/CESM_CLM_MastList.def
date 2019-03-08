@@ -656,7 +656,7 @@ evspsbl=QFLX_EVAP_TOT  #clm2.h5
 #  TABLE : EdayZ
 ############################
 epfy=mean(vinth2p(dynvarmip_epfy(time, ilev, lat, Uzm, UVzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
-epfz=mean(vinth2p(dynvarmip_epfz(time, ilev, lat, UZm, UWzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+epfz=mean(vinth2p(dynvarmip_epfz(time, ilev, lat, Uzm, UWzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 hus=zonalmean(vinth2p(Q,hyam, hybm, plev, PS, P0))
 psitem=mean(vinth2p(dynvarmip_psitem(time, ilev, lat, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 ta=zonalmean(vinth2p(T,hyam, hybm, plev, PS, P0))
@@ -878,7 +878,7 @@ wetlandFrac=FINUNDATED
 #  TABLE : EmonZ
 ############################
 epfy=mean(vinth2p(dynvarmip_epfy(time, ilev, lat, Uzm, UVzm, VTHzm, THzm), hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
-epfz=mean(vinth2p(dynvarmip_epfz(time, ilev, lat, UZm, UWzm, VTHzm, THzm), hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
+epfz=mean(vinth2p(dynvarmip_epfz(time, ilev, lat, Uzm, UWzm, VTHzm, THzm), hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 jo2=chunits(zonalmean(vinth2p((jo2_a+jo2_b),hyam,hybm,plev,PS,P0)),units="s-1")
 jo3=chunits(zonalmean(vinth2p((jo3_a+jo3_b),hyam,hybm,plev,PS,P0)),units="s-1")
 oxloss=zonalmean(vinth2p((O3_Loss*1.e6/6.022E23),hyam,hybm,plev,PS,P0))
@@ -1126,11 +1126,6 @@ tsl=TSOI
 ############################
 #  TABLE : Oclim
 ############################
-diftrblo=oclim(KAPPA_THIC)
-diftrelo=oclim(KAPPA_ISOP)
-difvho=oclim(VDC_T)
-difvmo=oclim(VVC)
-difvso=oclim(VDC_S)
 ############################
 #  TABLE : Oday
 ############################
@@ -1507,7 +1502,7 @@ sihc=sihc
 siitdconc=aicen*100
 siitdsnthick=siitdsnthick
 siitdthick=siitdthick
-simass=chunits((hi*917), units="kg m-2")
+simass=chunits((aice*sithick*917), units="kg m-2")
 simassacrossline=chunits(cice_regions(hi, siu, siv, HTE, HTN, siline, 917), units="kg/s")
 sipr=sipr
 sirdgconc=ardg
@@ -1515,7 +1510,7 @@ sirdgthick=sirdgthick
 sisaltmass=chunits((hi*917*0.004), units="kg m-2")
 sishevel=shear
 sisnhc=sisnhc
-sisnmass=hs*rhos
+sisnmass=chunits(aice*sisnthick*330.), units ="kg m-2")
 sisnthick=sisnthick
 sispeed=sispeed
 sistremax=sistremax
@@ -1561,7 +1556,7 @@ rlut=FLUT
 rsds=FSDS #clm2.h5
 rsus=FSR #clm2.h5
 sfcWind=U10 #clm2.h5
-snc=FSNO
+snc=FSNO  #clm2.h5
 snw=chunits(H2OSNO, units="kg m-2")  #clm2.h5
 ta=vinth2p(T,hyam, hybm, plev, PS, P0)
 tas=TSA #clm2.h5
