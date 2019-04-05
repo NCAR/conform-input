@@ -95,8 +95,8 @@ hfss=SHFLX
 huss=QREFHT
 mrro=chunits(QRUNOFF, units="kg m-2 s-1")
 mrsos=SOILWATER_10CM
-pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)), units="kg m-2 s-1")
 ps=PS
 rlds=FLDS
 rldscs=FLDSC
@@ -122,7 +122,7 @@ va=V
 bldep=PBLH
 hurs=chunits(RHREFHT,units="%")
 hus4=vinth2p(Q,hyam,hybm,plev,PS,P0)
-pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)), units="kg m-2 s-1")
 psl=PSL
 sfcWind=U10
 tas=TREFHT
@@ -287,7 +287,6 @@ ua=zonalmean(vinth2p(U,hyam,hybm,plev,PS,P0))
 cfc11global=f11vmr
 cfc12global=f12vmr
 ch4=vinth2p(CH4, hyam, hybm, plev, PS, P0)
-ch4Clim=vinth2p(CH4,hyam,hybm,plev,PS,P0)
 ch4global=ch4vmr
 ci=FREQZM
 cl=CLOUD
@@ -309,8 +308,8 @@ mc=CMFMC + CMFMCDZM
 n2o=vinth2p(N2O,hyam, hybm, plev, PS, P0)
 n2oglobal=n2ovmr
 o3=vinth2p(O3,hyam,hybm,plev,PS,P0)
-pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)), units="kg m-2 s-1")
 prw=TMQ
 ps=PS
 psl=PSL
@@ -361,8 +360,8 @@ h2o=Q+CLDICE+CLDLIQ
 hfls=LHFLX
 hfss=SHFLX
 hurs=chunits(RHREFHT,units="%")
-pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECT)), units="kg m-2 s-1")
 prlsns=LS_FLXSNW
 prlsprof=LS_FLXPRC-LS_FLXSNW
 prsnc=ZMFLXSNW
@@ -474,8 +473,8 @@ hurs=chunits(RHREFHT,units="%")
 hus=Q
 huss=QREFHT
 mc=CMFMC+CMFMCDZM
-pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)), units="kg m-2 s-1")
 ps=PS
 psl=PSL
 rlds=FLDS
@@ -488,6 +487,7 @@ rsus=FSDS-FSNS
 rsuscs=FSDSC-FSNSC
 rsut=SOLIN-FSNTOA
 rsutcs=SOLIN-FSNTOAC
+sbl=QFLX_SUB_SNOW*landfrac
 sfcWind=U10
 tas=TREFHT
 tnhus=QAP(n)-QAP(n-1)/dt
@@ -515,13 +515,11 @@ parasolRefl=RFL_PARASOL
 ############################
 #  TABLE : E1hr
 ############################
-pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)), units="kg m-2 s-1")
 psl=PSL
 rlut=FLUT
-ta=vinth2p(T,hyam, hybm, plev, PS, P0)
-ta27=T
-ua=vinth2p(U,hyam, hybm, plev, PS, P0)
+ta27=vinth2p(T,hyam, hybm, plev, PS, P0)
 ua27=vinth2p(U,hyam, hybm, plev, PS, P0)
 wap=vinth2p(OMEGA,hyam, hybm, plev, PS, P0)
 ############################
@@ -538,7 +536,7 @@ rsutcs=SOLIN - FSNTOAC
 clivi=TGCLDIWP
 clwvi=TGCLDLWP
 gpp=chunits(GPP, units="g/m^2/s")  #clm2.h7
-prrc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
+prrc=chunits( ((1000 * PRECC)), units="kg m-2 s-1")
 prw=TMQ
 psl=PSL
 ra=chunits(AR, units="g/m^2/s")  #clm2.h7
@@ -565,7 +563,6 @@ clmisr=CLD_MISR
 cltcalipso=CLDTOT_CAL
 co2=CO2
 hus=Q
-hus7h=vinth2p(Q,hyam,hybm,plev,PS,P0)
 n2o=N2O
 o3=O3
 parasolRefl=RFL_PARASOL
@@ -758,7 +755,6 @@ grassFracC3=yeartomonth_data((PCT_NAT_PFT[:,12,:,:]+PCT_NAT_PFT[:,13,:,:]), time
 grassFracC4=yeartomonth_data(PCT_NAT_PFT[:,14,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 hflsLut=CLM_landunit_to_CMIP6_Lut(EFLX_LH_TOT,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 hfssLut=CLM_landunit_to_CMIP6_Lut(FSH,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
-hus=vinth2p(Q,hyam,hybm,plev,PS,P0)
 hus27=vinth2p(Q,hyam,hybm,plev,PS,P0)
 hussLut=CLM_landunit_to_CMIP6_Lut(Q2M,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 irrLut=chunits(CLM_landunit_to_CMIP6_Lut(QIRRIG,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="kg m-2 s-1")  #clm2.h2
@@ -901,8 +897,8 @@ hfss=SHFLX
 hus=Q
 huss=QREFHT
 mc=CMFMC + CMFMCDZM
-pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)), units="kg m-2 s-1")
 prw=TMQ
 ps=PS
 reffclis=AREI/FREQI
@@ -1005,20 +1001,20 @@ snc=FSNO_ICE  #clm2.h3
 ############################
 #  TABLE : IyrGre
 ############################
-acabf=sfc_mbal_flux  #cism.h
+acabf=sfc_mbal_flux_tavg  #cism.h
 modelCellAreai=cell_area  #cism.h
 hfgeoubed=bheatflx  #cism.h
 iareafl=iareaf  #cism.h
 iareagr=iareag  #cism.h
-libmassbffl=basal_mbal_flux * floating_mask  #cism.h
-libmassbfgr=basal_mbal_flux * grounded_mask  #cism.h
-licalvf=calving_flux  #cism.h
+libmassbffl=basal_mbal_flux_tavg * floating_mask  #cism.h
+libmassbfgr=basal_mbal_flux_tavg * grounded_mask  #cism.h
+licalvf=calving_flux_tavg  #cism.h
 lim=imass  #cism.h
 limnsw=imass_above_flotation  #cism.h
 litempbotfl=btemp * floating_mask  #cism.h
 litempbotgr=btemp * grounded_mask  #cism.h
 litemptop=tempstag[:,0,:,:]  #cism.h
-lithk=thk  #cism.h 
+lithk=thk  #cism.h
 orog=usurf  #cism.h
 sftflf=floating_mask  #cism.h
 sftgif=ice_mask  #cism.h
@@ -1540,8 +1536,8 @@ huss=QREFHT
 mrro=chunits(QRUNOFF, units="kg m-2 s-1")
 mrso=TOTSOILLIQ+TOTSOILICE
 mrsos=SOILWATER_10CM
-pr=chunits( ((1000 * PRECT)/86400), units="kg m-2 s-1")
-prc=chunits( ((1000 * PRECC)/86400), units="kg m-2 s-1")
+pr=chunits( ((1000 * PRECT)), units="kg m-2 s-1")
+prc=chunits( ((1000 * PRECC)), units="kg m-2 s-1")
 psl=PSL
 rlds=FLDS
 rlus=FLDS+FLNS
