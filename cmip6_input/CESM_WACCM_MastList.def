@@ -1376,10 +1376,10 @@ expfe=monthtoyear_noleap(P_iron_FLUX_IN)  #pop.h
 expn=monthtoyear_noleap((16.0/117.0)*POC_FLUX_IN)  #pop.h
 expp=monthtoyear_noleap(POP_FLUX_IN)  #pop.h
 expsi=monthtoyear_noleap(SiO2_FLUX_IN)  #pop.h
-fediss=monthtoyear_noleap(P_iron_REMIN)
-fescav=monthtoyear_noleap(Fe_scavenge)
+fediss=monthtoyear_noleap(P_iron_REMIN)  #pop.h
+fescav=monthtoyear_noleap(Fe_scavenge)  #pop.h
 fg14co2abio=monthtoyear_noleap(chunits(FG_ABIO_DIC14 * 12.0e-8, units="kg m-2 s-1"))  #pop.h
-fgco2=monthtoyear_noleap(chunits(FG_CO2 * 12.0e-8, units="kg m-2 s-1"))
+fgco2=monthtoyear_noleap(chunits(FG_CO2 * 12.0e-8, units="kg m-2 s-1"))  #pop.h
 fgco2abio=monthtoyear_noleap(chunits(FG_ABIO_DIC * 12.0e-8, units="kg m-2 s-1"))  #pop.h
 fgco2nat=monthtoyear_noleap(chunits(FG_ALT_CO2 * 12.0e-8, units="kg m-2 s-1"))  #pop.h
 graz=graze_auto_TOT
@@ -1399,8 +1399,8 @@ osaltpmdiff=monthtoyear_noleap(Redi_TEND_SALT)*rho_sw*dz  #pop.h
 osaltpsmadvect=monthtoyear_noleap(SUBM_ADV_TEND_SALT)*rho_sw*dz  #pop.h
 osaltrmadvect=monthtoyear_noleap(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT+ADV_3D_SALT)*rho_sw*dz  #pop.h
 osalttend=monthtoyear_noleap(TEND_SALT)*rho_sw*dz  #pop.h
-pbfe=monthtoyear_noleap(photoFe_sp+photoFe_diat+photoFe_diaz)
-pbsi=monthtoyear_noleap(bsi_form)
+pbfe=monthtoyear_noleap(photoFe_sp+photoFe_diat+photoFe_diaz)  #pop.h
+pbsi=monthtoyear_noleap(bsi_form)  #pop.h
 pcalc=CaCO3_form
 phnat=monthtoyear_noleap(pH_3D_ALT_CO2)  #pop.h
 phyc=monthtoyear_noleap(spC+diatC+diazC)  #pop.h
@@ -1416,21 +1416,21 @@ sf6=monthtoyear_noleap(SF6)  #pop.h
 si=monthtoyear_noleap(SiO3)  #pop.h
 somint=monthtoyear_noleap(rho_sw*POP_layer_sum_mult(KMT,dz,SALT))  #pop.h
 talknat=monthtoyear_noleap(chunits(ALK_ALT_CO2 * 1e-3, units="mol m-3"))  #pop.h
-calc=monthtoyear_noleap(spCaCO3)
-co3=monthtoyear_noleap(CO3)
-co3nat=monthtoyear_noleap(CO3_ALT_CO2)
-co3satarag=monthtoyear_noleap(co3_sat_arag)
-co3satcalc=monthtoyear_noleap(co3_sat_calc)
-dissic=monthtoyear_noleap(DIC)
-dissoc=monthtoyear_noleap(DOC+DOCr)
-nh4=monthtoyear_noleap(NH4)
-ph=monthtoyear_noleap(pH_3D)
-phydiat=monthtoyear_noleap(diatC)
-phydiaz=monthtoyear_noleap(diazC)
-phypico=monthtoyear_noleap(spC)
-po4=monthtoyear_noleap(PO4)
-talk=monthtoyear_noleap(chunits(ALK * 1e-3, units="mol m-3"))
-zooc=monthtoyear_noleap(zooC)
+calc=monthtoyear_noleap(spCaCO3)  #pop.h
+co3=monthtoyear_noleap(CO3)  #pop.h
+co3nat=monthtoyear_noleap(CO3_ALT_CO2)  #pop.h
+co3satarag=monthtoyear_noleap(co3_sat_arag)  #pop.h
+co3satcalc=monthtoyear_noleap(co3_sat_calc)  #pop.h
+dissic=monthtoyear_noleap(DIC)  #pop.h
+dissoc=monthtoyear_noleap(DOC+DOCr)  #pop.h
+nh4=monthtoyear_noleap(NH4)  #pop.h
+ph=monthtoyear_noleap(pH_3D)  #pop.h
+phydiat=monthtoyear_noleap(diatC)  #pop.h
+phydiaz=monthtoyear_noleap(diazC)  #pop.h
+phypico=monthtoyear_noleap(spC)  #pop.h
+po4=monthtoyear_noleap(PO4)  #pop.h
+talk=monthtoyear_noleap(chunits(ALK * 1e-3, units="mol m-3"))  #pop.h
+zooc=monthtoyear_noleap(zooC)  #pop.h
 ############################
 #  TABLE : SIday
 ############################
