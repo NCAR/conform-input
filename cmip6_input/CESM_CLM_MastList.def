@@ -694,7 +694,7 @@ cLitterCwd=chunits(CWDC, units="g/m^2")
 cOther=chunits(STORVEGC, units="g/m^2")
 cSoil=chunits(TOTSOMC, units="g/m^2")  #clm2.h0
 cSoilAbove1m=chunits(TOTSOMC_1m, units="g/m^2")  #clm2.h0
-cSoilLevels=chunits(SOIL1C_vr+SOIL2C_vr+SOIL3C_vr, units="g/m^2")  #clm2.h3
+cSoilLevels=chunits(yeartomonth_data3D(SOIL1C_vr, time, lat, lon,levsoi)+yeartomonth_data3D(SOIL2C_vr, time, lat, lon,levsoi)+yeartomonth_data3D(SOIL3C_vr, time, lat, lon,levsoi), units="g/m^2")  #clm2.h3
 cSoilPools=chunits(get_soilpools(SOIL1C,SOIL2C,SOIL3C,soilpools), units="g/m^2")  #clm2.h0
 cStem=chunits(LIVESTEMC + DEADSTEMC, units="g/m^2")
 cTotFireLut=chunits(CLM_landunit_to_CMIP6_Lut(COL_FIRE_CLOSS,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse), units="g/m^2/s")  #clm2.h2
@@ -1406,7 +1406,7 @@ osaltpsmadvect=monthtoyear_noleap(SUBM_ADV_TEND_SALT)*rho_sw*dz  #pop.h
 osaltrmadvect=monthtoyear_noleap(SUBM_ADV_TEND_SALT+ISOP_ADV_TEND_SALT+ADV_3D_SALT)*rho_sw*dz  #pop.h
 osalttend=monthtoyear_noleap(TEND_SALT)*rho_sw*dz  #pop.h
 pbfe=monthtoyear_noleap(photoFe_sp+photoFe_diat+photoFe_diaz)  #pop.h
-pbsi=monthtoyear_noleap(bsi_form)  #pop.h
+pbsi=monthtoyear_noleap(bSi_form)  #pop.h
 pcalc=CaCO3_form
 phnat=monthtoyear_noleap(pH_3D_ALT_CO2)  #pop.h
 phyc=monthtoyear_noleap(spC+diatC+diazC)  #pop.h
