@@ -846,7 +846,7 @@ treeFracBdlDcd=yeartomonth_data((PCT_NAT_PFT[:,6,:,:]+PCT_NAT_PFT[:,7,:,:]+PCT_N
 treeFracBdlEvg=yeartomonth_data((PCT_NAT_PFT[:,4,:,:]+PCT_NAT_PFT[:,5,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 treeFracNdlDcd=yeartomonth_data(PCT_NAT_PFT[:,3,:,:], time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
 treeFracNdlEvg=yeartomonth_data((PCT_NAT_PFT[:,1,:,:]+PCT_NAT_PFT[:,2,:,:]), time, lat, lon)*yeartomonth_data(PCT_LANDUNIT[:,0,:,:], time, lat, lon)  #clm2.h3
-tslsiLut=CLM_landunit_to_CMIP6_Lut(TSKIN,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)
+tslsiLut=CLM_landunit_to_CMIP6_Lut(TSKIN,"all",time,lat,lon,grid1d_ixy,grid1d_jxy,grid1d_lon,grid1d_lat,land1d_lon,land1d_lat,land1d_ityplunit,land1d_active,land1d_wtgcell,landUse)  #clm2.h2
 twap=OMEGAT
 u2=UU
 ua27=vinth2p(U,hyam,hybm,plev,PS,P0)
@@ -1560,7 +1560,6 @@ zg=vinth2p(Z3,hyam,hybm,plev,PS,P0)
 #  TABLE : fx
 ############################
 areacella=AREA[0,:,:]
-mrsofc=sum(WATSAT, "levgrnd")*sum(DZSOI, "levgrnd")
 orog=chunits(PHIS[0,:,:]/9.80616,units="m")  #cam.h0
 sftgif=PCT_LANDUNIT[0,3,:,:]  #clm2.h3
 sftlf=LANDFRAC[0,:,:]
