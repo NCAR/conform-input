@@ -177,7 +177,7 @@ ch3coch3=CH3COCH3
 ch4=CH4
 cheaqpso4=(so4_c1AQH2SO4+so4_c2AQH2SO4+so4_c3AQH2SO4+so4_c1AQSO4+so4_c2AQSO4+so4_c3AQSO4)*96.06/115.11
 chegpso4=(so4_a1_sfgaex1+so4_a2_sfgaex1+so4_a3_sfgaex1) *96.06/115.11
-chepsoa=soa_a1_sfgaex1 + soa_a2_sfgaex1
+chepsoa=soa1_a1_sfgaex1 + soa1_a2_sfgaex1 + soa2_a1_sfgaex1 + soa2_a2_sfgaex1 + soa3_a1_sfgaex1 + soa3_a2_sfgaex1 + soa4_a1_sfgaex1 + soa4_a2_sfgaex1 + soa5_a1_sfgaex1 + soa5_a2_sfgaex1
 cltc=max(CONCLD, "lev")
 co=CO
 co2=CO2
@@ -189,7 +189,7 @@ drynh3=DF_NH3
 drynh4=DF_NH4
 drynoy=DF_NO+DF_NO2+DF_HNO3+DF_HO2NO2+DF_PAN+DF_ALKNIT+DF_HONITR+DF_ISOPNITA+DF_ISOPNITB+DF_ONITR+DF_NOA+DF_TERPNIT
 dryo3=DF_O3
-dryoa=pom_a1DDF+pom_a4DDF+soa_a1DDF+soa_a2DDF+pom_c1DDF+pom_c4DDF+soa_c1DDF+soa_c2DDF
+dryoa=pom_a1DDF+pom_a4DDF+pom_c1DDF+pom_c4DDF+soa1_a1DDF+soa1_a2DDF+soa1_c1DDF+soa1_c2DDF+soa2_a1DDF+soa2_a2DDF+soa2_c1DDF+soa2_c2DDF+soa3_a1DDF+soa3_a2DDF+soa3_c1DDF+soa3_c2DDF+soa4_a1DDF+soa4_a2DDF+soa4_c1DDF+soa4_c2DDF+soa5_a1DDF+soa5_a2DDF+soa5_c1DDF+soa5_c2DDF
 dryso2=DF_SO2
 dryso4=so4_a1DDF+so4_a2DDF+so4_a3DDF+so4_c1DDF+so4_c2DDF+so4_c3DDF
 dryss=ncl_a1DDF+ncl_a2DDF+ncl_a3DDF+ncl_c1DDF+ncl_c2DDF+ncl_c3DDF
@@ -255,9 +255,9 @@ ua=U
 va=V
 wetbc=bc_a1SFWET+bc_c1SFWET+bc_a4SFWET+bc_c4SFWET
 wetdust=dst_a1SFWET+dst_a3SFWET+dst_c1SFWET+dst_c3SFWET
-wetnh3=WD_NH3
-wetnh4=WD_NH4
-wetnoy=WD_NOY
+wetnh3=dry_deposition_NHx_as_N
+wetnh4=dry_deposition_NHx_as_N
+wetnoy=dry_deposition_NOy_as_N
 wetoa=pom_a1SFWET+pom_c1SFWET+pom_a4SFWET+pom_c4SFWET+soa_a1SFWET+soa_a2SFWET+soa_c1SFWET+soa_c2SFWET
 wetso2=WD_SO2
 wetso4=so4_a1SFWET+so4_a2SFWET+so4_a3SFWET+so4_c1SFWET+so4_c2SFWET+so4_c3SFWET
@@ -287,7 +287,7 @@ ua=zonalmean(vinth2p(U,hyam,hybm,plev,PS,P0))
 cfc11global=f11vmr
 cfc12global=f12vmr
 ch4=vinth2p(CH4, hyam, hybm, plev, PS, P0)
-ch4global=ch4vmr
+ch4global=CH4
 ci=FREQZM
 cl=CLOUD
 cli=CLDICE
@@ -640,7 +640,7 @@ tran=chunits(QVEGT, units="kg m-2 s-1")  #clm2.h5
 ts=TS
 tsl=TSOI  #clm2.h5
 tsn=masked_invalid(SNOTXMASS/(SNOWICE+SNOWLIQ))  #clm2.h5
-zg=vinth2p(Z3,hyam, hybm, plev, PS, P0)  #cam.h1
+zg=vinth2p(Z3,hyam, hybm, plev, PS, P0)
 zmla=PBLH
 evspsbl=QFLX_EVAP_TOT  #clm2.h5
 ############################
@@ -651,16 +651,16 @@ epfz=mean(vinth2p(dynvarmip_epfz(time, ilev, lat, Uzm, UWzm, VTHzm, THzm),hyai, 
 hus=zonalmean(vinth2p(Q,hyam, hybm, plev, PS, P0))
 psitem=mean(vinth2p(dynvarmip_psitem(time, ilev, lat, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 ta=zonalmean(vinth2p(T,hyam, hybm, plev, PS, P0))
-ua=zonalmean(vinth2p(U,hyam, hybm, plev, PS, P0))  #cam.h1
+ua=zonalmean(vinth2p(U,hyam, hybm, plev, PS, P0))
 utendepfd=mean(vinth2p(dynvarmip_utendepfd(time, ilev, lat, Uzm, UVzm, UWzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 utendnogw=zonalmean(vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev,PS,P0))
 utendogw=zonalmean(vinth2p(UTGWORO,hyam,hybm,plev,PS,P0))
 utendvtem=mean(vinth2p(dynvarmip_utendvtem(time, ilev, lat, Uzm, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 utendwtem=mean(vinth2p(dynvarmip_utendwtem(time, ilev, lat, Uzm, Wzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
-va=zonalmean(vinth2p(V,hyam, hybm, plev, PS, P0))  #cam.h1
+va=zonalmean(vinth2p(V,hyam, hybm, plev, PS, P0))
 vtem=mean(vinth2p(dynvarmip_vtem(time, ilev, lat, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 wtem=mean(vinth2p(dynvarmip_wtem(time, ilev, lat, Wzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
-zg=zonalmean(vinth2p(Z3,hyam, hybm, plev, PS, P0))  #cam.h1
+zg=zonalmean(vinth2p(Z3,hyam, hybm, plev, PS, P0))
 ############################
 #  TABLE : Efx
 ############################
@@ -1456,7 +1456,7 @@ sidconcdyn=sidconcdyn
 sidconcth=sidconcth
 sidivvel=divu
 sidmassdyn=sidmassdyn
-sidmassevapsubl=sidmassevapsubl
+sidmassevapsubl=sidmassevapsubl/1800/917
 sidmassgrowthbot=sidmassgrowthbot
 sidmassgrowthwat=sidmassgrowthwat
 sidmasslat=sidmasslat
@@ -1521,8 +1521,8 @@ sivoln=sum(sum(hemisphere((hi*tarea),dim="nj",dr=">"),"ni"),"nj")
 sivols=sum(sum(hemisphere((hi*tarea),dim="nj",dr="<"),"ni"),"nj")
 sfdsi=fsalt_ai
 sndmassmelt=sndmassmelt
-sndmasssnf=sndmasssnf
-sndmasssubl=sndmasssubl
+sndmasssnf=sndmasssnf/330
+sndmasssubl=sndmassubl/1800/330
 ############################
 #  TABLE : day
 ############################
@@ -1552,10 +1552,10 @@ tas=TREFHT
 tasmax=TREFHTMX
 tasmin=TREFHTMN
 tslsi=TSKIN  #clm2.h5
-ua=vinth2p(U,hyam, hybm, plev, PS, P0)  #cam.h1
-va=vinth2p(V,hyam, hybm, plev, PS, P0)  #cam.h1
+ua=vinth2p(U,hyam, hybm, plev, PS, P0)
+va=vinth2p(V,hyam, hybm, plev, PS, P0)
 wap=vinth2p(OMEGA,hyam, hybm, plev, PS, P0)
-zg=vinth2p(Z3,hyam,hybm,plev,PS,P0)  #cam.h1
+zg=vinth2p(Z3,hyam,hybm,plev,PS,P0)
 ############################
 #  TABLE : fx
 ############################

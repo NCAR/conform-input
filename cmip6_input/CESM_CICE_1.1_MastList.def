@@ -1259,7 +1259,7 @@ mlotstmax=XMXL_DR
 mlotstmin=TMXL_DR
 mlotstsq=HMXL_DR2
 msftbarot=chunits(BSF, units="1e6 m3 s-1")*rho_sw
-msftmz=chunits(ocean_basin((1e9 * rho_sw *MOC),0,basin),units="kg/s")
+msftmz=chunits(1e9 * rho_sw * (ocean_basin(MOC,0,basin)+ocean_basin(MOC,1,basin)+ocean_basin(MOC,2,basin)),units="kg/s")
 msftmzmpa=chunits(ocean_basin((1e9 * rho_sw *MOC),1,basin),units="kg/s")
 msftmzsmpa=chunits(ocean_basin((1e9 * rho_sw *MOC),2,basin),units="kg/s")
 nh4=NH4

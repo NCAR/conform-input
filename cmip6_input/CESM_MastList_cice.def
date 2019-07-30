@@ -1456,7 +1456,7 @@ sidconcdyn=sidconcdyn
 sidconcth=sidconcth
 sidivvel=divu
 sidmassdyn=sidmassdyn
-sidmassevapsubl=sidmassevapsubl
+sidmassevapsubl=sidmassevapsubl/1800/917
 sidmassgrowthbot=sidmassgrowthbot
 sidmassgrowthwat=sidmassgrowthwat
 sidmasslat=sidmasslat
@@ -1521,8 +1521,8 @@ sivoln=sum(sum(hemisphere((hi*tarea),dim="nj",dr=">"),"ni"),"nj")
 sivols=sum(sum(hemisphere((hi*tarea),dim="nj",dr="<"),"ni"),"nj")
 sfdsi=fsalt_ai
 sndmassmelt=sndmassmelt
-sndmasssnf=sndmasssnf
-sndmasssubl=sndmasssubl
+sndmasssnf=sndmasssnf/330
+sndmasssubl=sndmassubl/1800/330
 ############################
 #  TABLE : day
 ############################

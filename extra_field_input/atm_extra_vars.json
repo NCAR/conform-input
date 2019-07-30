@@ -1,4 +1,15 @@
 {
+    "tau_bnds": {
+        "attributes": {
+            "long_name": "bounds of isccp optical depth categories"
+        },
+        "datatype": "double",
+        "definition": "cosp_tau_bnds",
+        "dimensions": [
+            "tau",
+            "nbnd"
+        ]
+    },
     "a": {
         "attributes": {
             "long_name": "vertical coordinate formula term: a(k)",

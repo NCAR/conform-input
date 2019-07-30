@@ -640,7 +640,7 @@ tran=chunits(QVEGT, units="kg m-2 s-1")  #clm2.h5
 ts=TS
 tsl=TSOI  #clm2.h5
 tsn=masked_invalid(SNOTXMASS/(SNOWICE+SNOWLIQ))  #clm2.h5
-zg=vinth2p(Z3,hyam, hybm, plev, PS, P0)
+zg=vinth2p(Z3,hyam, hybm, plev, PS, P0)  #cam.h1
 zmla=PBLH
 evspsbl=QFLX_EVAP_TOT  #clm2.h5
 ############################
@@ -651,16 +651,16 @@ epfz=mean(vinth2p(dynvarmip_epfz(time, ilev, lat, Uzm, UWzm, VTHzm, THzm),hyai, 
 hus=zonalmean(vinth2p(Q,hyam, hybm, plev, PS, P0))
 psitem=mean(vinth2p(dynvarmip_psitem(time, ilev, lat, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 ta=zonalmean(vinth2p(T,hyam, hybm, plev, PS, P0))
-ua=zonalmean(vinth2p(U,hyam, hybm, plev, PS, P0))
+ua=zonalmean(vinth2p(U,hyam, hybm, plev, PS, P0))  #cam.h1
 utendepfd=mean(vinth2p(dynvarmip_utendepfd(time, ilev, lat, Uzm, UVzm, UWzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 utendnogw=zonalmean(vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev,PS,P0))
 utendogw=zonalmean(vinth2p(UTGWORO,hyam,hybm,plev,PS,P0))
 utendvtem=mean(vinth2p(dynvarmip_utendvtem(time, ilev, lat, Uzm, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 utendwtem=mean(vinth2p(dynvarmip_utendwtem(time, ilev, lat, Uzm, Wzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
-va=zonalmean(vinth2p(V,hyam, hybm, plev, PS, P0))
+va=zonalmean(vinth2p(V,hyam, hybm, plev, PS, P0))  #cam.h1
 vtem=mean(vinth2p(dynvarmip_vtem(time, ilev, lat, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 wtem=mean(vinth2p(dynvarmip_wtem(time, ilev, lat, Wzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
-zg=zonalmean(vinth2p(Z3,hyam, hybm, plev, PS, P0))
+zg=zonalmean(vinth2p(Z3,hyam, hybm, plev, PS, P0))  #cam.h1
 ############################
 #  TABLE : Efx
 ############################
@@ -1259,7 +1259,7 @@ mlotstmax=XMXL_DR
 mlotstmin=TMXL_DR
 mlotstsq=HMXL_DR2
 msftbarot=chunits(BSF, units="1e6 m3 s-1")*rho_sw
-msftmz=chunits(ocean_basin((1e9 * rho_sw *MOC),0,basin),units="kg/s")
+msftmz=chunits(1e9 * rho_sw * (ocean_basin(MOC,0,basin)+ocean_basin(MOC,1,basin)+ocean_basin(MOC,2,basin)),units="kg/s")
 msftmzmpa=chunits(ocean_basin((1e9 * rho_sw *MOC),1,basin),units="kg/s")
 msftmzsmpa=chunits(ocean_basin((1e9 * rho_sw *MOC),2,basin),units="kg/s")
 nh4=NH4
@@ -1456,13 +1456,13 @@ sidconcdyn=sidconcdyn
 sidconcth=sidconcth
 sidivvel=divu
 sidmassdyn=sidmassdyn
-sidmassevapsubl=sidmassevapsubl/1800
-sidmassgrowthbot=sidmassgrowthbot/1800
-sidmassgrowthwat=sidmassgrowthwat/1800
-sidmasslat=sidmasslat/1800
-sidmassmeltbot=sidmassmeltbot/1800
-sidmassmelttop=sidmassmelttop/1800
-sidmasssi=sidmasssi/1800
+sidmassevapsubl=sidmassevapsubl
+sidmassgrowthbot=sidmassgrowthbot
+sidmassgrowthwat=sidmassgrowthwat
+sidmasslat=sidmasslat
+sidmassmeltbot=sidmassmeltbot
+sidmassmelttop=sidmassmelttop
+sidmasssi=sidmasssi
 sidmassth=sidmassth
 sidmasstranx=sidmasstranx
 sidmasstrany=sidmasstrany
@@ -1520,7 +1520,7 @@ sivol=hi
 sivoln=sum(sum(hemisphere((hi*tarea),dim="nj",dr=">"),"ni"),"nj")
 sivols=sum(sum(hemisphere((hi*tarea),dim="nj",dr="<"),"ni"),"nj")
 sfdsi=fsalt_ai
-sndmassmelt=sndmassmelt/1800
+sndmassmelt=sndmassmelt
 sndmasssnf=sndmasssnf
 sndmasssubl=sndmasssubl
 ############################
@@ -1552,10 +1552,10 @@ tas=TREFHT
 tasmax=TREFHTMX
 tasmin=TREFHTMN
 tslsi=TSKIN  #clm2.h5
-ua=vinth2p(U,hyam, hybm, plev, PS, P0)
-va=vinth2p(V,hyam, hybm, plev, PS, P0)
+ua=vinth2p(U,hyam, hybm, plev, PS, P0)  #cam.h1
+va=vinth2p(V,hyam, hybm, plev, PS, P0)  #cam.h1
 wap=vinth2p(OMEGA,hyam, hybm, plev, PS, P0)
-zg=vinth2p(Z3,hyam,hybm,plev,PS,P0)
+zg=vinth2p(Z3,hyam,hybm,plev,PS,P0)  #cam.h1
 ############################
 #  TABLE : fx
 ############################

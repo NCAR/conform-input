@@ -1261,7 +1261,7 @@ mlotstmax=XMXL_DR
 mlotstmin=TMXL_DR
 mlotstsq=HMXL_DR2
 msftbarot=chunits(BSF, units="1e6 m3 s-1")*rho_sw
-msftmz=chunits(ocean_basin((1e9 * rho_sw *MOC),0,basin),units="kg/s")
+msftmz=chunits(1e9 * rho_sw * (ocean_basin(MOC,0,basin)+ocean_basin(MOC,1,basin)+ocean_basin(MOC,2,basin)),units="kg/s")
 msftmzmpa=chunits(ocean_basin((1e9 * rho_sw *MOC),1,basin),units="kg/s")
 msftmzsmpa=chunits(ocean_basin((1e9 * rho_sw *MOC),2,basin),units="kg/s")
 nh4=NH4
@@ -1458,13 +1458,13 @@ sidconcdyn=sidconcdyn
 sidconcth=sidconcth
 sidivvel=divu
 sidmassdyn=sidmassdyn
-sidmassevapsubl=sidmassevapsubl/1800
-sidmassgrowthbot=sidmassgrowthbot/1800
-sidmassgrowthwat=sidmassgrowthwat/1800
-sidmasslat=sidmasslat/1800
-sidmassmeltbot=sidmassmeltbot/1800
-sidmassmelttop=sidmassmelttop/1800
-sidmasssi=sidmasssi/1800
+sidmassevapsubl=sidmassevapsubl
+sidmassgrowthbot=sidmassgrowthbot
+sidmassgrowthwat=sidmassgrowthwat
+sidmasslat=sidmasslat
+sidmassmeltbot=sidmassmeltbot
+sidmassmelttop=sidmassmelttop
+sidmasssi=sidmasssi
 sidmassth=sidmassth
 sidmasstranx=sidmasstranx
 sidmasstrany=sidmasstrany
@@ -1522,7 +1522,7 @@ sivol=hi
 sivoln=sum(sum(hemisphere((hi*tarea),dim="nj",dr=">"),"ni"),"nj")
 sivols=sum(sum(hemisphere((hi*tarea),dim="nj",dr="<"),"ni"),"nj")
 sfdsi=fsalt_ai
-sndmassmelt=sndmassmelt/1800
+sndmassmelt=sndmassmelt
 sndmasssnf=sndmasssnf
 sndmasssubl=sndmasssubl
 ############################
