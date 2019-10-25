@@ -104,10 +104,10 @@
             "formula": "p = a*p0 + b*ps",
             "formula_terms": "p0: p0 a: a_bnds b: b_bnds ps: ps",
             "standard_name": "atmosphere_hybrid_sigma_pressure_coordinate",
-            "units": "hPa"
+            "units": "1"
         },
         "datatype": "double",
-        "definition": "lev_bnds",
+        "definition": "chunits(bounds(lev,bdim=\"nbnd\")/1000,\"1\")",
         "dimensions": [
             "alevel",
             "nbnd"

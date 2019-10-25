@@ -213,7 +213,7 @@ hcl=HCL
 hno3=HNO3
 isop=ISOP
 jno2=chunits(jno2,units="s-1")
-lossch4=chunits(CH4_CHML,units="mol m-3 s-1")
+lossch4=chunits((CH4_CHML*1.e6/6.022E23),units="mol m-3 s-1")
 lossco=chunits((CO_CHML*1.e6/6.022E23),units="mol m-3 s-1")
 lossn2o=chunits((N2O_CHML*1.e6/6.022E23),units="mol m-3 s-1")
 lwp=TGCLDLWP
@@ -296,7 +296,7 @@ clt=CLDTOT
 clw=CLDLIQ
 clwvi=TGCLDLWP+TGCLDIWP
 co2=vinth2p(CO2,hyam, hybm, plev, PS, P0)
-co2mass=chunits((28.966/44.) * co2vmr, units="kg")
+co2mass=chunits(co2vmr*44./28.966*5.148E18,units="kg")
 evspsbl=QFLX
 hfls=LHFLX
 hfss=SHFLX
@@ -1078,7 +1078,7 @@ cCwd=chunits(CWDC, units="g m-2")
 cLeaf=chunits(LEAFC, units="g m-2")
 cLitter=chunits(TOTLITC, units="g m-2")  #clm2.h0
 cProduct=chunits(TOT_WOODPRODC, units="g m-2")+chunits(CROPPROD1C, units="g m-2")
-cRoot=chunits(FROOTC+LIVECROOTC+DEADCROOTC, units="g m-2")
+cRoot=chunits(FROOTC+LIVECROOTC+DEADCROOTC, units="g m-2")  #clm2.h0
 cSoilFast=chunits(SOIL1C, units="g m-2")
 cSoilMedium=chunits(SOIL2C, units="g m-2")
 cSoilSlow=chunits(SOIL3C, units="g m-2")

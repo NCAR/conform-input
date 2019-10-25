@@ -180,7 +180,7 @@ chegpso4=(so4_a1_sfgaex1+so4_a2_sfgaex1+so4_a3_sfgaex1) *96.06/115.11
 chepsoa=soa_a1_sfgaex1 + soa_a2_sfgaex1
 cltc=max(CONCLD, "lev")
 co=CO
-co2=CO2
+co2=CO2*28.966/44.0
 cod=sum(TOT_CLD_VISTAU, "lev")
 dms=DMS
 drybc=bc_a1DDF + bc_a4DDF+bc_c1DDF + bc_c4DDF
@@ -213,7 +213,7 @@ hcl=HCL
 hno3=HNO3
 isop=ISOP
 jno2=chunits(jno2,units="s-1")
-lossch4=chunits(CH4_CHML,units="mol m-3 s-1")
+lossch4=chunits((CH4_CHML*1.e6/6.022E23),units="mol m-3 s-1")
 lossco=chunits((CO_CHML*1.e6/6.022E23),units="mol m-3 s-1")
 lossn2o=chunits((N2O_CHML*1.e6/6.022E23),units="mol m-3 s-1")
 lwp=TGCLDLWP
@@ -295,8 +295,8 @@ clivi=TGCLDIWP
 clt=CLDTOT
 clw=CLDLIQ
 clwvi=TGCLDLWP+TGCLDIWP
-co2=vinth2p(CO2,hyam, hybm, plev, PS, P0)
-co2mass=chunits((28.966/44.) * co2vmr, units="kg")
+co2=vinth2p((CO2*28.966/44.0),hyam, hybm, plev, PS, P0)
+co2mass=chunits(co2vmr*44./28.966*5.148E18,units="kg")
 evspsbl=QFLX
 hfls=LHFLX
 hfss=SHFLX
@@ -561,7 +561,7 @@ cllcalipso=CLDLOW_CAL
 clmcalipso=CLDMED_CAL
 clmisr=CLD_MISR
 cltcalipso=CLDTOT_CAL
-co2=CO2
+co2=CO2*28.966/44.0
 hus=Q
 n2o=N2O
 o3=O3
@@ -1078,7 +1078,7 @@ cCwd=chunits(CWDC, units="g m-2")
 cLeaf=chunits(LEAFC, units="g m-2")
 cLitter=chunits(TOTLITC, units="g m-2")  #clm2.h0
 cProduct=chunits(TOT_WOODPRODC, units="g m-2")+chunits(CROPPROD1C, units="g m-2")
-cRoot=chunits(FROOTC+LIVECROOTC+DEADCROOTC, units="g m-2")
+cRoot=chunits(FROOTC+LIVECROOTC+DEADCROOTC, units="g m-2")  #clm2.h0
 cSoilFast=chunits(SOIL1C, units="g m-2")
 cSoilMedium=chunits(SOIL2C, units="g m-2")
 cSoilSlow=chunits(SOIL3C, units="g m-2")
