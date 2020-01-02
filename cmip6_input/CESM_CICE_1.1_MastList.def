@@ -89,6 +89,7 @@ latitude=xxlatxx
 ############################
 #  TABLE : 3hr
 ############################
+prsn=chunits(SNOW,units="kg m-2 s-1") #clm2.h7
 clt=CLDTOT
 hfls=LHFLX
 hfss=SHFLX
@@ -201,7 +202,7 @@ emidust=SFdst_a1+SFdst_a2+SFdst_a3
 emiisop=SFISOP
 emilnox=LNO_PROD* 14. *1.e+3/6.022e23 *delp/9.81/rho
 eminh3=SFNH3
-eminox=SFNO+SFNO2
+eminox=(SFNO/30.0*14.0+SFNO2/46.0*14.0)+chunits((NO2_CLXF*14.0e-3/6.022e23*1.0e4),units="kg m-2 s-1")
 emioa=SFpom_a4+soa1_a1_sfgaex1 + soa1_a2_sfgaex1 + soa2_a1_sfgaex1 + soa2_a2_sfgaex1 + soa3_a1_sfgaex1 + soa3_a2_sfgaex1 + soa4_a1_sfgaex1 + soa4_a2_sfgaex1 + soa5_a1_sfgaex1 + soa5_a2_sfgaex1
 emiso2=SFSO2 + chunits( SO2_CLXF/6.02e23*64.066, units="g/cm2/s" )
 emiso4=SFso4_a1 + SFso4_a2 + chunits( (so4_a1_CLXF+so4_a2_CLXF)/6.02e+23*96.06, units="g/cm2/s" )
@@ -230,8 +231,8 @@ nh50=NH_50
 no=NO
 no2=NO2
 o3=O3
-o3loss=O3_Loss*1.e6/6.022E23
-o3prod=O3_Prod*1.e6/6.022E23
+o3loss=O3_Loss
+o3prod=O3_Prod
 o3ste=O3S
 od550aer=AODVISdn
 od550bc=AODBCdn
@@ -284,6 +285,7 @@ ua=zonalmean(vinth2p(U,hyam,hybm,plev,PS,P0))
 ############################
 #  TABLE : Amon
 ############################
+prsn=chunits(SNOW,units="kg m-2 s-1") #clm2.h0
 cfc11global=f11vmr
 cfc12global=f12vmr
 ch4=vinth2p(CH4, hyam, hybm, plev, PS, P0)
@@ -871,8 +873,8 @@ epfy=mean(vinth2p(dynvarmip_epfy(time, ilev, lat, Uzm, UVzm, VTHzm, THzm), hyai,
 epfz=mean(vinth2p(dynvarmip_epfz(time, ilev, lat, Uzm, UWzm, VTHzm, THzm), hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 jo2=chunits(zonalmean(vinth2p((jo2_a+jo2_b),hyam,hybm,plev,PS,P0)),units="s-1")
 jo3=chunits(zonalmean(vinth2p((jo3_a+jo3_b),hyam,hybm,plev,PS,P0)),units="s-1")
-oxloss=zonalmean(vinth2p((O3_Loss*1.e6/6.022E23),hyam,hybm,plev,PS,P0))
-oxprod=zonalmean(vinth2p((O3_Prod*1.e6/6.022E23),hyam,hybm,plev,PS,P0))
+oxloss=zonalmean(vinth2p((O3_Loss),hyam,hybm,plev,PS,P0))
+oxprod=zonalmean(vinth2p((O3_Prod),hyam,hybm,plev,PS,P0))
 sltbasin=N_SALT(:,:,transport_comp=1,:)*rho_sw
 sltnortha=N_SALT(:,transport_region=2,transport_comp=1,:)*rho_sw
 tntmp=zonalmean(vinth2p(PTTEND,hyam,hybm,plev,PS,P0))
@@ -1517,6 +1519,7 @@ sndmasssnf=fsnow
 ############################
 #  TABLE : day
 ############################
+prsn=chunits(SNOW,units="kg m-2 s-1") #clm2.h5
 clt=CLDTOT
 hfls=LHFLX
 hfss=SHFLX
