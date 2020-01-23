@@ -200,7 +200,7 @@ emico=SFCO
 emidms=SFDMS
 emidust=SFdst_a1+SFdst_a2+SFdst_a3
 emiisop=SFISOP
-emilnox=LNO_PROD* 14. *1.e+3/6.022e23 *delp/9.81/rho
+emilnox=emilnox(P0,PS,hyai,hybi,hyam,hybm,T,chunits(LNO_PROD,units="1/cm3/s"),lon,lat,time)
 eminh3=SFNH3
 eminox=(SFNO/30.0*14.0+SFNO2/46.0*14.0)+chunits((NO2_CLXF*14.0e-3/6.022e23*1.0e4),units="kg m-2 s-1")
 emioa=SFpom_a4+soa1_a1_sfgaex1 + soa1_a2_sfgaex1 + soa2_a1_sfgaex1 + soa2_a2_sfgaex1 + soa3_a1_sfgaex1 + soa3_a2_sfgaex1 + soa4_a1_sfgaex1 + soa4_a2_sfgaex1 + soa5_a1_sfgaex1 + soa5_a2_sfgaex1
