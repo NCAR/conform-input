@@ -298,7 +298,7 @@ clt=CLDTOT
 clw=CLDLIQ
 clwvi=TGCLDLWP+TGCLDIWP
 co2=vinth2p((CO2*28.966/44.0),hyam, hybm, plev, PS, P0)
-co2mass=chunits(co2vmr*44./28.966*5.148E18,units="kg") 
+co2mass=chunits(co2vmr*44./28.966*5.148E18,units="kg")
 evspsbl=QFLX
 hfls=LHFLX
 hfss=SHFLX
@@ -1458,7 +1458,7 @@ sidconcdyn=sidconcdyn
 sidconcth=sidconcth
 sidivvel=divu
 sidmassdyn=sidmassdyn
-sidmassevapsubl=sidmassevapsubl
+sidmassevapsubl=sidmassevapsubl/1800/917
 sidmassgrowthbot=sidmassgrowthbot
 sidmassgrowthwat=sidmassgrowthwat
 sidmasslat=sidmasslat
@@ -1523,8 +1523,8 @@ sivoln=sum(sum(hemisphere((hi*tarea),dim="nj",dr=">"),"ni"),"nj")
 sivols=sum(sum(hemisphere((hi*tarea),dim="nj",dr="<"),"ni"),"nj")
 sfdsi=fsalt_ai
 sndmassmelt=sndmassmelt
-sndmasssnf=sndmasssnf
-sndmasssubl=sndmasssubl
+sndmasssnf=sndmasssnf/330
+sndmasssubl=sndmassubl/1800/330
 ############################
 #  TABLE : day
 ############################

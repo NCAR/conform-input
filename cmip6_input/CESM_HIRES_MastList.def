@@ -135,6 +135,8 @@ zg1000=Z1000
 cldicemxrat27=vinth2p(CLDICE,hyam,hybm,plev,PS,P0)
 cldwatmxrat27=vinth2p(CLDLIQ,hyam,hybm,plev,PS,P0)
 dtaus=TOT_ICLD_VISTAU:allcloud
+hus27=vinth2p(Q,hyam,hybm,plev27,PS,P0)
+hus7h=vinth2p(Q,hyam,hybm,plev7h,PS,P0)
 huss=QREFHT
 mrsos=SOILWATER_10CM
 psl=PSL
@@ -298,7 +300,7 @@ clt=CLDTOT
 clw=CLDLIQ
 clwvi=TGCLDLWP+TGCLDIWP
 co2=vinth2p((CO2*28.966/44.0),hyam, hybm, plev, PS, P0)
-co2mass=chunits(co2vmr*44./28.966*5.148E18,units="kg") 
+co2mass=chunits(co2vmr*44./28.966*5.148E18,units="kg")
 evspsbl=QFLX
 hfls=LHFLX
 hfss=SHFLX
@@ -642,7 +644,7 @@ tran=chunits(QVEGT, units="kg m-2 s-1")  #clm2.h5
 ts=TS
 tsl=TSOI  #clm2.h5
 tsn=masked_invalid(SNOTXMASS/(SNOWICE+SNOWLIQ))  #clm2.h5
-zg=vinth2p(Z3,hyam, hybm, plev, PS, P0)  #cam.h1
+zg=vinth2p(Z3,hyam, hybm, plev, PS, P0)
 zmla=PBLH
 evspsbl=QFLX_EVAP_TOT  #clm2.h5
 ############################
@@ -653,16 +655,16 @@ epfz=mean(vinth2p(dynvarmip_epfz(time, ilev, lat, Uzm, UWzm, VTHzm, THzm),hyai, 
 hus=zonalmean(vinth2p(Q,hyam, hybm, plev, PS, P0))
 psitem=mean(vinth2p(dynvarmip_psitem(time, ilev, lat, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 ta=zonalmean(vinth2p(T,hyam, hybm, plev, PS, P0))
-ua=zonalmean(vinth2p(U,hyam, hybm, plev, PS, P0))  #cam.h1
+ua=zonalmean(vinth2p(U,hyam, hybm, plev, PS, P0))
 utendepfd=mean(vinth2p(dynvarmip_utendepfd(time, ilev, lat, Uzm, UVzm, UWzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 utendnogw=zonalmean(vinth2p((UTGWSPEC+BUTGWSPEC),hyam,hybm,plev,PS,P0))
 utendogw=zonalmean(vinth2p(UTGWORO,hyam,hybm,plev,PS,P0))
 utendvtem=mean(vinth2p(dynvarmip_utendvtem(time, ilev, lat, Uzm, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 utendwtem=mean(vinth2p(dynvarmip_utendwtem(time, ilev, lat, Uzm, Wzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
-va=zonalmean(vinth2p(V,hyam, hybm, plev, PS, P0))  #cam.h1
+va=zonalmean(vinth2p(V,hyam, hybm, plev, PS, P0))
 vtem=mean(vinth2p(dynvarmip_vtem(time, ilev, lat, Vzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
 wtem=mean(vinth2p(dynvarmip_wtem(time, ilev, lat, Wzm, VTHzm, THzm),hyai, hybi, plev,chdims(PS[:,:,0:1],'time','lat','zlon'), P0), 'zlon')
-zg=zonalmean(vinth2p(Z3,hyam, hybm, plev, PS, P0))  #cam.h1
+zg=zonalmean(vinth2p(Z3,hyam, hybm, plev, PS, P0))
 ############################
 #  TABLE : Efx
 ############################
@@ -1555,10 +1557,10 @@ tas=TREFHT
 tasmax=TREFHTMX
 tasmin=TREFHTMN
 tslsi=TSKIN  #clm2.h5
-ua=vinth2p(U,hyam, hybm, plev, PS, P0)  #cam.h1
-va=vinth2p(V,hyam, hybm, plev, PS, P0)  #cam.h1
+ua=vinth2p(U,hyam, hybm, plev, PS, P0)
+va=vinth2p(V,hyam, hybm, plev, PS, P0)
 wap=vinth2p(OMEGA,hyam, hybm, plev, PS, P0)
-zg=vinth2p(Z3,hyam,hybm,plev,PS,P0)  #cam.h1
+zg=vinth2p(Z3,hyam,hybm,plev,PS,P0)
 ############################
 #  TABLE : fx
 ############################

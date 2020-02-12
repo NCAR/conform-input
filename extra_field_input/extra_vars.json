@@ -107,7 +107,7 @@
             "units": "hPa"
         },
         "datatype": "float",
-        "definition": "alevel_bnds",
+        "definition": "lev_bnds",
         "dimensions": [
             "lev",
             "nbnd"
@@ -147,7 +147,16 @@
         "datatype": "double",
         "definition": "time_bnds",
         "dimensions": [
-            "time",
+            "time2",
+            "nbnd"
+        ]
+    },
+    "time3_bnds": {
+        "attributes": {},
+        "datatype": "double",
+        "definition": "time_bnds",
+        "dimensions": [
+            "time3",
             "nbnd"
         ]
     },

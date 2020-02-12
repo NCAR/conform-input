@@ -1,10 +1,21 @@
 {
+    "tau_bnds": {
+        "attributes": {
+            "long_name": "bounds of isccp optical depth categories"
+        },
+        "datatype": "double",
+        "definition": "cosp_tau_bnds",
+        "dimensions": [
+            "tau",
+            "nbnd"
+        ]
+    },
     "a": {
         "attributes": {
             "long_name": "vertical coordinate formula term: a(k)",
             "bounds": "a_bnds"
         },
-        "datatype": "float",
+        "datatype": "double",
         "definition": "hyam",
         "dimensions": [
             "lev"
@@ -14,7 +25,7 @@
         "attributes": {
             "long_name": "vertical coordinate formula term: a(k+1/2)"
         },
-        "datatype": "float",
+        "datatype": "double",
         "definition": "a_bnds",
         "dimensions": [
             "lev",
@@ -26,7 +37,7 @@
             "long_name": "vertical coordinate formula term: b(k)",
             "bounds": "b_bnds"
         },
-        "datatype": "float",
+        "datatype": "double",
         "definition": "hybm",
         "dimensions": [
             "lev"
@@ -36,7 +47,7 @@
         "attributes": {
             "long_name": "vertical coordinate formula term: b(k+1/2)"
         },
-        "datatype": "float",
+        "datatype": "double",
         "definition": "b_bnds",
         "dimensions": [
             "lev",
@@ -48,7 +59,7 @@
             "standard_name": "atmosphere_hybrid_sigma_pressure_coordinate",
             "units": "hPa"
         },
-        "datatype": "float",
+        "datatype": "double",
         "definition": "alevhalf_bnds",
         "dimensions": [
             "ilev",
@@ -59,7 +70,7 @@
         "attributes": {
             "units": "degrees_north"
         },
-        "datatype": "float",
+        "datatype": "double",
         "definition": "latitude_bnds",
         "dimensions": [
             "latitude",
@@ -70,7 +81,7 @@
         "attributes": {
             "units": "m"
         },
-        "datatype": "float",
+        "datatype": "double",
         "definition": "sdepth_bnds",
         "dimensions": [
             "sdepth",
@@ -81,7 +92,7 @@
         "attributes": {
             "units": "m"
         },  
-        "datatype": "float",
+        "datatype": "double",
         "definition": "olevel_bnds",
         "dimensions": [
             "olevel",
@@ -93,12 +104,12 @@
             "formula": "p = a*p0 + b*ps",
             "formula_terms": "p0: p0 a: a_bnds b: b_bnds ps: ps",
             "standard_name": "atmosphere_hybrid_sigma_pressure_coordinate",
-            "units": "hPa"
+            "units": "1"
         },
-        "datatype": "float",
-        "definition": "alevel_bnds",
+        "datatype": "double",
+        "definition": "chunits(bounds(lev,bdim=\"nbnd\")/1000,\"1\")",
         "dimensions": [
-            "lev",
+            "alevel",
             "nbnd"
         ]
     },
@@ -111,11 +122,24 @@
         "definition": "P0",
         "dimensions": []
     },
+    "ps": {
+        "attributes": {
+            "long_name": "surface_air_pressure",
+            "units": "Pa"
+        },
+        "datatype": "float",
+        "definition": "PS",
+        "dimensions": [
+            "time",
+            "lat",
+            "lon"
+        ]
+    },
     "longitude_bnds": {
         "attributes": {
             "units": "degrees_east"
         },
-        "datatype": "float",
+        "datatype": "double",
         "definition": "longitude_bnds",
         "dimensions": [
             "longitude",
@@ -136,13 +160,22 @@
         "datatype": "double",
         "definition": "time_bnds",
         "dimensions": [
-            "time",
+            "time2",
+            "nbnd"
+        ]
+    },
+    "time3_bnds": {
+        "attributes": {},
+        "datatype": "double",
+        "definition": "time_bnds",
+        "dimensions": [
+            "time3",
             "nbnd"
         ]
     },
     "alt40_bnds":{
         "attributes": {},
-        "datatype": "float",
+        "datatype": "double",
         "definition": [0.0, 480.0, 480.0, 960.0, 960.0, 1440.0, 1440.0, 1920.0, 1920.0, 2400.0, 2400.0, 2880.0, 2880.0, 3360.0, 3360.0, 3840.0, 3840.0, 4320.0, 4320.0, 4800.0, 4800.0, 5280.0, 5280.0, 5760.0, 5760.0, 6240.0, 6240.0, 6720.0, 6720.0, 7200.0, 7200.0, 7680.0, 7680.0, 8160.0, 8160.0, 8640.0, 8640.0, 9120.0, 9120.0, 9600.0, 9600.0, 10080.0, 10080.0, 10560.0, 10560.0, 11040.0, 11040.0, 11520.0, 11520.0, 12000.0, 12000.0, 12480.0, 12480.0, 12960.0, 12960.0, 13440.0, 13440.0, 13920.0, 13920.0, 14400.0, 14400.0, 14880.0, 14880.0, 15360.0, 15360.0, 15840.0, 15840.0, 16320.0, 16320.0, 16800.0, 16800.0, 17280.0, 17280.0, 17760.0, 17760.0, 18240.0, 18240.0, 18720.0, 18720.0, 19200.0],
         "dimensions": [
             "alt40_bnds"
@@ -150,7 +183,7 @@
     },
     "alt16_bnds":{
         "attributes": {},
-        "datatype": "float",
+        "datatype": "double",
         "definition": [-99000.0, 0.0, 0.0, 500.0, 500.0, 1000.0, 1000.0, 1500.0, 1500.0, 2000.0, 2000.0, 2500.0, 2500.0, 3000.0, 3000.0, 4000.0, 4000.0, 5000.0, 5000.0, 7000.0, 7000.0, 9000.0, 9000.0, 11000.0, 11000.0, 13000.0, 13000.0, 15000.0, 15000.0, 17000.0, 17000.0, 99000.0],
         "dimensions": [
             "alt16_bnds"
@@ -158,7 +191,7 @@
     },
     "plev7c_bnds":{
         "attributes": {},
-        "datatype": "float",
+        "datatype": "double",
         "definition": [100000.0, 80000.0, 80000.0, 68000.0, 68000.0, 56000.0, 56000.0, 44000.0, 44000.0, 31000.0, 31000.0, 18000.0, 18000.0, 0.0],
         "dimensions": [
             "plev7c_bnds"

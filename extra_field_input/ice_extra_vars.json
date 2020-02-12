@@ -1,25 +1,47 @@
 {
+
+    "ni": {
+        "definition": "ni",
+        "attributes": {
+            "units": "1",
+            "long_name": "cell index along second dimension"
+        },
+        "datatype": "int",
+        "dimensions": ["ni"]
+    },
+    "nj": {
+        "definition": "nj",
+        "attributes": {
+            "units": "1",
+            "long_name": "cell index along first dimension"
+        },
+        "datatype": "int",
+        "dimensions": ["nj"]
+    },
+    "nc": {
+        "attributes": {
+            "long_name": "category maximum thickness",
+            "units": "m"
+        },
+        "datatype": "int",
+        "definition": "nc",
+        "dimensions": ["nc"]
+    },
     "latitude_bnds": {
         "attributes": {
             "units": "degrees_north"
         },
         "datatype": "float",
-        "definition": "latitude_bnds",
-        "dimensions": [
-            "latitude",
-            "d2"
-        ]
+        "definition": "lat_vertices",
+        "dimensions": ["nj","ni","nvertices"]
     },
     "longitude_bnds": {
         "attributes": {
             "units": "degrees_east"
         },
         "datatype": "float",
-        "definition": "longitude_bnds",
-        "dimensions": [
-            "longitude",
-            "d2"
-        ]
+        "definition": "lon_vertices",
+        "dimensions": ["nj","ni","nvertices"]
     },
     "time_bnds": {
         "attributes": {},
@@ -36,6 +58,15 @@
         "definition": "time_bnds",
         "dimensions": [
             "time",
+            "d2"
+        ]
+    },
+    "iceband_bnds": {
+        "attributes": {},
+        "datatype": "double",
+        "definition": "bounds(NCAT,bdim=\"d2\")",
+        "dimensions": [
+            "iceband",
             "d2"
         ]
     }

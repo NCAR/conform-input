@@ -2,6 +2,7 @@
     "branch_method": "hybrid",
     "branch_time_in_child": "365.0D0",
     "branch_time_in_parent": "365.0D0",
+    "case_id": "399",
     "experiment_id": "historical",
     "parent_activity_id": "CMIP",
     "parent_experiment_id": "piControl",

@@ -1,0 +1,69 @@
+!----------------------------------------------------------------------------------
+! Users should add all user specific namelist changes below in the form of 
+! namelist_var = new_namelist_value 
+!
+! EXCEPTIONS: 
+! Set use_cndv           by the compset you use and the CLM_BLDNML_OPTS -dynamic_vegetation setting
+! Set use_vichydro       by the compset you use and the CLM_BLDNML_OPTS -vichydro           setting
+! Set use_cn             by the compset you use and CLM_BLDNML_OPTS -bgc  setting
+! Set use_crop           by the compset you use and CLM_BLDNML_OPTS -crop setting
+! Set spinup_state       by the CLM_BLDNML_OPTS -bgc_spinup      setting
+! Set irrigate           by the CLM_BLDNML_OPTS -irrig           setting
+! Set co2_ppmv           with CCSM_CO2_PPMV                      option
+! Set dtime              with L_NCPL                             option
+! Set fatmlndfrc         with LND_DOMAIN_PATH/LND_DOMAIN_FILE    options
+! Set finidat            with RUN_REFCASE/RUN_REFDATE/RUN_REFTOD options for hybrid or branch cases
+!                        (includes $inst_string for multi-ensemble cases)
+! Set maxpatch_glcmec    with GLC_NEC                            option
+! Set glc_do_dynglacier  with GLC_TWO_WAY_COUPLING               env variable
+!----------------------------------------------------------------------------------
+
+use_c13 = .true.
+use_c14 = .true.
+use_c13_timeseries = .true.
+use_c14_bombspike = .true.
+
+!finidat = '/glade/p/cgd/tss/people/oleson/CLM5_restarts/clm50_r266_1deg_CRUNCEPV7_iso_accum_1850pAD.clm2.r.1526-01-01-00000.nc'
+!use_init_interp = .true.
+
+stream_fldfilename_ndep = '/glade/p/cesmdata/cseg/inputdata/lnd/clm2/ndepdata/fndep_clm_rcp4.5_simyr1849-2106_1.9x2.5_c100428.nc'
+stream_year_last_ndep = 2100
+
+stream_year_last_popdens = 2015
+
+stream_year_last_urbantv = 2100
+
+hist_fexcl1 = 'PCT_GLC_MEC', 'SOIL1C_vr', 'SOIL1N_vr', 'SOIL2C_vr', 'SOIL2N_vr', 'SOIL3C_vr', 'SOIL3N_vr', 'CWDC_vr', 'CWDN_vr', 'LITR1C_vr', 'LITR1N_vr', 'LITR2C_vr', 'LITR2N_vr', 'LITR3C_vr', 'LITR3N_vr','PCT_CFT','PCT_NAT_PFT','SMIN_NO3_vr','CONC_O2_UNSAT','CONC_O2_SAT','SMIN_NH4_vr','SMINN_vr'
+
+! Emon, Lmon
+hist_fincl2 = 'GPP', 'NPP', 'AGNPP', 'TLAI', 'TOTVEGC', 'TSA','TREFMNAV','TREFMXAV', 'BTRANMN', 'NPP_NUPTAKE', 'GRAINC_TO_FOOD', 'Vcmx25Z', 'FCTR', 'FCEV', 'FGEV', 'FSH', 'FIRE', 'FSR', 'FIRA', 'FSA', 'NFERTILIZATION', 'AR', 'VEGWP', 'HTOP', 'GSSUNLN', 'GSSHALN', 'TSKIN'
+
+! Eyr landuse tiles
+! TOT_WOODPRODC:I throws a segfault at the landunit level
+hist_fincl3 = 'FSR', 'H2OSNO', 'Q2M', 'SNOWDP', 'TSA', 'TREFMNAV', 'TREFMXAV', 'TG', 'QRUNOFF', 'FSH', 'FIRE', 'FIRA', 'FGR', 'EFLX_LH_TOT', 'RH2M', 'TLAI', 'GPP', 'NPP', 'SOILWATER_10CM', 'TOTSOILLIQ', 'TOTSOILICE', 'AR', 'HR', 'DWT_CONV_CFLUX_PATCH', 'WOOD_HARVESTC', 'U10', 'DWT_WOOD_PRODUCTC_GAIN_PATCH', 'GRAINC_TO_FOOD', 'SLASH_HARVESTC', 'TSOI_10CM', 'COL_FIRE_CLOSS', 'DWT_SLASH_CFLUX','TOTSOMC:I', 'TOTSOMC_1m:I', 'TOTECOSYSC:I', 'TOTVEGC:I', 'WOODC:I', 'TOTLITC:I', 'LIVECROOTC:I', 'DEADCROOTC:I', 'FROOTC:I'
+
+! Eyr
+! FSNO_ICE for lyrGre and lyrAnt is not in this tag
+hist_fincl4 = 'PCT_CFT', 'PCT_GLC_MEC', 'SOIL1C_vr', 'SOIL1N_vr', 'SOIL2C_vr', 'SOIL2N_vr', 'SOIL3C_vr', 'SOIL3N_vr', 'CWDC_vr', 'CWDN_vr', 'LITR1C_vr', 'LITR1N_vr', 'LITR2C_vr', 'LITR2N_vr', 'LITR3C_vr', 'LITR3N_vr', 'QICE_FORC', 'TSRF_FORC', 'TOPO_FORC','PCT_NAT_PFT','PCT_LANDUNIT','TOTLITC:I','TOT_WOODPRODC:I','CROPPROD1C:I','TOTSOMC','TOTVEGC'
+
+! day, Eday
+hist_fincl5 = 'SOILWATER_10CM', 'TOTSOILLIQ', 'TOTSOILICE', 'GPP', 'NPP', 'AR', 'HR', 'EFLX_LH_TOT', 'FSH', 'FGR12', 'FSM', 'QSNOEVAP', 'TLAI', 'QDRAI', 'QDRAI_PERCH', 'QOVER', 'QFLX_SUB_SNOW', 'FSA', 'FIRA', 'H2OSNO', 'SNOCAN', 'QSNOFRZ', 'QFLX_SNOW_DRAIN', 'SNOWDP', 'H2OSFC', 'TV', 'TG', 'TAUX', 'TAUY', 'QVEGT', 'TWS', 'H2OCAN', 'ALT', 'QVEGE', 'QSOIL', 'TSKIN', 'FSDS','FSNO','SNOFSRVD','SNOFSRVI','SNOFSRND','SNOFSRNI','FSDSVD','FSDSVI','FSDSND','FSDSNI','SNOWLIQ','SOILICE','SOILLIQ','QINTR','SNOBCMSL','TSOI'
+
+! 3hr, E3hr, CF3hr, CFsubhr, 6hrPlevPt
+! 3hr requires QRUNOFF for time mean, and SOILWATER_10CM, TSKIN for time point (I)
+! E3hr requires GPP, AR, HR for time mean
+! CF3hr requires QFLX_SUB_SNOW for time point (I)
+! CFsubhr requires QFLX_SUB_SNOW for time point (I)
+! 6hrPlevPt requires SOILWATER_10CM, H2OSOI, TSL, H2OSNO for time point (I)
+hist_fincl6 = 'GPP','AR','HR','TSA','RH2M','SOILWATER_10CM:I','FSH','EFLX_LH_TOT','FSDS','TSKIN:I','QRUNOFF','QFLX_SUB_SNOW:I','H2OSOI:I','H2OSNO:I','TSL:I'
+
+! Not required by CMIP, but useful for us
+hist_fincl7 = 'FIRE:X'
+
+! Not required by CMIP, but useful for us
+hist_fincl8 = 'FIRE:M'
+
+hist_mfilt = 1,1,1,1,365,8760,365,365
+hist_dov2xy = .true.,.false.,.false.,.true.,.true.,.true.,.false.,.false.
+hist_nhtfrq = 0,0,0,-8760,-24,-1,-24,-24
+hist_type1d_pertape = ' ',' ','LAND',' ',' ',' ',' ',' '

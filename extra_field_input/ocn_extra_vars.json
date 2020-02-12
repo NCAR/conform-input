@@ -1,14 +1,29 @@
 {
+    "nlat": {
+        "definition": "nlat",
+        "attributes": {
+            "units": "1",
+            "long_name": "cell index along second dimension"
+        },
+        "datatype": "int",
+        "dimensions": ["nlat"]
+    },
+    "nlon": {
+        "definition": "nlon",
+        "attributes": {
+            "units": "1",
+            "long_name": "cell index along first dimension"
+        },
+        "datatype": "int",
+        "dimensions": ["nlon"]
+    },
     "latitude_bnds": {
         "attributes": {
             "units": "degrees_north"
         },
         "datatype": "float",
-        "definition": "latitude_bnds",
-        "dimensions": [
-            "latitude",
-            "d2"
-        ]
+        "definition": "lat_vertices",
+        "dimensions": ["nlat","nlon","vertices"]
     },
     "olevel_bnds": {
         "attributes": {
@@ -26,16 +41,13 @@
             "units": "degrees_east"
         },
         "datatype": "float",
-        "definition": "longitude_bnds",
-        "dimensions": [
-            "longitude",
-            "d2"
-        ]
+        "definition": "lon_vertices",
+        "dimensions": ["nlat","nlon","vertices"]
     },
     "time_bnds": {
         "attributes": {},
         "datatype": "double",
-        "definition": "time_bnds",
+        "definition": "time_bound",
         "dimensions": [
             "time",
             "d2"
@@ -44,9 +56,9 @@
     "time2_bnds": {
         "attributes": {},
         "datatype": "double",
-        "definition": "time_bnds",
+        "definition": "time_bound",
         "dimensions": [
-            "time",
+            "time2",
             "d2"
         ]
     },

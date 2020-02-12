@@ -1,12 +1,43 @@
 {
+    "xgre": {
+        "definition": "xxxgrexx",
+        "attributes": {
+            "units": "meters",
+            "long_name": ""
+        },
+        "datatype": "float",
+        "dimensions": ["xgre"]
+    },
+    "ygre": {
+        "definition": "xxygrexx",
+        "attributes": {
+            "units": "meters",
+            "long_name": ""
+        },
+        "datatype": "float",
+        "dimensions": ["ygre"]
+    },
+
     "latitude_bnds": {
         "attributes": {
             "units": "degrees_north"
         },
         "datatype": "float",
-        "definition": "latitude_bnds",
+        "definition": "bounds(xxlatxx, bdim=\"hist_interval\")",
         "dimensions": [
             "latitude",
+            "hist_interval"
+        ]
+    },
+
+    "xgre_bnds": {
+        "attributes": {
+            "units": "degrees_north"
+        },
+        "datatype": "float",
+        "definition": "bounds(xgre, bdim=\"hist_interval\")",
+        "dimensions": [
+            "xgre",
             "hist_interval"
         ]
     },
@@ -26,9 +57,21 @@
             "units": "degrees_east"
         },
         "datatype": "float",
-        "definition": "longitude_bnds",
+        "definition": "bounds(xxlonxx, bdim=\"hist_interval\")",
         "dimensions": [
             "longitude",
+            "hist_interval"
+        ]
+    },
+
+    "ygre_bnds": {
+        "attributes": {
+            "units": "degrees_east"
+        },
+        "datatype": "float",
+        "definition": "bounds(ygre, bdim=\"hist_interval\")",
+        "dimensions": [
+            "ygre",
             "hist_interval"
         ]
     },
