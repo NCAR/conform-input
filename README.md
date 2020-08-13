@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/121768689.svg)](https://zenodo.org/badge/latestdoi/121768689)
+
 # conform-input
 
 These are the CESM input files into the PyConform Tool for CMIP6.  
